@@ -1,0 +1,297 @@
+{"compareChartInsights": {
+    "graduateMetrics": {
+      "generalMajors": [
+        {
+          "name": "Engineering, manufacturing and construction",
+          "totalGraduates": 3000,
+          "maleGraduates": 2100,
+          "femaleGraduates": 900
+        },
+        {
+          "name": "Health and Welfare",
+          "totalGraduates": 3400,
+          "maleGraduates": 850,
+          "femaleGraduates": 2550
+        },
+        {
+          "name": "Business, administration and law",
+          "totalGraduates": 3500,
+          "maleGraduates": 1750,
+          "femaleGraduates": 1750
+        },
+        {
+          "name": "Communications and Information Technology",
+          "totalGraduates": 2700,
+          "maleGraduates": 1890,
+          "femaleGraduates": 810
+        },
+        {
+          "name": "Arts and Humanities",
+          "totalGraduates": 2500,
+          "maleGraduates": 1000,
+          "femaleGraduates": 1500
+        }
+      ],
+      "narrowMajors": [
+        {
+          "name": "Computer Science",
+          "totalGraduates": 900,
+          "maleGraduates": 630,
+          "femaleGraduates": 270
+        },
+        {
+          "name": "Nursing",
+          "totalGraduates": 850,
+          "maleGraduates": 170,
+          "femaleGraduates": 680
+        },
+        {
+          "name": "Business Administration",
+          "totalGraduates": 800,
+          "maleGraduates": 400,
+          "femaleGraduates": 400
+        },
+        {
+          "name": "Mechanical Engineering",
+          "totalGraduates": 750,
+          "maleGraduates": 600,
+          "femaleGraduates": 150
+        },
+        {
+          "name": "Psychology",
+          "totalGraduates": 700,
+          "maleGraduates": 210,
+          "femaleGraduates": 490
+        }
+      ],
+      "majors": [
+        {
+          "name": "Software Development",
+          "totalGraduates": 350,
+          "maleGraduates": 245,
+          "femaleGraduates": 105
+        },
+        {
+          "name": "Clinical Nursing",
+          "totalGraduates": 350,
+          "maleGraduates": 70,
+          "femaleGraduates": 280
+        },
+        {
+          "name": "Business Analytics",
+          "totalGraduates": 300,
+          "maleGraduates": 150,
+          "femaleGraduates": 150
+        },
+        {
+          "name": "Robotics Engineering",
+          "totalGraduates": 250,
+          "maleGraduates": 200,
+          "femaleGraduates": 50
+        },
+        {
+          "name": "Clinical Psychology",
+          "totalGraduates": 250,
+          "maleGraduates": 75,
+          "femaleGraduates": 175
+        }
+      ]
+    },
+    "employmentMetrics": {
+      "generalMajors": [
+        {
+          "name": "Engineering, manufacturing and construction",
+          "employmentRate": 90,
+          "averageSalary": 10000,
+          "averageTimeToEmployment": 75
+        },
+        {
+          "name": "Health and Welfare",
+          "employmentRate": 95,
+          "averageSalary": 10000,
+          "averageTimeToEmployment": 50
+        },
+        {
+          "name": "Business, administration and law",
+          "employmentRate": 90,
+          "averageSalary": 9200,
+          "averageTimeToEmployment": 90
+        },
+        {
+          "name": "Communications and Information Technology",
+          "employmentRate": 85,
+          "averageSalary": 8000,
+          "averageTimeToEmployment": 120
+        },
+        {
+          "name": "Arts and Humanities",
+          "employmentRate": 80,
+          "averageSalary": 7500,
+          "averageTimeToEmployment": 150
+        }
+      ],
+      "narrowMajors": [
+        {
+          "name": "Computer Science",
+          "employmentRate": 92,
+          "averageSalary": 11000,
+          "averageTimeToEmployment": 65
+        },
+        {
+          "name": "Nursing",
+          "employmentRate": 95,
+          "averageSalary": 9500,
+          "averageTimeToEmployment": 50
+        },
+        {
+          "name": "Business Administration",
+          "employmentRate": 88,
+          "averageSalary": 9000,
+          "averageTimeToEmployment": 90
+        },
+        {
+          "name": "Mechanical Engineering",
+          "employmentRate": 90,
+          "averageSalary": 9500,
+          "averageTimeToEmployment": 80
+        },
+        {
+          "name": "Psychology",
+          "employmentRate": 85,
+          "averageSalary": 8000,
+          "averageTimeToEmployment": 120
+        }
+      ],
+      "majors": [
+        {
+          "name": "Software Development",
+          "employmentRate": 95,
+          "averageSalary": 12000,
+          "averageTimeToEmployment": 55
+        },
+        {
+          "name": "Clinical Nursing",
+          "employmentRate": 98,
+          "averageSalary": 10000,
+          "averageTimeToEmployment": 40
+        },
+        {
+          "name": "Business Analytics",
+          "employmentRate": 90,
+          "averageSalary": 9500,
+          "averageTimeToEmployment": 85
+        },
+        {
+          "name": "Robotics Engineering",
+          "employmentRate": 92,
+          "averageSalary": 10000,
+          "averageTimeToEmployment": 70
+        },
+        {
+          "name": "Clinical Psychology",
+          "employmentRate": 88,
+          "averageSalary": 8500,
+          "averageTimeToEmployment": 100
+        }
+      ]
+    },
+    "timingMetrics": {
+      "generalMajors": [
+        {
+          "name": "Engineering, manufacturing and construction",
+          "beforeGraduation": 25,
+          "withinYear": 65,
+          "afterYear": 10
+        },
+        {
+          "name": "Health and Welfare",
+          "beforeGraduation": 30,
+          "withinYear": 65,
+          "afterYear": 5
+        },
+        {
+          "name": "Business, administration and law",
+          "beforeGraduation": 20,
+          "withinYear": 70,
+          "afterYear": 10
+        },
+        {
+          "name": "Communications and Information Technology",
+          "beforeGraduation": 15,
+          "withinYear": 70,
+          "afterYear": 15
+        },
+        {
+          "name": "Arts and Humanities",
+          "beforeGraduation": 10,
+          "withinYear": 70,
+          "afterYear": 20
+        }
+      ],
+      "narrowMajors": [
+        {
+          "name": "Computer Science",
+          "beforeGraduation": 24,
+          "withinYear": 68,
+          "afterYear": 8
+        },
+        {
+          "name": "Nursing",
+          "beforeGraduation": 30,
+          "withinYear": 65,
+          "afterYear": 5
+        },
+        {
+          "name": "Business Administration",
+          "beforeGraduation": 20,
+          "withinYear": 70,
+          "afterYear": 10
+        },
+        {
+          "name": "Mechanical Engineering",
+          "beforeGraduation": 25,
+          "withinYear": 65,
+          "afterYear": 10
+        },
+        {
+          "name": "Psychology",
+          "beforeGraduation": 15,
+          "withinYear": 70,
+          "afterYear": 15
+        }
+      ],
+      "majors": [
+        {
+          "name": "Software Development",
+          "beforeGraduation": 30,
+          "withinYear": 60,
+          "afterYear": 10
+        },
+        {
+          "name": "Clinical Nursing",
+          "beforeGraduation": 40,
+          "withinYear": 50,
+          "afterYear": 10
+        },
+        {
+          "name": "Business Analytics",
+          "beforeGraduation": 20,
+          "withinYear": 70,
+          "afterYear": 10
+        },
+        {
+          "name": "Robotics Engineering",
+          "beforeGraduation": 25,
+          "withinYear": 65,
+          "afterYear": 10
+        },
+        {
+          "name": "Clinical Psychology",
+          "beforeGraduation": 15,
+          "withinYear": 70,
+          "afterYear": 15
+        }
+      ]
+    }
+  }
+}

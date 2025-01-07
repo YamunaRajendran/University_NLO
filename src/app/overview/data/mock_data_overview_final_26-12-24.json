@@ -1,0 +1,1221 @@
+{
+  "OverViewInsights": {
+    "summaryCards": {
+      "totalGraduates": 15000,
+      "overallEmploymentRate": 78.5,
+      "averageSalary": 8500,
+      "averageTimeToEmployment": 120
+    },
+    "topGeneralMajors": {
+      "byGraduates": {
+        "rankings": [
+          {
+            "generalMajor": "Business, administration and law",
+            "value": 3500,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "business and management",
+                "value": 800,
+                "topMajors": [
+                  {"major": "business administration", "value": 300},
+                  {"major": "finance", "value": 200},
+                  {"major": "marketing", "value": 150},
+                  {"major": "accounting", "value": 100},
+                  {"major": "international business", "value": 50}
+                ]
+              },
+              {
+                "narrowMajor": "the law",
+                "value": 700,
+                "topMajors": [
+                  {"major": "commercial law", "value": 250},
+                  {"major": "civil law", "value": 200},
+                  {"major": "criminal law", "value": 150},
+                  {"major": "international law", "value": 50},
+                  {"major": "corporate law", "value": 50}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Engineering, manufacturing and construction",
+            "value": 3000,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "engineering and engineering crafts",
+                "value": 1000,
+                "topMajors": [
+                  {"major": "mechanical engineering", "value": 400},
+                  {"major": "electrical engineering", "value": 300},
+                  {"major": "civil engineering", "value": 150},
+                  {"major": "chemical engineering", "value": 100},
+                  {"major": "industrial engineering", "value": 50}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Health and Welfare",
+            "value": 2500,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "health",
+                "value": 900,
+                "topMajors": [
+                  {"major": "nursing", "value": 300},
+                  {"major": "pharmacy", "value": 250},
+                  {"major": "physiotherapy", "value": 200},
+                  {"major": "dental", "value": 100},
+                  {"major": "medical laboratory", "value": 50}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Arts and Humanities",
+            "value": 2000,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "languages",
+                "value": 800,
+                "topMajors": [
+                  {"major": "english", "value": 300},
+                  {"major": "arabic", "value": 200},
+                  {"major": "french", "value": 150},
+                  {"major": "spanish", "value": 100},
+                  {"major": "german", "value": 50}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Communications and Information Technology",
+            "value": 1800,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "computer science",
+                "value": 700,
+                "topMajors": [
+                  {"major": "software engineering", "value": 250},
+                  {"major": "data science", "value": 200},
+                  {"major": "cybersecurity", "value": 150},
+                  {"major": "artificial intelligence", "value": 50},
+                  {"major": "web development", "value": 50}
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "byEmploymentRate": {
+        "rankings": [
+          {
+            "generalMajor": "Health and Welfare",
+            "value": 92.5,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "health",
+                "value": 95.0,
+                "topMajors": [
+                  {"major": "nursing", "value": 97.0},
+                  {"major": "pharmacy", "value": 94.0},
+                  {"major": "physiotherapy", "value": 93.0},
+                  {"major": "dental", "value": 92.0},
+                  {"major": "medical laboratory", "value": 91.0}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Engineering, manufacturing and construction",
+            "value": 88.0,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "engineering and engineering crafts",
+                "value": 90.0,
+                "topMajors": [
+                  {"major": "petroleum engineering", "value": 95.0},
+                  {"major": "electrical engineering", "value": 92.0},
+                  {"major": "mechanical engineering", "value": 89.0},
+                  {"major": "chemical engineering", "value": 88.0},
+                  {"major": "civil engineering", "value": 87.0}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Communications and Information Technology",
+            "value": 86.0,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "computer science",
+                "value": 88.0,
+                "topMajors": [
+                  {"major": "software engineering", "value": 91.0},
+                  {"major": "cybersecurity", "value": 89.0},
+                  {"major": "data science", "value": 87.0},
+                  {"major": "artificial intelligence", "value": 86.0},
+                  {"major": "web development", "value": 85.0}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Business, administration and law",
+            "value": 84.0,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "business and management",
+                "value": 86.0,
+                "topMajors": [
+                  {"major": "finance", "value": 88.0},
+                  {"major": "business administration", "value": 87.0},
+                  {"major": "accounting", "value": 86.0},
+                  {"major": "marketing", "value": 84.0},
+                  {"major": "international business", "value": 83.0}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Arts and Humanities",
+            "value": 82.0,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "languages",
+                "value": 84.0,
+                "topMajors": [
+                  {"major": "english", "value": 86.0},
+                  {"major": "arabic", "value": 85.0},
+                  {"major": "french", "value": 83.0},
+                  {"major": "spanish", "value": 82.0},
+                  {"major": "german", "value": 81.0}
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "byAverageSalary": {
+        "rankings": [
+          {
+            "generalMajor": "Engineering, manufacturing and construction",
+            "value": 12000,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "engineering and engineering crafts",
+                "value": 13000,
+                "topMajors": [
+                  {"major": "petroleum engineering", "value": 15000},
+                  {"major": "chemical engineering", "value": 14000},
+                  {"major": "electrical engineering", "value": 13000},
+                  {"major": "mechanical engineering", "value": 12000},
+                  {"major": "civil engineering", "value": 11000}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Communications and Information Technology",
+            "value": 11500,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "computer science",
+                "value": 12000,
+                "topMajors": [
+                  {"major": "software engineering", "value": 13500},
+                  {"major": "data science", "value": 13000},
+                  {"major": "cybersecurity", "value": 12500},
+                  {"major": "artificial intelligence", "value": 12000},
+                  {"major": "web development", "value": 11000}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Business, administration and law",
+            "value": 10500,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "business and management",
+                "value": 11000,
+                "topMajors": [
+                  {"major": "finance", "value": 12000},
+                  {"major": "business administration", "value": 11500},
+                  {"major": "accounting", "value": 11000},
+                  {"major": "marketing", "value": 10500},
+                  {"major": "international business", "value": 10000}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Health and Welfare",
+            "value": 10000,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "health",
+                "value": 10500,
+                "topMajors": [
+                  {"major": "pharmacy", "value": 11500},
+                  {"major": "dental", "value": 11000},
+                  {"major": "nursing", "value": 10500},
+                  {"major": "physiotherapy", "value": 10000},
+                  {"major": "medical laboratory", "value": 9500}
+                ]
+              }
+            ]
+          },
+          {
+            "generalMajor": "Arts and Humanities",
+            "value": 9000,
+            "topNarrowMajors": [
+              {
+                "narrowMajor": "languages",
+                "value": 9500,
+                "topMajors": [
+                  {"major": "english", "value": 10000},
+                  {"major": "arabic", "value": 9500},
+                  {"major": "french", "value": 9000},
+                  {"major": "spanish", "value": 8500},
+                  {"major": "german", "value": 8000}
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "topISCOOccupations": {
+      "byGraduates": {
+        "rankings": [
+          {
+            "occupation": "software developer",
+            "value": 800,
+            "topMajors": [
+              {"major": "computer science", "count": 300},
+              {"major": "software engineering", "count": 200},
+              {"major": "information technology", "count": 150},
+              {"major": "computer engineering", "count": 100},
+              {"major": "information systems", "count": 50}
+            ]
+          },
+          {
+            "occupation": "mechanical engineer",
+            "value": 700,
+            "topMajors": [
+              {"major": "mechanical engineering", "count": 400},
+              {"major": "industrial engineering", "count": 150},
+              {"major": "mechatronics engineering", "count": 100},
+              {"major": "aerospace engineering", "count": 30},
+              {"major": "automotive engineering", "count": 20}
+            ]
+          },
+          {
+            "occupation": "accountant",
+            "value": 600,
+            "topMajors": [
+              {"major": "accounting", "count": 300},
+              {"major": "finance", "count": 150},
+              {"major": "business administration", "count": 100},
+              {"major": "economics", "count": 30},
+              {"major": "banking and finance", "count": 20}
+            ]
+          },
+          {
+            "occupation": "business analyst",
+            "value": 500,
+            "topMajors": [
+              {"major": "business administration", "count": 200},
+              {"major": "information systems", "count": 150},
+              {"major": "business analytics", "count": 100},
+              {"major": "economics", "count": 30},
+              {"major": "statistics", "count": 20}
+            ]
+          },
+          {
+            "occupation": "project manager",
+            "value": 400,
+            "topMajors": [
+              {"major": "project management", "count": 150},
+              {"major": "business administration", "count": 100},
+              {"major": "engineering management", "count": 80},
+              {"major": "construction management", "count": 40},
+              {"major": "industrial engineering", "count": 30}
+            ]
+          }
+        ]
+      },
+      "byAverageSalary": {
+        "rankings": [
+          {
+            "occupation": "software architect",
+            "value": 15000,
+            "topMajors": [
+              {"major": "computer science", "averageSalary": 14500},
+              {"major": "software engineering", "averageSalary": 14000},
+              {"major": "computer engineering", "averageSalary": 13500},
+              {"major": "information systems", "averageSalary": 13000},
+              {"major": "artificial intelligence", "averageSalary": 12500}
+            ]
+          },
+          {
+            "occupation": "data scientist",
+            "value": 14000,
+            "topMajors": [
+              {"major": "data science", "averageSalary": 13500},
+              {"major": "statistics", "averageSalary": 13000},
+              {"major": "computer science", "averageSalary": 12500},
+              {"major": "mathematics", "averageSalary": 12000},
+              {"major": "artificial intelligence", "averageSalary": 11500}
+            ]
+          },
+          {
+            "occupation": "financial manager",
+            "value": 13000,
+            "topMajors": [
+              {"major": "finance", "averageSalary": 12500},
+              {"major": "accounting", "averageSalary": 12000},
+              {"major": "business administration", "averageSalary": 11500},
+              {"major": "economics", "averageSalary": 11000},
+              {"major": "banking and finance", "averageSalary": 10500}
+            ]
+          },
+          {
+            "occupation": "project director",
+            "value": 12000,
+            "topMajors": [
+              {"major": "project management", "averageSalary": 11500},
+              {"major": "business administration", "averageSalary": 11000},
+              {"major": "engineering management", "averageSalary": 10500},
+              {"major": "construction management", "averageSalary": 10000},
+              {"major": "industrial engineering", "averageSalary": 9500}
+            ]
+          },
+          {
+            "occupation": "senior engineer",
+            "value": 11000,
+            "topMajors": [
+              {"major": "mechanical engineering", "averageSalary": 10500},
+              {"major": "electrical engineering", "averageSalary": 10000},
+              {"major": "chemical engineering", "averageSalary": 9500},
+              {"major": "civil engineering", "averageSalary": 9000},
+              {"major": "industrial engineering", "averageSalary": 8500}
+            ]
+          }
+        ]
+      },
+      "mostCommonJobTitles": {
+        "rankings": [
+          {"title": "software engineer", "count": 1000},
+          {"title": "business analyst", "count": 800},
+          {"title": "project manager", "count": 700},
+          {"title": "accountant", "count": 600},
+          {"title": "sales manager", "count": 500}
+        ]
+      },
+      "topEmployers": {
+        "rankings": [
+          {"employer": "Saudi Aramco", "averageSalary": 18000},
+          {"employer": "SABIC", "averageSalary": 16000},
+          {"employer": "STC", "averageSalary": 15000},
+          {"employer": "NCB", "averageSalary": 14000},
+          {"employer": "Saudi Airlines", "averageSalary": 13000}
+        ]
+      }
+    },
+    "genderDistribution": {
+      "male": {
+        "count": 8000,
+        "percentage": 53.3
+      },
+      "female": {
+        "count": 7000,
+        "percentage": 46.7
+      }
+    },
+    "salaryDistribution": {
+      "ranges": {
+        "0-5000": {"count": 3000, "percentage": 20},
+        "5001-10000": {"count": 6750, "percentage": 45},
+        "10001-15000": {"count": 3750, "percentage": 25},
+        "15001+": {"count": 1500, "percentage": 10}
+      },
+      "median": 8500
+    },
+    "employmentTiming": {
+      "preGraduation": {"count": 2250, "percentage": 15},
+      "within6Months": {"count": 6750, "percentage": 45},
+      "6To12Months": {"count": 3750, "percentage": 25},
+      "after12Months": {"count": 1500, "percentage": 10},
+      "unemployed": {"count": 750, "percentage": 5}
+    }
+  },
+  "majorsInsights": {
+    "overall": {
+      "basicMetrics": [
+        {
+          "generalMajor": "Business and Management",
+          "graduates": 3500,
+          "graduatesPercentage": 23.3,
+          "employmentRate": 82.5,
+          "averageSalary": 9200,
+          "timeToEmployment": 90
+        },
+        {
+          "generalMajor": "Engineering and Technology",
+          "graduates": 3000,
+          "graduatesPercentage": 20.0,
+          "employmentRate": 85.0,
+          "averageSalary": 10000,
+          "timeToEmployment": 75
+        },
+        {
+          "generalMajor": "Health Sciences",
+          "graduates": 2800,
+          "graduatesPercentage": 18.7,
+          "employmentRate": 88.0,
+          "averageSalary": 9500,
+          "timeToEmployment": 60
+        },
+        {
+          "generalMajor": "Social Sciences",
+          "graduates": 2700,
+          "graduatesPercentage": 18.0,
+          "employmentRate": 75.0,
+          "averageSalary": 8000,
+          "timeToEmployment": 120
+        },
+        {
+          "generalMajor": "Arts and Humanities",
+          "graduates": 2500,
+          "graduatesPercentage": 16.7,
+          "employmentRate": 72.0,
+          "averageSalary": 7500,
+          "timeToEmployment": 150
+        }
+      ],
+      "topGeneralMajorsInsights": {
+        "mostPopular": [
+          {
+            "generalMajor": "Business and Management",
+            "graduates": 3500,
+            "percentage": 23.3
+          },
+          {
+            "generalMajor": "Engineering and Technology",
+            "graduates": 3000,
+            "percentage": 20.0
+          },
+          {
+            "generalMajor": "Health Sciences",
+            "graduates": 2800,
+            "percentage": 18.7
+          },
+          {
+            "generalMajor": "Social Sciences",
+            "graduates": 2700,
+            "percentage": 18.0
+          },
+          {
+            "generalMajor": "Arts and Humanities",
+            "graduates": 2500,
+            "percentage": 16.7
+          }
+        ],
+        "mostEmployable": [
+          {
+            "generalMajor": "Health Sciences",
+            "employmentRate": 88.0,
+            "graduates": 2800
+          },
+          {
+            "generalMajor": "Engineering and Technology",
+            "employmentRate": 85.0,
+            "graduates": 3000
+          },
+          {
+            "generalMajor": "Business and Management",
+            "employmentRate": 82.5,
+            "graduates": 3500
+          },
+          {
+            "generalMajor": "Social Sciences",
+            "employmentRate": 75.0,
+            "graduates": 2700
+          },
+          {
+            "generalMajor": "Arts and Humanities",
+            "employmentRate": 72.0,
+            "graduates": 2500
+          }
+        ],
+        "highestPaying": [
+          {
+            "generalMajor": "Engineering and Technology",
+            "averageSalary": 10000,
+            "graduates": 3000
+          },
+          {
+            "generalMajor": "Health Sciences",
+            "averageSalary": 9500,
+            "graduates": 2800
+          },
+          {
+            "generalMajor": "Business and Management",
+            "averageSalary": 9200,
+            "graduates": 3500
+          },
+          {
+            "generalMajor": "Social Sciences",
+            "averageSalary": 8000,
+            "graduates": 2700
+          },
+          {
+            "generalMajor": "Arts and Humanities",
+            "averageSalary": 7500,
+            "graduates": 2500
+          }
+        ]
+      },
+      "topMajorsByOccupation": {
+        "occupations": [
+          {
+            "name": "Software Developer",
+            "metrics": {
+              "graduates": 2000,
+              "employmentRate": 92.0,
+              "averageSalary": 12000
+            },
+            "majorDistribution": [
+              {
+                "name": "Computer Science",
+                "metrics": {
+                  "graduates": 800,
+                  "employmentRate": 94.0,
+                  "averageSalary": 12500
+                }
+              },
+              {
+                "name": "Software Engineering",
+                "metrics": {
+                  "graduates": 600,
+                  "employmentRate": 92.0,
+                  "averageSalary": 12000
+                }
+              }
+            ]
+          },
+          {
+            "name": "Business Analyst",
+            "metrics": {
+              "graduates": 1500,
+              "employmentRate": 85.0,
+              "averageSalary": 9000
+            },
+            "majorDistribution": [
+              {
+                "name": "Business Administration",
+                "metrics": {
+                  "graduates": 800,
+                  "employmentRate": 88.0,
+                  "averageSalary": 9200
+                }
+              },
+              {
+                "name": "Finance",
+                "metrics": {
+                  "graduates": 500,
+                  "employmentRate": 84.0,
+                  "averageSalary": 9000
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "genderDistribution": [
+        {
+          "generalMajor": "Business and Management",
+          "male": {"count": 2000, "percentage": 57.1},
+          "female": {"count": 1500, "percentage": 42.9}
+        },
+        {
+          "generalMajor": "Engineering and Technology",
+          "male": {"count": 2200, "percentage": 73.3},
+          "female": {"count": 800, "percentage": 26.7}
+        },
+        {
+          "generalMajor": "Health Sciences",
+          "male": {"count": 1100, "percentage": 39.3},
+          "female": {"count": 1700, "percentage": 60.7}
+        },
+        {
+          "generalMajor": "Social Sciences",
+          "male": {"count": 1350, "percentage": 50.0},
+          "female": {"count": 1350, "percentage": 50.0}
+        },
+        {
+          "generalMajor": "Arts and Humanities",
+          "male": {"count": 1000, "percentage": 40.0},
+          "female": {"count": 1500, "percentage": 60.0}
+        }
+      ],
+      "salaryDistribution": [
+        {
+          "generalMajor": "Engineering and Technology",
+          "salary": 10000,
+          "percentage": 20.0
+        },
+        {
+          "generalMajor": "Health Sciences",
+          "salary": 9500,
+          "percentage": 18.7
+        },
+        {
+          "generalMajor": "Business and Management",
+          "salary": 9200,
+          "percentage": 23.3
+        },
+        {
+          "generalMajor": "Social Sciences",
+          "salary": 8000,
+          "percentage": 18.0
+        },
+        {
+          "generalMajor": "Arts and Humanities",
+          "salary": 7500,
+          "percentage": 16.7
+        }
+      ],
+      "employmentTiming": [
+        {
+          "generalMajor": "Health Sciences",
+          "beforeGraduation": {"count": 560, "percentage": 20},
+          "withinFirstYear": {"count": 1960, "percentage": 70},
+          "afterFirstYear": {"count": 280, "percentage": 10}
+        },
+        {
+          "generalMajor": "Engineering and Technology",
+          "beforeGraduation": {"count": 750, "percentage": 25},
+          "withinFirstYear": {"count": 1950, "percentage": 65},
+          "afterFirstYear": {"count": 300, "percentage": 10}
+        },
+        {
+          "generalMajor": "Business and Management",
+          "beforeGraduation": {"count": 700, "percentage": 20},
+          "withinFirstYear": {"count": 2450, "percentage": 70},
+          "afterFirstYear": {"count": 350, "percentage": 10}
+        },
+        {
+          "generalMajor": "Social Sciences",
+          "beforeGraduation": {"count": 405, "percentage": 15},
+          "withinFirstYear": {"count": 1890, "percentage": 70},
+          "afterFirstYear": {"count": 405, "percentage": 15}
+        },
+        {
+          "generalMajor": "Arts and Humanities",
+          "beforeGraduation": {"count": 250, "percentage": 10},
+          "withinFirstYear": {"count": 1750, "percentage": 70},
+          "afterFirstYear": {"count": 500, "percentage": 20}
+        }
+      ],
+      "employmentTimeline": [
+        {
+          "generalMajor": "Health Sciences",
+          "averageTime": 60,
+          "quickEmploymentRate": 85,
+          "waitingPeriods": [
+            {"period": "0-3 months", "percentage": 50},
+            {"period": "3-6 months", "percentage": 35},
+            {"period": "6-9 months", "percentage": 10},
+            {"period": "9+ months", "percentage": 5}
+          ]
+        },
+        {
+          "generalMajor": "Engineering and Technology",
+          "averageTime": 75,
+          "quickEmploymentRate": 80,
+          "waitingPeriods": [
+            {"period": "0-3 months", "percentage": 45},
+            {"period": "3-6 months", "percentage": 35},
+            {"period": "6-9 months", "percentage": 15},
+            {"period": "9+ months", "percentage": 5}
+          ]
+        },
+        {
+          "generalMajor": "Business and Management",
+          "averageTime": 90,
+          "quickEmploymentRate": 70,
+          "waitingPeriods": [
+            {"period": "0-3 months", "percentage": 40},
+            {"period": "3-6 months", "percentage": 30},
+            {"period": "6-9 months", "percentage": 20},
+            {"period": "9+ months", "percentage": 10}
+          ]
+        },
+        {
+          "generalMajor": "Social Sciences",
+          "averageTime": 120,
+          "quickEmploymentRate": 60,
+          "waitingPeriods": [
+            {"period": "0-3 months", "percentage": 35},
+            {"period": "3-6 months", "percentage": 30},
+            {"period": "6-9 months", "percentage": 20},
+            {"period": "9+ months", "percentage": 15}
+          ]
+        },
+        {
+          "generalMajor": "Arts and Humanities",
+          "averageTime": 150,
+          "quickEmploymentRate": 50,
+          "waitingPeriods": [
+            {"period": "0-3 months", "percentage": 30},
+            {"period": "3-6 months", "percentage": 30},
+            {"period": "6-9 months", "percentage": 25},
+            {"period": "9+ months", "percentage": 15}
+          ]
+        }
+      ]
+    },
+    "byGeneralMajor": {
+      "generalMajors": [
+        {
+          "name": "Business and Management",
+          "overall": {
+            "basicMetrics": [
+              {
+                "narrowMajor": "Business Administration",
+                "graduates": 800,
+                "graduatesPercentage": 22.9,
+                "employmentRate": 85.0,
+                "averageSalary": 9200,
+                "timeToEmployment": 85
+              },
+              {
+                "narrowMajor": "Finance",
+                "graduates": 750,
+                "graduatesPercentage": 21.4,
+                "employmentRate": 84.0,
+                "averageSalary": 9500,
+                "timeToEmployment": 80
+              },
+              {
+                "narrowMajor": "Management",
+                "graduates": 450,
+                "graduatesPercentage": 12.9,
+                "employmentRate": 82.0,
+                "averageSalary": 9000,
+                "timeToEmployment": 95
+              },
+              {
+                "narrowMajor": "Accounting",
+                "graduates": 400,
+                "graduatesPercentage": 11.4,
+                "employmentRate": 83.0,
+                "averageSalary": 9100,
+                "timeToEmployment": 90
+              }
+            ],
+            "topNarrowMajorsInsights": {
+              "mostPopular": [
+                {
+                  "narrowMajor": "Business Administration",
+                  "graduates": 800,
+                  "percentage": 22.9
+                },
+                {
+                  "narrowMajor": "Finance",
+                  "graduates": 750,
+                  "percentage": 21.4
+                }
+              ],
+              "mostEmployable": [
+                {
+                  "narrowMajor": "Finance",
+                  "employmentRate": 84.0,
+                  "graduates": 750
+                },
+                {
+                  "narrowMajor": "Business Administration",
+                  "employmentRate": 85.0,
+                  "graduates": 800
+                }
+              ],
+              "highestPaying": [
+                {
+                  "narrowMajor": "Finance",
+                  "averageSalary": 9500,
+                  "graduates": 750
+                },
+                {
+                  "narrowMajor": "Business Administration",
+                  "averageSalary": 9200,
+                  "graduates": 800
+                }
+              ]
+            },
+            "topMajorsByOccupation": {
+              "occupations": [
+                {
+                  "name": "Business Analyst",
+                  "metrics": {
+                    "graduates": 1500,
+                    "employmentRate": 85.0,
+                    "averageSalary": 9000
+                  },
+                  "majorDistribution": [
+                    {
+                      "name": "Business Administration",
+                      "metrics": {
+                        "graduates": 800,
+                        "employmentRate": 88.0,
+                        "averageSalary": 9200
+                      }
+                    },
+                    {
+                      "name": "Finance",
+                      "metrics": {
+                        "graduates": 500,
+                        "employmentRate": 84.0,
+                        "averageSalary": 9000
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "genderDistribution": {
+              "male": {"count": 2000, "percentage": 57.1},
+              "female": {"count": 1500, "percentage": 42.9}
+            },
+            "salaryDistribution": [
+              {
+                "narrowMajor": "Finance",
+                "salary": 9500,
+                "percentage": 21.4
+              },
+              {
+                "narrowMajor": "Business Administration",
+                "salary": 9200,
+                "percentage": 22.9
+              }
+            ],
+            "employmentTiming": {
+              "beforeGraduation": {"count": 700, "percentage": 20},
+              "withinFirstYear": {"count": 2450, "percentage": 70},
+              "afterFirstYear": {"count": 350, "percentage": 10}
+            },
+            "employmentTimeline": {
+              "averageTime": 90,
+              "quickEmploymentRate": 70,
+              "waitingPeriods": [
+                {"period": "0-3 months", "percentage": 40},
+                {"period": "3-6 months", "percentage": 30},
+                {"period": "6-9 months", "percentage": 20},
+                {"period": "9+ months", "percentage": 10}
+              ]
+            }
+          },
+          "byNarrowMajor": {
+            "narrowMajors": [
+              {
+                "name": "Business Administration",
+                "overall": {
+                  "basicMetrics": [
+                    {
+                      "occupation": "Business Analyst",
+                      "graduates": 200,
+                      "graduatesPercentage": 25.0,
+                      "employmentRate": 88.0,
+                      "averageSalary": 9200,
+                      "timeToEmployment": 85
+                    },
+                    {
+                      "occupation": "Management Consultant",
+                      "graduates": 150,
+                      "graduatesPercentage": 18.8,
+                      "employmentRate": 86.0,
+                      "averageSalary": 9500,
+                      "timeToEmployment": 80
+                    },
+                    {
+                      "occupation": "Project Manager",
+                      "graduates": 120,
+                      "graduatesPercentage": 15.0,
+                      "employmentRate": 84.0,
+                      "averageSalary": 9000,
+                      "timeToEmployment": 90
+                    }
+                  ],
+                  "topOccupationsInsights": {
+                    "mostPopular": [
+                      {
+                        "occupation": "Business Analyst",
+                        "graduates": 200,
+                        "percentage": 25.0
+                      },
+                      {
+                        "occupation": "Management Consultant",
+                        "graduates": 150,
+                        "percentage": 18.8
+                      }
+                    ],
+                    "mostEmployable": [
+                      {
+                        "occupation": "Business Analyst",
+                        "employmentRate": 88.0,
+                        "graduates": 200
+                      },
+                      {
+                        "occupation": "Management Consultant",
+                        "employmentRate": 86.0,
+                        "graduates": 150
+                      }
+                    ],
+                    "highestPaying": [
+                      {
+                        "occupation": "Management Consultant",
+                        "averageSalary": 9500,
+                        "graduates": 150
+                      },
+                      {
+                        "occupation": "Business Analyst",
+                        "averageSalary": 9200,
+                        "graduates": 200
+                      }
+                    ]
+                  },
+                  "topOccupationsByIndustry": {
+                    "industries": [
+                      {
+                        "name": "Business Services",
+                        "popularOccupations": [
+                          {
+                            "occupation": "Business Analyst",
+                            "graduates": 200
+                          },
+                          {
+                            "occupation": "Management Consultant",
+                            "graduates": 150
+                          }
+                        ],
+                        "employmentByOccupation": [
+                          {
+                            "occupation": "Business Analyst",
+                            "employmentRate": 88.0
+                          },
+                          {
+                            "occupation": "Management Consultant",
+                            "employmentRate": 86.0
+                          }
+                        ],
+                        "salaryByOccupation": [
+                          {
+                            "occupation": "Management Consultant",
+                            "averageSalary": 9500
+                          },
+                          {
+                            "occupation": "Business Analyst",
+                            "averageSalary": 9200
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "genderDistribution": {
+                    "male": {"count": 480, "percentage": 60.0},
+                    "female": {"count": 320, "percentage": 40.0}
+                  },
+                  "salaryDistribution": [
+                    {
+                      "occupation": "Management Consultant",
+                      "salary": 9500,
+                      "percentage": 18.8
+                    },
+                    {
+                      "occupation": "Business Analyst",
+                      "salary": 9200,
+                      "percentage": 25.0
+                    }
+                  ],
+                  "employmentTiming": {
+                    "beforeGraduation": {"count": 160, "percentage": 20},
+                    "withinFirstYear": {"count": 560, "percentage": 70},
+                    "afterFirstYear": {"count": 80, "percentage": 10}
+                  },
+                  "employmentTimeline": {
+                    "averageTime": 85,
+                    "quickEmploymentRate": 75,
+                    "waitingPeriods": [
+                      {"period": "0-3 months", "percentage": 45},
+                      {"period": "3-6 months", "percentage": 30},
+                      {"period": "6-9 months", "percentage": 15},
+                      {"period": "9+ months", "percentage": 10}
+                    ]
+                  }
+                }
+              },
+              {
+                "name": "Finance",
+                "overall": {
+                  "basicMetrics": [
+                    {
+                      "occupation": "Financial Analyst",
+                      "graduates": 200,
+                      "graduatesPercentage": 26.7,
+                      "employmentRate": 87.0,
+                      "averageSalary": 9500,
+                      "timeToEmployment": 75
+                    },
+                    {
+                      "occupation": "Investment Banker",
+                      "graduates": 150,
+                      "graduatesPercentage": 20.0,
+                      "employmentRate": 85.0,
+                      "averageSalary": 10000,
+                      "timeToEmployment": 80
+                    },
+                    {
+                      "occupation": "Risk Analyst",
+                      "graduates": 120,
+                      "graduatesPercentage": 16.0,
+                      "employmentRate": 84.0,
+                      "averageSalary": 9200,
+                      "timeToEmployment": 85
+                    }
+                  ],
+                  "topOccupationsInsights": {
+                    "mostPopular": [
+                      {
+                        "occupation": "Financial Analyst",
+                        "graduates": 200,
+                        "percentage": 26.7
+                      },
+                      {
+                        "occupation": "Investment Banker",
+                        "graduates": 150,
+                        "percentage": 20.0
+                      }
+                    ],
+                    "mostEmployable": [
+                      {
+                        "occupation": "Financial Analyst",
+                        "employmentRate": 87.0,
+                        "graduates": 200
+                      },
+                      {
+                        "occupation": "Investment Banker",
+                        "employmentRate": 85.0,
+                        "graduates": 150
+                      }
+                    ],
+                    "highestPaying": [
+                      {
+                        "occupation": "Investment Banker",
+                        "averageSalary": 10000,
+                        "graduates": 150
+                      },
+                      {
+                        "occupation": "Financial Analyst",
+                        "averageSalary": 9500,
+                        "graduates": 200
+                      }
+                    ]
+                  },
+                  "topOccupationsByIndustry": {
+                    "industries": [
+                      {
+                        "name": "Financial Services",
+                        "popularOccupations": [
+                          {
+                            "occupation": "Financial Analyst",
+                            "graduates": 200
+                          },
+                          {
+                            "occupation": "Investment Banker",
+                            "graduates": 150
+                          }
+                        ],
+                        "employmentByOccupation": [
+                          {
+                            "occupation": "Financial Analyst",
+                            "employmentRate": 87.0
+                          },
+                          {
+                            "occupation": "Investment Banker",
+                            "employmentRate": 85.0
+                          }
+                        ],
+                        "salaryByOccupation": [
+                          {
+                            "occupation": "Investment Banker",
+                            "averageSalary": 10000
+                          },
+                          {
+                            "occupation": "Financial Analyst",
+                            "averageSalary": 9500
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "genderDistribution": {
+                    "male": {"count": 450, "percentage": 60.0},
+                    "female": {"count": 300, "percentage": 40.0}
+                  },
+                  "salaryDistribution": [
+                    {
+                      "occupation": "Investment Banker",
+                      "salary": 10000,
+                      "percentage": 20.0
+                    },
+                    {
+                      "occupation": "Financial Analyst",
+                      "salary": 9500,
+                      "percentage": 26.7
+                    }
+                  ],
+                  "employmentTiming": {
+                    "beforeGraduation": {"count": 150, "percentage": 20},
+                    "withinFirstYear": {"count": 525, "percentage": 70},
+                    "afterFirstYear": {"count": 75, "percentage": 10}
+                  },
+                  "employmentTimeline": {
+                    "averageTime": 80,
+                    "quickEmploymentRate": 75,
+                    "waitingPeriods": [
+                      {"period": "0-3 months", "percentage": 45},
+                      {"period": "3-6 months", "percentage": 30},
+                      {"period": "6-9 months", "percentage": 15},
+                      {"period": "9+ months", "percentage": 10}
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "educationInsights": {
+    "overall": {
+      "totalInstitutions": 500,
+      "averageGraduationRate": 75.5,
+      "averageProgramDuration": 48
+    },
+    "byInstitutionType": {
+      "Public": {
+        "count": 300,
+        "graduationRate": 74.5,
+        "averageProgramDuration": 48
+      },
+      "Private": {
+        "count": 200,
+        "graduationRate": 77.0,
+        "averageProgramDuration": 47
+      }
+    }
+  }
+}
