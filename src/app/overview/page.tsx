@@ -135,12 +135,12 @@ export default function HomePage() {
   const currentData = getSelectedMajorData();
 
   return (
-    <div className="flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-x-hidden">
+    <div className="flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden">
       {/* Add a blur overlay at the bottom */}
       {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#24285E]/80 to-transparent backdrop-blur-sm"></div> */}
 
       {/* Data Source Note */}
-      <div className="absolute -bottom-3 right-2 sm:right-4 text-white text-[10px] sm:text-xs md:text-sm font-['Roboto_regular'] z-10">
+      <div className="absolute bottom-2 right-2 sm:right-4 text-white text-[10px] sm:text-xs md:text-sm font-['Roboto_regular'] z-10">
         <p className="max-w-[300px]">Data Source: National Labor Observatory</p>
         <p className="max-w-[300px]">Last Updated: January 2025</p>
       </div>
