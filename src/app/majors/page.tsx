@@ -894,7 +894,7 @@ export default function SecondPage() {
                         className="w-[200px] relative cursor-pointer"
                         onClick={() => {
                           router.push(
-                            `/third-page?major=${encodeURIComponent(
+                            `/narrow_major?major=${encodeURIComponent(
                               major.narrowMajor
                             )}&generalMajor=${encodeURIComponent(
                               selectedMajor

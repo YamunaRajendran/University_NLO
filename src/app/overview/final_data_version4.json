@@ -560,7 +560,7 @@
           "totalStudentsEnrolled": 600000
         },
         {
-          "generalMajor": "Social Sciences, Journalism, Information and Media",
+          "generalMajor": "Social Sciences, Journalism, Information",
           "graduates": {
             "totalGraduates": 23869,
             "male": {
@@ -6254,7 +6254,7 @@
           }
         },
         {
-          "generalMajor": "Social Sciences, Journalism, Information and Media",
+          "generalMajor": "Social Sciences, Journalism, Information",
           "overall": {
             "totalMetrics": {
               "graduates": {

@@ -105,7 +105,7 @@ export default function HomePage() {
       "natural sciences, mathematics and statistics": FaFlask,
       "engineering, manufacturing and construction": FaCogs,
       "agriculture, forestry, fisheries and veterinary": FaSeedling,
-      "social sciences, journalism, information and media": FaBook,
+      "social sciences, journalism, information": FaBook,
       "generic programs and qualifications": FaUserGraduate,
       services: FaCog,
     };
@@ -146,17 +146,17 @@ export default function HomePage() {
       </div>
 
       {/* Left Side Education Stats */}
-      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-2">
-        <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base">
+      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-8">
+        <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular']">
           A statistical study of university and institute graduates in one year
         </p>
 
         {/* Education Title */}
-        <div className="flex flex-col items-start gap-3 w-full sm:w-[300px] h-[45px] sm:h-[50px] justify-start mx-auto mb-1">
+        <div className="flex flex-col items-start gap-0 w-full sm:w-[300px] h-[45px] sm:h-[50px] justify-start mx-auto mb-1">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2">
-                <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0 transform transition-transform duration-300 hover:scale-110" />
+                <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0 transform transition-transform duration-300 hover:scale-110 " />
                 <span className="text-white text-lg sm:text-xl font-['Roboto_regular'] leading-tight tracking-wide text-left flex-1">
                   {currentData.title}
                 </span>
@@ -166,7 +166,7 @@ export default function HomePage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="flex flex-col gap-2 p-2 sm:p-4 bg-[#1C3862] rounded-[15px]">
+        <div className="flex flex-col gap-2 p-2 sm:p-4 bg-[#1C3862]/50 rounded-[15px]">
           {/* Total Graduates Card */}
           <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
             <div className="flex items-center gap-4 mb-1">
@@ -397,7 +397,7 @@ export default function HomePage() {
 
           <div className="p-0 sm:p-0 rounded-[20px] shadow-lg border border-[#ffff] bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px]">
             <div className="grid grid-cols-[auto_1fr] gap-4">
-              <div className="mt-6">
+              <div className="mt-6 ml-2">
                 <FaUniversity
                   style={{ color: "#2CCAD3", width: 38, height: 38 }}
                 />
@@ -407,21 +407,21 @@ export default function HomePage() {
                   Number of Universities and Educational Institutions
                 </span>
                 <div className="flex flex-col gap-1 mt-1">
-                  <div className="flex h-5 items-center bg-[#1a1f4d]/100 rounded-sm relative w-[180px]">
-                    <span className="text-white text-sm pl-1">
+                  <div className="flex h-5 items-center bg-[#1a1f4d]/100 rounded-sm relative w-[175px]">
+                    <span className="text-white text-sm pl-2">
                       Public Universities
                     </span>
                     <div className="absolute left-0 h-full w-[2px] bg-[#2CCAD3]/100"></div>
-                    <span className="text-white text-2xl font-['Roboto_regular'] ml-auto pr-1 font-bold">
+                    <span className="text-white text-2xl font-['Roboto_regular'] ml-auto pr-2 font-bold">
                       27
                     </span>
                   </div>
-                  <div className="flex h-5 items-center bg-[#1a1f4d]/100 rounded-sm relative w-[180px]">
-                    <span className="text-white text-sm pl-1">
+                  <div className="flex h-5 items-center bg-[#1a1f4d]/100 rounded-sm relative w-[175px]">
+                    <span className="text-white text-sm pl-2">
                       Private Universities
                     </span>
                     <div className="absolute left-0 h-full w-[2px] bg-[#2CCAD3]/100"></div>
-                    <span className="text-white text-2xl font-['Roboto_regular'] ml-auto pr-1 font-bold">
+                    <span className="text-white text-2xl font-['Roboto_regular'] ml-auto pr-2 font-bold">
                       24
                     </span>
                   </div>

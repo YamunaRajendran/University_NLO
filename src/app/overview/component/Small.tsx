@@ -96,7 +96,7 @@ const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
     {
       icon: FaBook,
       text: "Social Sciences",
-      majorKey: "Social Sciences, Journalism, Information and Media",
+      majorKey: "Social Sciences, Journalism, Information",
       position: { angle: 182, radius: 200, offsetX: 0, rotate: 0 },
     },
     {
