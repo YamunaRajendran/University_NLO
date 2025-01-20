@@ -136,7 +136,7 @@ export default function SecondPage() {
   return (
     <div className="min-h-screen bg-transparent backdrop-blur-sm py-8 px-2">
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-2 py-8 max-w-full">
+      <div className="relative z-10 container mx-auto px-2 py-8 max-w-full w-[99%]">
         {/* Major Title */}
         <div className="mb-5">
           <h1 className="text-white font-['Roboto_Regular'] text-2xl text-center">
@@ -388,8 +388,7 @@ export default function SecondPage() {
                             className="w-full absolute bottom-0 border border-white group-hover:opacity-90 transition-opacity rounded-t-full"
                             style={{
                               height: "100%",
-                              background:
-                                "linear-gradient(180deg, #1A1B4B 0%, #377eab 100%)",
+                              background: 'linear-gradient(to top, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)',
                             }}
                           />
                         </div>
@@ -461,8 +460,7 @@ export default function SecondPage() {
                           style={{
                             width: `${percentage}%`,
                             maxWidth: "100%",
-                            background:
-                              "linear-gradient(90deg, #377eab 0%, #1A1B4B 100%)",
+                            background: 'linear-gradient(to right, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)',
                           }}
                         >
                           {/* Total Graduates */}
@@ -506,10 +504,12 @@ export default function SecondPage() {
             <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
               <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
                 <div className="flex gap-1">
-                  <BiMale style={{ color: "#2CCAD3", width: 12, height: 12 }} />
-                  <BiFemale
-                    style={{ color: "#2CCAD3", width: 12, height: 12 }}
-                  />
+                <Image
+                  src="/icons/degree.svg"
+                  alt="Degree"
+                  width={24}
+                  height={24}
+                />
                 </div>
               </div>
               <span className="text-white">Top Narrow Majors by Gender</span>
@@ -530,7 +530,7 @@ export default function SecondPage() {
                     <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
                       {/* Male percentage */}
                       <div
-                        className="absolute h-full bg-gradient-to-r from-[#2CCAD3]/30 to-[#2CCAD3]/50 group-hover:opacity-90 transition-opacity cursor-pointer"
+                        className="absolute h-full bg-gradient-to-r from-[#2cd7c4]/30 to-[#2cd7c4]/100 group-hover:opacity-90 transition-opacity cursor-pointer"
                         style={{
                           width: `${major.genderDistribution.male.percentage}%`,
                           left: 0,
@@ -607,121 +607,96 @@ export default function SecondPage() {
                   height={24}
                 />
               </div>
-              <span className="text-white">Top 5 occupation by salary</span>
+              <span className="text-white">Top 5 Occupation by Salary</span>
             </h2>
-            <div className="h-[280px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadialBarChart
-                  innerRadius="30%"
-                  outerRadius="110%"
-                  data={topOccupations
-                    .slice(0, 5)
-                    .sort((a, b) => a.averageSalary - b.averageSalary)
-                    .map((occupation, index) => ({
-                      name: occupation.occupation,
-                      value: occupation.averageSalary,
-                      fill: [
-                        "#2ab1bb",
-                        "#ac4863",
-                        "#2c828c",
-                        "#778899",
-                        "#996515",
-                      ][topOccupations.indexOf(occupation)],
-                    }))}
-                  startAngle={90}
-                  endAngle={-270}
-                  cx="35%"
-                  cy="50%"
-                >
-                  <RadialBar
-                    background={{ fill: "#ffffff10" }}
-                    label={{
-                      position: "insideStart",
-                      fill: "#fff",
-                      formatter: (value: number) =>
-                        `${value.toLocaleString()} SAR`,
-                      fontSize: 12,
-                      fontFamily: "Roboto",
-                    }}
-                    dataKey="value"
-                    cornerRadius={30}
-                  />
-                  {/* <Tooltip
-                    content={({ active, payload }) => {
-                      if (active && payload && payload.length) {
-                        return (
-                          <div className="bg-white/90 backdrop-blur-sm p-2 rounded shadow">
-                            <p className="text-gray-900">
-                              {payload[0].payload.name}
-                            </p>
-                            <p className="text-gray-600">
-                              Average Salary:{" "}
-                              {payload[0].value?.toLocaleString()} SAR
-                            </p>
-                          </div>
-                        );
-                      }
-                      return null;
-                    }}
-                  /> */}
-                  {[...topOccupations]
-                    .slice(0, 5)
-                    .sort((a, b) => b.averageSalary - a.averageSalary)
-                    .map((occupation, index) => {
-                      const colors = [
-                        "#996515",
-                        "#778899",
-                        "#2c828c",
-                        "#ac4863",
-                        "#2ab1bb",
-                      ];
-                      const sortedIndex = topOccupations
-                        .slice(0, 5)
-                        .sort((a, b) => a.averageSalary - b.averageSalary)
-                        .findIndex(
-                          (o) => o.occupation === occupation.occupation
-                        );
-
-                      const words = occupation.occupation.split(" ");
-                      const lines = [];
-                      let currentLine = "";
-
-                      words.forEach((word, i) => {
-                        if (currentLine.length + word.length > 20) {
-                          lines.push(currentLine);
-                          currentLine = word;
-                        } else {
-                          currentLine += (currentLine ? " " : "") + word;
-                        }
-                        if (i === words.length - 1 && currentLine) {
-                          lines.push(currentLine);
-                        }
-                      });
-
-                      return lines.map((line, lineIndex) => (
-                        <text
-                          key={`${index}-${lineIndex}`}
-                          x="70%"
-                          y={`${15 + index * 15 + lineIndex * 4}%`}
-                          textAnchor="start"
-                          fill={colors[sortedIndex]}
-                          className="text-xs"
-                        >
-                          {line}
-                        </text>
-                      ));
-                    })}
-                </RadialBarChart>
-              </ResponsiveContainer>
+            {/* Container for chart and legends */}
+            <div className="flex flex-col items-center gap-4">
+              {/* Chart container */}
+              <div className="h-[300px] w-full mb-4">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadialBarChart
+                    innerRadius="30%"
+                    outerRadius="110%"
+                    data={topOccupations
+                      .slice(0, 5)
+                      .sort((a, b) => a.averageSalary - b.averageSalary)
+                      .map((occupation, index) => ({
+                        name: occupation.occupation,
+                        value: occupation.averageSalary,
+                        fill: [
+                          "#2ab1bb",
+                          "#ac4863",
+                          "#2c828c",
+                          "#778899",
+                          "#996515",
+                        ][topOccupations.indexOf(occupation)],
+                      }))}
+                    startAngle={90}
+                    endAngle={-270}
+                    cx="50%"
+                    cy="50%"
+                  >
+                    <RadialBar
+                      background={{ fill: "#ffffff10" }}
+                      label={{
+                        position: "insideStart",
+                        fill: "#fff",
+                        formatter: (value: number) =>
+                          `${value.toLocaleString()} SAR`,
+                        fontSize: 12,
+                        fontFamily: "Roboto",
+                      }}
+                      dataKey="value"
+                      cornerRadius={30}
+                    />
+                  </RadialBarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
+            {/* Legends container */}
+            <div className="grid grid-cols-3 gap-2 w-full ">
+                {[...topOccupations]
+                  .slice(0, 5)
+                  .sort((a, b) => b.averageSalary - a.averageSalary)
+                  .map((occupation, index) => {
+                    const colors = [
+                      "#996515",
+                      "#778899",
+                      "#2c828c",
+                      "#ac4863",
+                      "#2ab1bb",
+                    ];
+                    const sortedIndex = topOccupations
+                      .slice(0, 5)
+                      .sort((a, b) => a.averageSalary - b.averageSalary)
+                      .findIndex((o) => o.occupation === occupation.occupation);
+
+                    return (
+                      <div key={index} className="flex items-center gap-2">
+                        {/* Color box */}
+                        <div
+                          style={{
+                            backgroundColor: colors[sortedIndex],
+                          }}
+                          className="w-4 h-4 rounded-sm"
+                        ></div>
+                        {/* Legend text */}
+                        <span className="text-white text-sm font-['Roboto']">
+                          {occupation.occupation}
+                        </span>
+                      </div>
+                    );
+                  })}
+              </div>
           </div>
         </Col>
+
 
         {/* Sankey Chart Row */}
         <Col xs={10} lg={9}>
           <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors">
             <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
-              <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
+              <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg flex justify-center items-center">
                 <Image
                   src="/icons/major.svg"
                   alt="Major"
@@ -735,134 +710,165 @@ export default function SecondPage() {
             </h2>
 
             {/* Chart */}
-            <div className="h-[300px] w-[400px]">
-              {majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming
-                .length > 0 ? (
-                <ResponsiveSankey
-                  data={{
-                    nodes: [
-                      ...majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.map(
-                        (major) => ({
-                          id: major.narrowMajor,
-                          nodeColor: getNarrowMajorColor(major.narrowMajor),
-                        })
-                      ),
-                      {
-                        id: "Before Graduation",
-                        nodeColor: colorMapping["Before Graduation"],
+            <div className="flex justify-center">
+              <div className="h-[400px] w-full max-w-[550px]">
+                {majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming
+                  .length > 0 ? (
+                  <ResponsiveSankey
+                    data={{
+                      nodes: [
+                        ...majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.map(
+                          (major) => ({
+                            id: major.narrowMajor,
+                            nodeColor: getNarrowMajorColor(major.narrowMajor),
+                          })
+                        ),
+                        {
+                          id: "Before Graduation",
+                          nodeColor: colorMapping["Before Graduation"],
+                        },
+                        {
+                          id: "Within First Year",
+                          nodeColor: colorMapping["Within First Year"],
+                        },
+                        {
+                          id: "After First Year",
+                          nodeColor: colorMapping["After First Year"],
+                        },
+                      ],
+                      links:
+                        majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.flatMap(
+                          (major) => [
+                            {
+                              source: major.narrowMajor,
+                              target: "Before Graduation",
+                              value:
+                                major.employmentTiming.beforeGraduation.percentage,
+                            },
+                            {
+                              source: major.narrowMajor,
+                              target: "Within First Year",
+                              value:
+                                major.employmentTiming.withinFirstYear.percentage,
+                            },
+                            {
+                              source: major.narrowMajor,
+                              target: "After First Year",
+                              value:
+                                major.employmentTiming.afterFirstYear.percentage,
+                            },
+                          ]
+                        ),
+                    }}
+                    onClick={(
+                      node: SankeyNodeDatum<
+                        SankeyCustomNodeData,
+                        SankeyCustomLinkData
+                      >
+                    ) => {
+                      console.log(node);
+                      if (
+                        node.id !== "Before Graduation" &&
+                        node.id !== "Within First Year" &&
+                        node.id !== "After First Year"
+                      ) {
+                        router.push(
+                          `/narrow_major?major=${encodeURIComponent(
+                            node.id || node.source.id
+                          )}&generalMajor=${encodeURIComponent(selectedMajor)}`
+                        );
+                      }
+                    }}
+                    margin={{ top: 20, right: 80, bottom: 60, left: 100 }}
+                    align="justify"
+                    colors={(node) => {
+                      if (
+                        [
+                          "Before Graduation",
+                          "Within First Year",
+                          "After First Year",
+                        ].includes(node.id)
+                      ) {
+                        return colorMapping[node.id];
+                      }
+                      return getNarrowMajorColor(node.id);
+                    }}
+                    nodeOpacity={1}
+                    nodeThickness={10}
+                    nodeInnerPadding={2}
+                    nodeSpacing={16}
+                    nodeBorderWidth={0}
+                    nodeBorderRadius={3}
+                    linkOpacity={0.5}
+                    linkHoverOpacity={0.7}
+                    linkContract={3}
+                    enableLinkGradient={true}
+                    
+                    labelPosition="outside"
+                    labelOrientation="horizontal"
+                    labelPadding={4}
+                    labelTextColor={{
+                      from: "color",
+                      modifiers: [["darker", 1]],
+                    }}
+                    animate={true}
+                    label={(node) => {
+                      // Get the label text
+                      const text = node.id;
+
+                      // Maximum width for each line (in characters)
+                      const maxLineWidth = 20;
+
+                      // Split text into words
+                      const words = text.split(' ');
+                      let lines = [];
+                      let currentLine = words[0];
+
+                      // Create lines of text
+                      for (let i = 1; i < words.length; i++) {
+                        const word = words[i];
+                        if ((currentLine + ' ' + word).length <= maxLineWidth) {
+                          currentLine += ' ' + word;
+                        } else {
+                          lines.push(currentLine);
+                          currentLine = word;
+                        }
+                      }
+                      lines.push(currentLine);
+
+                      // Render each line with a different dy value to avoid overlap
+                      return lines.map((line, index) => (
+                        <tspan key={index} dy={index > 0 ? 12 : -10} x="0" >
+                          {line}
+                        </tspan>
+                      ));
+                    }}
+                    theme={{
+                      labels: {
+                        text: {
+                          fontSize: 10,
+                          fill: "#fff",
+                          fontFamily: "Roboto",
+                          dominantBaseline: "middle",
+                        },
                       },
-                      {
-                        id: "Within First Year",
-                        nodeColor: colorMapping["Within First Year"],
+                      tooltip: {
+                        container: {
+                          background: "#1E1F5E",
+                          color: "#fff",
+                          fontSize: 12,
+                          borderRadius: 8,
+                          padding: "8px 12px",
+                        },
                       },
-                      {
-                        id: "After First Year",
-                        nodeColor: colorMapping["After First Year"],
-                      },
-                    ],
-                    links:
-                      majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.flatMap(
-                        (major) => [
-                          {
-                            source: major.narrowMajor,
-                            target: "Before Graduation",
-                            value:
-                              major.employmentTiming.beforeGraduation
-                                .percentage,
-                          },
-                          {
-                            source: major.narrowMajor,
-                            target: "Within First Year",
-                            value:
-                              major.employmentTiming.withinFirstYear.percentage,
-                          },
-                          {
-                            source: major.narrowMajor,
-                            target: "After First Year",
-                            value:
-                              major.employmentTiming.afterFirstYear.percentage,
-                          },
-                        ]
-                      ),
-                  }}
-                  onClick={(
-                    node: SankeyNodeDatum<
-                      SankeyCustomNodeData,
-                      SankeyCustomLinkData
-                    >
-                  ) => {
-                    // Only navigate if clicking on a major node (not timing nodes)
-                    console.log(node);
-                    if (
-                      node.id !== "Before Graduation" &&
-                      node.id !== "Within First Year" &&
-                      node.id !== "After First Year"
-                    ) {
-                      router.push(
-                        `/narrow_major?major=${encodeURIComponent(
-                          node.id || node.source.id
-                        )}&generalMajor=${encodeURIComponent(selectedMajor)}`
-                      );
-                    }
-                  }}
-                  margin={{ top: 20, right: 80, bottom: 60, left: 200 }}
-                  align="justify"
-                  colors={(node) => {
-                    // For employment timing nodes
-                    if (
-                      [
-                        "Before Graduation",
-                        "Within First Year",
-                        "After First Year",
-                      ].includes(node.id)
-                    ) {
-                      return colorMapping[node.id];
-                    }
-                    // For narrow majors, use the specific color
-                    return getNarrowMajorColor(node.id);
-                  }}
-                  nodeOpacity={1}
-                  nodeThickness={12}
-                  nodeInnerPadding={2}
-                  nodeSpacing={16}
-                  nodeBorderWidth={0}
-                  nodeBorderRadius={3}
-                  linkOpacity={0.3}
-                  linkHoverOpacity={0.7}
-                  linkContract={3}
-                  enableLinkGradient={true}
-                  labelPosition="outside"
-                  labelOrientation="horizontal"
-                  labelPadding={4}
-                  labelTextColor={{
-                    from: "color",
-                    modifiers: [["darker", 1]],
-                  }}
-                  animate={true}
-                  theme={{
-                    labels: {
-                      text: {
-                        fontSize: 10,
-                        fill: "#fff",
-                        fontFamily: "Roboto",
-                      },
-                    },
-                    tooltip: {
-                      container: {
-                        background: "#1E1F5E",
-                        color: "#fff",
-                        fontSize: 12,
-                        borderRadius: 8,
-                        padding: "8px 12px",
-                      },
-                    },
-                  }}
-                />
-              ) : (
-                <div className="flex items-center justify-center h-[200px] text-white">
-                  No data available
-                </div>
-              )}
+                    }}
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-[200px] text-white">
+                    No data available
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </Col>
@@ -879,15 +885,15 @@ export default function SecondPage() {
                   height={24}
                 />
               </div>
-              <span className="text-white">Employment Rate by Major</span>
+              <span className="text-white">Employment Rate by Narrow Major</span>
             </h2>
-            <div className="space-y-4 relative">
+            <div className="space-y-4 relative" style={{ top: "30px" }}>
               {/* Vertical line */}
               <div className="absolute left-[200px] top-0 bottom-0 w-[1.5px] bg-gray-100" />
-              {majorData?.overall?.topNarrowMajorsInsights?.topByGender
-                ?.slice(0, 5)
+              {[...(majorData?.overall?.topNarrowMajorsInsights?.topByGender || [])]
+                .sort((a, b) => b.employmentRate - a.employmentRate)
                 .map((major, index) => {
-                  const width = (major.employmentRate / 100) * 100; // Convert to percentage
+                  const width = major.employmentRate;
                   return (
                     <div key={index} className="flex items-center group">
                       <div
@@ -913,12 +919,11 @@ export default function SecondPage() {
                           style={{
                             width: `${width}%`,
                             maxWidth: "100%",
-                            background:
-                              "linear-gradient(90deg, #377eab 0%, #1A1B4B 100%)",
+                            background: 'linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)',
                           }}
                           onClick={() => {
                             router.push(
-                              `/third-page?major=${encodeURIComponent(
+                              `/narrow_major?major=${encodeURIComponent(
                                 major.narrowMajor
                               )}&generalMajor=${encodeURIComponent(
                                 selectedMajor
@@ -945,6 +950,7 @@ export default function SecondPage() {
             </div>
           </div>
         </Col>
+
       </Row>
     </div>
   );

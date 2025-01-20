@@ -146,9 +146,9 @@ export default function HomePage() {
       </div>
 
       {/* Left Side Education Stats */}
-      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-8">
+      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:-mt-7">
         <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular']">
-          A statistical study of university and institute graduates in one year
+        The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
         </p>
 
         {/* Education Title */}
@@ -407,7 +407,7 @@ export default function HomePage() {
                   Number of Universities and Educational Institutions
                 </span>
                 <div className="flex flex-col gap-1 mt-1">
-                  <div className="flex h-5 items-center bg-[#1a1f4d]/100 rounded-sm relative w-[175px]">
+                  <div className="flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px]">
                     <span className="text-white text-sm pl-2">
                       Public Universities
                     </span>
@@ -416,7 +416,7 @@ export default function HomePage() {
                       27
                     </span>
                   </div>
-                  <div className="flex h-5 items-center bg-[#1a1f4d]/100 rounded-sm relative w-[175px]">
+                  <div className="flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px]">
                     <span className="text-white text-sm pl-2">
                       Private Universities
                     </span>
@@ -467,13 +467,13 @@ export default function HomePage() {
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] font-bold mt-1">
                   {totalMetrics.graduates.totalGraduates.toLocaleString()}
                   <div className="flex gap-2 mt-1 text-sm font-['Roboto_Regular']">
-                    <div className="bg-[#1a1f4d]/90 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
+                    <div className="bg-[#15234A]/50 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
                       <span className="flex items-center gap-1">
                         <BiMale style={{ color: "#2CCAD3" }} size={20} />
                         {totalMetrics.graduates.male.percentage}%
                       </span>
                     </div>
-                    <div className="bg-[#1a1f4d]/90 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
+                    <div className="bg-[#15234A]/50 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
                       <span className="flex items-center gap-1">
                         <BiFemale style={{ color: "#2CCAD3 " }} size={20} />
                         {totalMetrics.graduates.female.percentage}%
@@ -543,7 +543,7 @@ export default function HomePage() {
         </div>
 
         {/* Education Degree Overview Card */}
-        <div className="w-full sm:w-[500px] h-[270px] p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#ffff] bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90">
+        <div className="w-full sm:w-[500px] h-[300px] p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#ffff] bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90">
           <div className="flex flex-col gap-2">
             {/* Title Section */}
             <div className="flex items-center gap-8">
@@ -567,175 +567,147 @@ export default function HomePage() {
             </div>
 
             {/* Bar Chart Section */}
-            <div className="flex flex-col p-4 sm:p-6 bg-gradient-to-br from-[#1D1F50] via-[#1D1F50] to-[#1E3963] rounded-[15px] border border-[#2E3153]/30">
-              <div className="flex items-end justify-between px-2 gap-2 sm:gap-4">
+             <div className="flex flex-col px-4 h-60 bg-gradient-to-br from-[#15234A]/50 via-[#15234A]/50 to-[#15234A]/50 border rounded-[20px] border-[#2E3153]/10">
+              <div className="flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1">
                 <div className="flex flex-col items-center">
-                  <div className="h-24 w-6 sm:w-8 flex items-end overflow-hidden relative">
+                  <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
                       style={{
-                        height: "72%",
-                        // boxShadow: "0 0 20px rgba(44,215,196,0.3)",
+                        height: "195%",
                       }}
                     >
-                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/8 text-white text-[16px] font-bold">
-                        210
-                      </span>
-                    </div>
-                  </div>
-                  {/* <div className="h-24 w-6 sm:w-8 bg-gradient-to-b from-[#1a1f4d]/90 to-[#1a1f4d]/40 rounded-t-xl flex items-end overflow-hidden relative">
-                    <div className="w-full bg-gradient-to-t from-[#2398A9] via-[#205B7C]/80 to-[#1E3963]/40 rounded-t-lg shadow-[0_0_10px_rgba(44,202,211,0.5)]"
-                      style={{ height: "72%" }}></div>
-                    <span className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-[11px] font-bold">210</span>
-                  </div> */}
-                </div>
-
-                <div className="flex flex-col items-center">
-                  <div className="h-24 w-6 sm:w-8 flex items-end overflow-hidden relative">
-                    <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
-                      style={{
-                        height: "65%",
-                        // boxShadow: "0 0 20px rgba(44,215,196,0.3)",
-                      }}
-                    >
-                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/8 text-white text-[16px] font-bold">
-                        214
-                      </span>
-                    </div>
-                  </div>
-                  {/* <div className="h-24 w-6 sm:w-8 bg-gradient-to-b from-[#1a1f4d]/90 to-[#1a1f4d]/40 rounded-t-xl flex items-end overflow-hidden relative">
-                    <div className="w-full bg-gradient-to-t from-[#2398A9] via-[#205B7C]/80 to-[#1E3963]/40 rounded-t-lg shadow-[0_0_10px_rgba(44,202,211,0.5)]"
-                      style={{ height: "65%" }}></div>
-                    <span className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-[11px] font-bold">214</span>
-                  </div> */}
-                </div>
-
-                <div className="flex flex-col items-center">
-                  {/* <div className="h-24 w-6 sm:w-8 bg-gradient-to-b from-[#1a1f4d]/90 to-[#1a1f4d]/40 rounded-t-xl flex items-end overflow-hidden relative">
-                    <div className="w-full bg-gradient-to-t from-[#2398A9] via-[#205B7C]/80 to-[#1E3963]/40 rounded-t-lg shadow-[0_0_10px_rgba(44,202,211,0.5)]"
-                      style={{ height: "85%" }}></div>
-                    <span className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-[11px] font-bold">478</span>
-                  </div> */}
-                  <div className="h-24 w-6 sm:w-8 flex items-end overflow-hidden relative">
-                    <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
-                      style={{
-                        height: "85%",
-                        // boxShadow: "0 0 20px rgba(44,215,196,0.3)",
-                      }}
-                    >
-                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/8 text-white text-[16px] font-bold">
-                        478
-                      </span>
+                      <div className="absolute bottom-5 -left-2">
+                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          389835
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="h-24 w-6 sm:w-8 flex items-end overflow-hidden relative">
+                  <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
                       style={{
-                        height: "75%",
-                        // boxShadow: "0 0 20px rgba(44,215,196,0.3)",
+                        height: "125%",
                       }}
                     >
-                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/8 text-white text-[16px] font-bold">
-                        358
-                      </span>
+                      <div className="absolute bottom-5 -left-1.5">
+                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          25428
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  {/* <div className="h-24 w-6 sm:w-8 bg-gradient-to-b from-[#1a1f4d]/90 to-[#1a1f4d]/40 rounded-t-xl flex items-end overflow-hidden relative">
-                    <div className="w-full bg-gradient-to-t from-[#2398A9] via-[#205B7C]/80 to-[#1E3963]/40 rounded-t-lg shadow-[0_0_10px_rgba(44,202,211,0.5)]"
-                      style={{ height: "75%" }}></div>
-                    <span className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-[11px] font-bold">358</span>
-                  </div> */}
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="h-24 w-6 sm:w-8 flex items-end overflow-hidden relative">
+                  <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
                       style={{
-                        height: "70%",
-                        // boxShadow: "0 0 20px rgba(44,215,196,0.3)",
+                        height: "160%",
                       }}
                     >
-                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/8 text-white text-[16px] font-bold">
-                        314
-                      </span>
+                      <div className="absolute bottom-5 -left-1.5">
+                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          39085
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  {/* <div className="h-24 w-6 sm:w-8 bg-gradient-to-b from-[#1a1f4d]/90 to-[#1a1f4d]/40 rounded-t-xl flex items-end overflow-hidden relative">
-                    <div className="w-full bg-gradient-to-t from-[#2398A9] via-[#205B7C]/80 to-[#1E3963]/40 rounded-t-lg shadow-[0_0_10px_rgba(44,202,211,0.5)]"
-                      style={{ height: "70%" }}></div>
-                    <span className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-[11px] font-bold">314</span>
-                  </div> */}
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="h-24 w-6 sm:w-8 flex items-end overflow-hidden relative">
+                  <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
                       style={{
-                        height: "25%",
-                        // boxShadow: "0 0 20px rgba(44,215,196,0.3)",
+                        height: "90%",
                       }}
                     >
-                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/8 text-white text-[16px] font-bold">
-                        88
-                      </span>
+                      <div className="absolute bottom-5 -left-1">
+                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          8001
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  {/* <div className="h-24 w-6 sm:w-8 bg-gradient-to-b from-[#1a1f4d]/90 to-[#1a1f4d]/40 rounded-t-xl flex items-end overflow-hidden relative">
-                    <div className="w-full bg-gradient-to-t from-[#2398A9] via-[#205B7C]/80 to-[#1E3963]/40 rounded-t-lg shadow-[0_0_10px_rgba(44,202,211,0.5)]"
-                      style={{ height: "25%" }}></div>
-                    <span className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-[11px] font-bold">88</span>
-                  </div> */}
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="h-24 w-6 sm:w-8 flex items-end overflow-hidden relative">
+                  <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
                       style={{
-                        height: "85%",
-                        // boxShadow: "0 0 20px rgba(44,215,196,0.3)",
+                        height: "105%",
                       }}
                     >
-                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/8 text-white text-[16px] Roboto_regular font-bold">
-                        478
-                      </span>
+                      <div className="absolute bottom-5 -left-1.5">
+                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          11043
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  {/* <div className="h-24 w-6 sm:w-8 bg-gradient-to-b from-[#1a1f4d]/90 to-[#1a1f4d]/40 rounded-t-xl flex items-end overflow-hidden relative">
-                    <div className="w-full bg-gradient-to-t from-[#2398A9] via-[#205B7C]/80 to-[#1E3963]/40 rounded-t-lg shadow-[0_0_10px_rgba(44,202,211,0.5)]"
-                      style={{ height: "85%" }}></div>
-                    <span className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-[11px] font-bold">478</span>
-                  </div> */}
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                    <div
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      style={{
+                        height: "55%",
+                      }}
+                    >
+                      <div className="absolute bottom-5 left-0">
+                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          590
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                    <div
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      style={{
+                        height: "80%",
+                      }}
+                    >
+                      <div className="absolute bottom-5 -left-1">
+                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          2916
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-between px-2 mt-2 text-[9px] sm:text-[11px]">
-                <div className="text-white text-center w-6 sm:w-8 -translate-x-1">
+              <div className="flex gap-x-6 px-0 text-[9px] sm:text-[11px]">
+                <div className="text-white text-center w-6 sm:w-10">
                   Bachelor's
                 </div>
-                <div className="text-white text-center w-6 sm:w-8 -translate-x-1">
+                <div className="text-white text-center w-6 sm:w-10">
                   Master's
                 </div>
-                <div className="text-white text-center w-6 sm:w-8 -translate-x-1">
+                <div className="text-white text-center w-6 sm:w-12">
                   Associate Diploma
                 </div>
-                <div className="text-white text-center w-6 sm:w-8 -translate-x-1">
+                <div className="text-white text-center w-6 sm:w-12">
                   Intermediate Diploma
                 </div>
-                <div className="text-white text-center w-6 sm:w-8 translate-x-1">
+                <div className="text-white text-center w-6 sm:w-10">
                   Higher Diploma
                 </div>
-                <div className="text-white text-center w-6 sm:w-8 -translate-x-1">
+                <div className="text-white text-center w-6 sm:w-12">
                   Fellowship
                 </div>
-                <div className="text-white text-center w-6 sm:w-8 -translate-x-1">
+                <div className="text-white text-center w-6 sm:w-0">
                   PhD
                 </div>
               </div>
