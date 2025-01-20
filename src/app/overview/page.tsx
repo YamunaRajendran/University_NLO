@@ -578,7 +578,7 @@ export default function HomePage() {
                       }}
                     >
                       <div className="absolute bottom-5 -left-2">
-                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           389835
                         </span>
                       </div>
@@ -595,7 +595,7 @@ export default function HomePage() {
                       }}
                     >
                       <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           25428
                         </span>
                       </div>
@@ -612,7 +612,7 @@ export default function HomePage() {
                       }}
                     >
                       <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           39085
                         </span>
                       </div>
@@ -629,7 +629,7 @@ export default function HomePage() {
                       }}
                     >
                       <div className="absolute bottom-5 -left-1">
-                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           8001
                         </span>
                       </div>
@@ -646,7 +646,7 @@ export default function HomePage() {
                       }}
                     >
                       <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           11043
                         </span>
                       </div>
@@ -663,7 +663,7 @@ export default function HomePage() {
                       }}
                     >
                       <div className="absolute bottom-5 left-0">
-                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           590
                         </span>
                       </div>
@@ -680,7 +680,7 @@ export default function HomePage() {
                       }}
                     >
                       <div className="absolute bottom-5 -left-1">
-                        <span className="text-white text-[14px] sm:text-[16px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           2916
                         </span>
                       </div>
