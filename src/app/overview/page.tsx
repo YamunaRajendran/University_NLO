@@ -572,13 +572,13 @@ export default function HomePage() {
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "195%",
                       }}
                     >
                       <div className="absolute bottom-5 -left-2">
-                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           389835
                         </span>
                       </div>
@@ -589,13 +589,13 @@ export default function HomePage() {
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "125%",
                       }}
                     >
                       <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           25428
                         </span>
                       </div>
@@ -606,13 +606,13 @@ export default function HomePage() {
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "160%",
                       }}
                     >
                       <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           39085
                         </span>
                       </div>
@@ -623,13 +623,13 @@ export default function HomePage() {
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "90%",
                       }}
                     >
                       <div className="absolute bottom-5 -left-1">
-                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           8001
                         </span>
                       </div>
@@ -640,13 +640,13 @@ export default function HomePage() {
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "105%",
                       }}
                     >
                       <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           11043
                         </span>
                       </div>
@@ -657,13 +657,13 @@ export default function HomePage() {
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "55%",
                       }}
                     >
                       <div className="absolute bottom-5 left-0">
-                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           590
                         </span>
                       </div>
@@ -674,13 +674,13 @@ export default function HomePage() {
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
                     <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-transparent rounded-t-2xl"
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "80%",
                       }}
                     >
                       <div className="absolute bottom-5 -left-1">
-                        <span className="text-white text-[10px] sm:text-[12px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           2916
                         </span>
                       </div>
