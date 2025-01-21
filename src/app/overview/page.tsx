@@ -580,7 +580,7 @@ export default function HomePage() {
               <div className="flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1">
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-[106%] -left-2">
+                  <div className="absolute -top-[105%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           389835
                         </span>
@@ -602,7 +602,7 @@ export default function HomePage() {
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-12 -left-1.5">
+                  <div className="absolute -top-[45%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           25428
                         </span>
@@ -624,7 +624,7 @@ export default function HomePage() {
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-20 -left-1.5">
+                  <div className="absolute -top-[80%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           39085
                         </span>
@@ -642,7 +642,7 @@ export default function HomePage() {
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-5 -left-1">
+                  <div className="absolute -top-[10%] -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           8001
                         </span>
@@ -664,7 +664,7 @@ export default function HomePage() {
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-[30%] -left-1.5">
+                  <div className="absolute -top-[25%] -left-1.5"> 
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           11043
                         </span>
@@ -686,7 +686,7 @@ export default function HomePage() {
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute top-5 left-0">
+                  <div className="absolute top-[24%] left-0">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           590
                         </span>
@@ -708,7 +708,7 @@ export default function HomePage() {
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-[10%] -left-1">
+                  <div className="absolute -top-[1%] -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           2916
                         </span>
