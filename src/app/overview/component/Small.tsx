@@ -204,7 +204,7 @@ const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
               }}
             >
               <div
-                className="absolute inset-0 flex flex-col items-center justify-center border border-[#ffff] rounded-full"
+                className="absolute inset-0 flex flex-col items-center justify-center border border-[#2ab1bb] rounded-full"
                 style={{ transform: `rotate(${-rotation}deg)` }}
               >
                 <Icon className="text-[#4EC9ED] text-2xl mb-1" />

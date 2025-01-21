@@ -134,7 +134,10 @@ export default function SecondPage() {
     majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming || [];
 
   return (
-    <div className="min-h-screen bg-transparent backdrop-blur-sm py-8 px-2">
+    <div
+      className="min-h-screen bg-transparent backdrop-blur-sm  px-2 "
+      style={{ marginTop: "-30px" }}
+    >
       {/* Content */}
       <div className="relative z-10 container mx-auto px-2 py-8 max-w-full w-[99%]">
         {/* Major Title */}
@@ -377,28 +380,46 @@ export default function SecondPage() {
                         className="flex flex-col items-center group w-[60px]"
                       >
                         {/* Value on top of bar */}
-                        <div className="text-sm font-['Roboto_Regular'] text-white mb-1">
+                        <div
+                          className="text-sm font-['Roboto_Regular'] text-white mb-1"
+                          style={{ marginBottom: "5px" }}
+                        >
                           {occupation.totalGraduates.toLocaleString()}
                         </div>
                         <div
                           className="w-[30px] relative"
-                          style={{ height: `${height * 2}px` }}
+                          style={{
+                            height: `${height * 2}px`,
+                            marginBottom: "2px",
+                          }}
                         >
                           <div
                             className="w-full absolute bottom-0 border border-white group-hover:opacity-90 transition-opacity rounded-t-full"
                             style={{
-                              height: "100%",
-                              background: 'linear-gradient(to top, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)',
+                              height: "85%",
+                              marginBottom: "15px",
+                              background:
+                                "linear-gradient(to top, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                             }}
                           />
                         </div>
                         {/* horizontal line */}
-                        <div className="absolute left-[28px] h-[2px] w-[85%] bg-gray-100 top-52 transform -translate-y-1/6" />
+                        <div
+                          className="absolute left-[30px] h-[2px] w-[85%] bg-gray-100 top-52 transform -translate-y-1/6"
+                          style={{ marginTop: "-15px" }}
+                        />
 
                         {/* {text} */}
-                        <div className="mt-4 text-center px-1 min-h-[27px] left-5">
-                          <span className="text-[10px] font-['Roboto_Regular'] text-white block break-words capitalize -rotate-45 transform origin-top-left translate-y-10 -translate-x-1 w-20">
-                            {occupation.occupation.split(" ").join("\n")}
+                        <div className="mt-1 text-center px-1 min-h-[40px]">
+                          <span
+                            className="text-[10px] font-['Roboto_Regular'] text-white block break-words -rotate-45 capitalize transform translate-y-8 -translate-x-2 w-24"
+                            style={{
+                              wordBreak: "break-word",
+                              lineHeight: "1.2",
+                              marginTop: "-20px",
+                            }}
+                          >
+                            {occupation.occupation}
                           </span>
                         </div>
                       </div>
@@ -441,7 +462,7 @@ export default function SecondPage() {
                 .slice(0, 5) // Only take the first 5 items
                 .map((level, index) => {
                   // Fixed percentage scale for each bar
-                  const percentages = [98, 75, 45, 30, 15];
+                  const percentages = [98, 75, 55, 38, 27];
                   const percentage = percentages[index] || 12;
                   const isSmallBar = percentage < 30;
 
@@ -460,7 +481,8 @@ export default function SecondPage() {
                           style={{
                             width: `${percentage}%`,
                             maxWidth: "100%",
-                            background: 'linear-gradient(to right, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)',
+                            background:
+                              "linear-gradient(to right, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                           }}
                         >
                           {/* Total Graduates */}
@@ -504,12 +526,12 @@ export default function SecondPage() {
             <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
               <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
                 <div className="flex gap-1">
-                <Image
-                  src="/icons/degree.svg"
-                  alt="Degree"
-                  width={24}
-                  height={24}
-                />
+                  <Image
+                    src="/icons/degree.svg"
+                    alt="Degree"
+                    width={24}
+                    height={24}
+                  />
                 </div>
               </div>
               <span className="text-white">Top Narrow Majors by Gender</span>
@@ -655,46 +677,45 @@ export default function SecondPage() {
             </div>
             {/* Legends container */}
             <div className="grid grid-cols-3 gap-2 w-full ">
-                {[...topOccupations]
-                  .slice(0, 5)
-                  .sort((a, b) => b.averageSalary - a.averageSalary)
-                  .map((occupation, index) => {
-                    const colors = [
-                      "#996515",
-                      "#778899",
-                      "#2c828c",
-                      "#ac4863",
-                      "#2ab1bb",
-                    ];
-                    const sortedIndex = topOccupations
-                      .slice(0, 5)
-                      .sort((a, b) => a.averageSalary - b.averageSalary)
-                      .findIndex((o) => o.occupation === occupation.occupation);
+              {[...topOccupations]
+                .slice(0, 5)
+                .sort((a, b) => b.averageSalary - a.averageSalary)
+                .map((occupation, index) => {
+                  const colors = [
+                    "#996515",
+                    "#778899",
+                    "#2c828c",
+                    "#ac4863",
+                    "#2ab1bb",
+                  ];
+                  const sortedIndex = topOccupations
+                    .slice(0, 5)
+                    .sort((a, b) => a.averageSalary - b.averageSalary)
+                    .findIndex((o) => o.occupation === occupation.occupation);
 
-                    return (
-                      <div key={index} className="flex items-center gap-2">
-                        {/* Color box */}
-                        <div
-                          style={{
-                            backgroundColor: colors[sortedIndex],
-                          }}
-                          className="w-4 h-4 rounded-sm"
-                        ></div>
-                        {/* Legend text */}
-                        <span className="text-white text-sm font-['Roboto']">
-                          {occupation.occupation}
-                        </span>
-                      </div>
-                    );
-                  })}
-              </div>
+                  return (
+                    <div key={index} className="flex items-center gap-2">
+                      {/* Color box */}
+                      <div
+                        style={{
+                          backgroundColor: colors[sortedIndex],
+                        }}
+                        className="w-4 h-4 rounded-sm"
+                      ></div>
+                      {/* Legend text */}
+                      <span className="text-white text-sm font-['Roboto']">
+                        {occupation.occupation}
+                      </span>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </Col>
 
-
         {/* Sankey Chart Row */}
         <Col xs={10} lg={9}>
-          <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors">
+          <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
             <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
               <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg flex justify-center items-center">
                 <Image
@@ -711,9 +732,9 @@ export default function SecondPage() {
 
             {/* Chart */}
             <div className="flex justify-center">
-              <div className="h-[400px] w-full max-w-[550px]">
-                {majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming
-                  .length > 0 ? (
+              <div className="h-[400px] w-full max-w-[450px]">
+                {majorData?.overall.topNarrowMajorsInsights
+                  .topByEmploymentTiming.length > 0 ? (
                   <ResponsiveSankey
                     data={{
                       nodes: [
@@ -743,19 +764,22 @@ export default function SecondPage() {
                               source: major.narrowMajor,
                               target: "Before Graduation",
                               value:
-                                major.employmentTiming.beforeGraduation.percentage,
+                                major.employmentTiming.beforeGraduation
+                                  .percentage,
                             },
                             {
                               source: major.narrowMajor,
                               target: "Within First Year",
                               value:
-                                major.employmentTiming.withinFirstYear.percentage,
+                                major.employmentTiming.withinFirstYear
+                                  .percentage,
                             },
                             {
                               source: major.narrowMajor,
                               target: "After First Year",
                               value:
-                                major.employmentTiming.afterFirstYear.percentage,
+                                major.employmentTiming.afterFirstYear
+                                  .percentage,
                             },
                           ]
                         ),
@@ -779,7 +803,7 @@ export default function SecondPage() {
                         );
                       }
                     }}
-                    margin={{ top: 20, right: 80, bottom: 60, left: 100 }}
+                    margin={{ top: 20, right: 120, bottom: 20, left: 150 }}
                     align="justify"
                     colors={(node) => {
                       if (
@@ -803,7 +827,6 @@ export default function SecondPage() {
                     linkHoverOpacity={0.7}
                     linkContract={3}
                     enableLinkGradient={true}
-                    
                     labelPosition="outside"
                     labelOrientation="horizontal"
                     labelPadding={4}
@@ -820,15 +843,15 @@ export default function SecondPage() {
                       const maxLineWidth = 20;
 
                       // Split text into words
-                      const words = text.split(' ');
+                      const words = text.split(" ");
                       let lines = [];
                       let currentLine = words[0];
 
                       // Create lines of text
                       for (let i = 1; i < words.length; i++) {
                         const word = words[i];
-                        if ((currentLine + ' ' + word).length <= maxLineWidth) {
-                          currentLine += ' ' + word;
+                        if ((currentLine + " " + word).length <= maxLineWidth) {
+                          currentLine += " " + word;
                         } else {
                           lines.push(currentLine);
                           currentLine = word;
@@ -838,7 +861,7 @@ export default function SecondPage() {
 
                       // Render each line with a different dy value to avoid overlap
                       return lines.map((line, index) => (
-                        <tspan key={index} dy={index > 0 ? 12 : -10} x="0" >
+                        <tspan key={index} dy={index > 0 ? 12 : -10} x="0">
                           {line}
                         </tspan>
                       ));
@@ -846,7 +869,7 @@ export default function SecondPage() {
                     theme={{
                       labels: {
                         text: {
-                          fontSize: 10,
+                          fontSize: 15,
                           fill: "#fff",
                           fontFamily: "Roboto",
                           dominantBaseline: "middle",
@@ -856,7 +879,7 @@ export default function SecondPage() {
                         container: {
                           background: "#1E1F5E",
                           color: "#fff",
-                          fontSize: 12,
+                          fontSize: 15,
                           borderRadius: 8,
                           padding: "8px 12px",
                         },
@@ -885,12 +908,17 @@ export default function SecondPage() {
                   height={24}
                 />
               </div>
-              <span className="text-white">Employment Rate by Narrow Major</span>
+              <span className="text-white">
+                Employment Rate by Narrow Major
+              </span>
             </h2>
             <div className="space-y-4 relative" style={{ top: "30px" }}>
               {/* Vertical line */}
               <div className="absolute left-[200px] top-0 bottom-0 w-[1.5px] bg-gray-100" />
-              {[...(majorData?.overall?.topNarrowMajorsInsights?.topByGender || [])]
+              {[
+                ...(majorData?.overall?.topNarrowMajorsInsights?.topByGender ||
+                  []),
+              ]
                 .sort((a, b) => b.employmentRate - a.employmentRate)
                 .map((major, index) => {
                   const width = major.employmentRate;
@@ -919,7 +947,8 @@ export default function SecondPage() {
                           style={{
                             width: `${width}%`,
                             maxWidth: "100%",
-                            background: 'linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)',
+                            background:
+                              "linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                           }}
                           onClick={() => {
                             router.push(
@@ -950,7 +979,6 @@ export default function SecondPage() {
             </div>
           </div>
         </Col>
-
       </Row>
     </div>
   );

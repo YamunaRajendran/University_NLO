@@ -135,7 +135,19 @@ export default function HomePage() {
   const currentData = getSelectedMajorData();
 
   return (
+    <>
+    <p className="px-8 text-white text-left mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular'] w-[67%]">
+    The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
+    </p>
     <div className="flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden">
+      
+      {/* Description text positioned at the top */}
+      {/* <div className="w-full text-center mb-6"> */}
+        {/* <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular']">
+          The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
+        </p> */}
+      {/* </div> */}
+
       {/* Add a blur overlay at the bottom */}
       {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#24285E]/80 to-transparent backdrop-blur-sm"></div> */}
 
@@ -146,20 +158,24 @@ export default function HomePage() {
       </div>
 
       {/* Left Side Education Stats */}
-      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:-mt-7">
-        <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular']">
-        The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
-        </p>
+      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-5">
+       
+      {/* <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:-mt-7">
+        <p className="text-white text-sm sm:text-base lg:text-lg font-['Roboto_regular'] leading-relaxed mb-4">
+          The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
+        </p> */}
 
         {/* Education Title */}
         <div className="flex flex-col items-start gap-0 w-full sm:w-[300px] h-[45px] sm:h-[50px] justify-start mx-auto mb-1">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2">
-                <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0 transform transition-transform duration-300 hover:scale-110 " />
-                <span className="text-white text-lg sm:text-xl font-['Roboto_regular'] leading-tight tracking-wide text-left flex-1">
-                  {currentData.title}
-                </span>
+                <div className="flex items-center gap-2">
+                  <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0 transform transition-transform duration-300 hover:scale-110 " />
+                  <span className="text-white text-lg sm:text-xl font-['Roboto_regular'] leading-tight tracking-wide text-left flex-1">
+                    {currentData.title}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -345,7 +361,7 @@ export default function HomePage() {
 
           {/* Centered Logo */}
           <div
-            className="absolute inset-0 m-auto w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] lg:w-[180px] lg:h-[180px] rounded-full flex flex-col items-center justify-center z-20 logo-container"
+            className="absolute inset-0 m-auto w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] lg:w-[180px] lg:h-[180px] flex flex-col items-center justify-center z-20 logo-container"
             style={{ marginTop: "29px" }}
           >
             <Image
@@ -355,13 +371,6 @@ export default function HomePage() {
               className="object-contain brightness-0 invert logo-glow p-2"
               priority
             />
-            {/* <p
-              className="text-white text-center text-xs mt-[180px] max-w-[120px] leading-tight" */}
-            {/* // style={{ marginTop: "150px" }} */}
-            {/* >
-              A statistical study of university and institute graduates in one
-              year
-            </p> */}
           </div>
         </div>
       </div>
@@ -571,119 +580,150 @@ export default function HomePage() {
               <div className="flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1">
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                    <div
-                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
-                      style={{
-                        height: "195%",
-                      }}
-                    >
-                      <div className="absolute bottom-5 -left-2">
+                  <div className="absolute -top-[106%] -left-2">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           389835
                         </span>
                       </div>
+                    <div
+                      className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
+                      style={{
+                        height: "185%",
+                      }}
+                    >
+                      {/* <div className="absolute bottom-5 -left-2">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          389835
+                        </span>
+                      </div> */}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                  <div className="absolute -top-12 -left-1.5">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          25428
+                        </span>
+                      </div>
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "125%",
                       }}
                     >
-                      <div className="absolute bottom-5 -left-1.5">
+                      {/* <div className="absolute bottom-5 -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           25428
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                  <div className="absolute -top-20 -left-1.5">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          39085
+                        </span>
+                      </div>
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "160%",
                       }}
                     >
-                      <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          39085
-                        </span>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                  <div className="absolute -top-5 -left-1">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          8001
+                        </span>
+                      </div>
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "90%",
                       }}
                     >
-                      <div className="absolute bottom-5 -left-1">
+                      {/* <div className="absolute bottom-5 -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           8001
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                  <div className="absolute -top-[30%] -left-1.5">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          11043
+                        </span>
+                      </div>
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "105%",
                       }}
                     >
-                      <div className="absolute bottom-5 -left-1.5">
+                      {/* <div className="absolute bottom-5 -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           11043
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                  <div className="absolute top-5 left-0">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          590
+                        </span>
+                      </div>
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "55%",
                       }}
                     >
-                      <div className="absolute bottom-5 left-0">
+                      {/* <div className="absolute bottom-5 left-0">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           590
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                  <div className="absolute -top-[10%] -left-1">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          2916
+                        </span>
+                      </div>
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
                         height: "80%",
                       }}
                     >
-                      <div className="absolute bottom-5 -left-1">
+                      {/* <div className="absolute bottom-5 -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           2916
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -716,5 +756,6 @@ export default function HomePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
