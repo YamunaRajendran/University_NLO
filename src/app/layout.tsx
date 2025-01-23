@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import NetworkBackground from '@/app/sidebar/NetworkBackground'
 import {Header} from '@/app/sidebar/Header';
+import { LanguageProvider } from './context/LanguageContext';
 
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -49,8 +50,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen overflow-x-hidden`}>
         <NetworkBackground />
-        <Header />
-        <main>{children}</main>
+        <LanguageProvider>
+          <Header />
+          <main>{children}</main>
+        </LanguageProvider>
       </body>
     </html>
   );

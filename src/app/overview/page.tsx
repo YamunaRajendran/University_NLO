@@ -3,6 +3,7 @@
 import Image from "next/image";
 import nloSymbol from "../../../public/logo/nlo_logo_symbol.png";
 import mockData from "./final_data_version4.json";
+import arabicData from './major_insights_arabic.json';
 import { useEffect, useState } from "react";
 import SmallCircles from "@/app/overview/component/Small";
 import { PiMoneyFill } from "react-icons/pi";
@@ -27,6 +28,9 @@ import {
   FaUserGraduate,
   FaCog,
 } from "react-icons/fa";
+
+import { useLanguage } from '@/app/context/LanguageContext';
+import { getTranslation } from '@/app/utils/translations';
 
 const CircularText = ({
   text,
@@ -71,7 +75,9 @@ const CircularText = ({
 };
 
 export default function HomePage() {
-  const { totalMetrics, overall } = mockData.majorsInsights;
+  const { language } = useLanguage();
+  const data = language === 'ar' ? arabicData : mockData;
+  const { totalMetrics, overall } = data.majorsInsights;
   const [animate, setAnimate] = useState(false);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
 
@@ -82,7 +88,7 @@ export default function HomePage() {
   const getSelectedMajorData = () => {
     if (!selectedMajor) {
       return {
-        title: "Education",
+        title: getTranslation("Education", language),
         icon: FaGraduationCap,
         graduates: totalMetrics.graduates,
         employmentRate: totalMetrics.employmentRate,
@@ -91,9 +97,32 @@ export default function HomePage() {
       };
     }
 
+    // Map English major names to Arabic major names
+    const majorNameMap = {
+      "education": "التعليم",
+      "communications and information technology": "تقنية الاتصالات والمعلومات",
+      "business, administration and law": "الأعمال والإدارة والقانون",
+      "arts and humanities": "الفنون والعلوم الإنسانية",
+      "health and welfare": "الصحة والرفاه",
+      "natural sciences, mathematics and statistics": "العلوم الطبيعية والرياضيات والإحصاء",
+      "engineering, manufacturing and construction": "الهندسة والتصنيع والبناء",
+      "agriculture, forestry, fisheries and veterinary": "الزراعة والحراجة ومصائد الأسماك والبيطرة",
+      "social sciences, journalism, information": "العلوم الاجتماعية والصحافة والإعلام",
+      "generic programs and qualifications": "البرامج العامة والمؤهلات",
+      "services": "الخدمات"
+    };
+
+    const searchMajor = language === 'ar' 
+      ? majorNameMap[selectedMajor.toLowerCase()] || selectedMajor 
+      : selectedMajor;
+
     const majorData = overall.basicMetrics.find(
-      (major) =>
-        major.generalMajor.toLowerCase() === selectedMajor.toLowerCase()
+      (major) => {
+        const majorName = language === 'ar' 
+          ? major.generalMajor 
+          : Object.entries(majorNameMap).find(([eng, ar]) => ar === major.generalMajor)?.[0] || major.generalMajor;
+        return majorName.toLowerCase() === searchMajor.toLowerCase();
+      }
     );
 
     const majorIcons = {
@@ -115,7 +144,7 @@ export default function HomePage() {
 
     return majorData
       ? {
-          title: selectedMajor,
+          title: language === 'ar' ? majorData.generalMajor : selectedMajor,
           icon: selectedIcon,
           graduates: majorData.graduates,
           employmentRate: majorData.employmentRate,
@@ -123,7 +152,7 @@ export default function HomePage() {
           timeToEmployment: majorData.timeToEmployment,
         }
       : {
-          title: "Education",
+          title: getTranslation("Education", language),
           icon: FaGraduationCap,
           graduates: totalMetrics.graduates,
           employmentRate: totalMetrics.employmentRate,
@@ -134,35 +163,44 @@ export default function HomePage() {
 
   const currentData = getSelectedMajorData();
 
+  const metrics = [
+    {
+      icon: <PiGraduationCapFill className="text-4xl text-violet-600" />,
+      value: data.majorsInsights.totalMetrics.graduates.totalGraduates.toLocaleString(),
+      label: getTranslation("Total Graduates", language),
+    },
+    {
+      icon: <PiMoneyFill className="text-4xl text-violet-600" />,
+      value: data.majorsInsights.totalMetrics.averageSalary.toLocaleString(),
+      label: getTranslation("Average Salary", language),
+    },
+    {
+      icon: <FaBusinessTime className="text-4xl text-violet-600" />,
+      value: `${data.majorsInsights.totalMetrics.timeToEmployment.overall.days} ${getTranslation("days", language)}`,
+      label: getTranslation("Time to Employment", language),
+    },
+    {
+      icon: <FaUniversity className="text-4xl text-violet-600" />,
+      value: `${data.majorsInsights.totalMetrics.employmentRate}%`,
+      label: getTranslation("Employment Rate", language),
+    },
+  ];
+
   return (
     <>
-    <p className="px-8 text-white text-left mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular'] w-[67%]">
-    The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
-    </p>
-    <div className="flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden">
-      
-      {/* Description text positioned at the top */}
-      {/* <div className="w-full text-center mb-6"> */}
-        {/* <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular']">
-          The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
-        </p> */}
-      {/* </div> */}
+   
 
+    <div className="relative flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden">
+    <p className="absolute -top-1 px-2 text-white text-left mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular'] w-[67%] ">
+    {getTranslation("The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors", language)}
+    </p>
       {/* Add a blur overlay at the bottom */}
       {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#24285E]/80 to-transparent backdrop-blur-sm"></div> */}
 
-      {/* Data Source Note */}
-      <div className="absolute bottom-2 right-2 sm:right-4 text-white text-[10px] sm:text-xs md:text-sm font-['Roboto_regular'] z-10">
-        <p className="max-w-[300px]">Data Source: National Labor Observatory</p>
-        <p className="max-w-[300px]">Last Updated: January 2025</p>
-      </div>
-
       {/* Left Side Education Stats */}
-      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-5">
-       
-      {/* <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:-mt-7">
-        <p className="text-white text-sm sm:text-base lg:text-lg font-['Roboto_regular'] leading-relaxed mb-4">
-          The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors
+      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-16">
+        {/* <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  font-['Roboto_regular']">
+          {getTranslation("The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors", language)}
         </p> */}
 
         {/* Education Title */}
@@ -170,12 +208,10 @@ export default function HomePage() {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2">
-                  <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0 transform transition-transform duration-300 hover:scale-110 " />
-                  <span className="text-white text-lg sm:text-xl font-['Roboto_regular'] leading-tight tracking-wide text-left flex-1">
-                    {currentData.title}
-                  </span>
-                </div>
+                <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0 transform transition-transform duration-300 hover:scale-110 " />
+                <span className="text-white text-lg sm:text-xl font-['Roboto_regular'] leading-tight tracking-wide text-left flex-1">
+                  {currentData.title}
+                </span>
               </div>
             </div>
           </div>
@@ -196,7 +232,7 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff] ">
-                  Total Graduates
+                  {getTranslation("Total Graduates", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] font-bold">
                   {currentData.graduates.totalGraduates.toLocaleString()}
@@ -256,8 +292,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="flex-1">
-                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Employment Rate
+                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff] ">
+                  {getTranslation("Employment Rate", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] font-bold">
                   {currentData.employmentRate}%
@@ -275,8 +311,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="flex-1">
-                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Average Salary
+                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff] ">
+                  {getTranslation("Average Salary", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] font-bold">
                   {currentData.averageSalary.toLocaleString()}{" "}
@@ -287,7 +323,7 @@ export default function HomePage() {
                       fontWeight: 300,
                     }}
                   >
-                    SAR
+                    {getTranslation("SAR", language)}
                   </span>
                 </div>
               </div>
@@ -303,8 +339,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="flex-1">
-                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Time to Employment
+                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff] ">
+                  {getTranslation("Time to Employment", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] font-bold">
                   {currentData.timeToEmployment.overall.days}{" "}
@@ -315,7 +351,7 @@ export default function HomePage() {
                       fontWeight: 400,
                     }}
                   >
-                    days
+                    {getTranslation("days", language)}
                   </span>
                 </div>
               </div>
@@ -331,18 +367,19 @@ export default function HomePage() {
                 />
               </div>
               <div className="flex-1">
-                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Job Seekers
+                <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff] ">
+                  {getTranslation("Job Seekers", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] font-bold">
                   125,847
                 </div>
-                {/* <div className="flex gap-2 mt-1">
+
+                <div className="flex gap-2 mt-1">
                   <div className="bg-[#1d3862]/80 rounded-[7px] flex items-center gap-1 px-2 py-0.5">
-                    <span className="text-[#2cd7c4] text-sm">Active</span>
-                    <span className="text-white/70 text-sm">78%</span>
+                    {/* <span className="text-[#2cd7c4] text-sm">Active</span>
+                    <span className="text-white/70 text-sm">78%</span> */}
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -350,7 +387,7 @@ export default function HomePage() {
       </div>
 
       {/* Main container with transition */}
-      <div className="w-[300px] sm:w-[400px] lg:w-[600px] h-[300px] sm:h-[400px] lg:h-[600px] flex items-center justify-center">
+      <div className="w-[300px] sm:w-[400px] lg:w-[600px] h-[300px] sm:h-[400px] lg:h-[700px] flex items-center justify-center">
         {/* Main circle container */}
         <div className="relative w-[150px] sm:w-[180px] lg:w-[230px] h-[150px] sm:h-[180px] lg:h-[230px] rounded-full shadow-2xl shadow-[#2e6bb2]/500 bg-gradient-to-br from-[#24285E] from-20% via-[#24285E] via-20% to-[#244975]">
           {/* Outer glowing border */}
@@ -361,7 +398,7 @@ export default function HomePage() {
 
           {/* Centered Logo */}
           <div
-            className="absolute inset-0 m-auto w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] lg:w-[180px] lg:h-[180px] flex flex-col items-center justify-center z-20 logo-container"
+            className="absolute inset-0 m-auto w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] lg:w-[180px] lg:h-[180px] rounded-full flex flex-col items-center justify-center z-20 logo-container"
             style={{ marginTop: "29px" }}
           >
             <Image
@@ -371,6 +408,13 @@ export default function HomePage() {
               className="object-contain brightness-0 invert logo-glow p-2"
               priority
             />
+            {/* <p
+              className="text-white text-center text-xs mt-[180px] max-w-[120px] leading-tight" */}
+            {/* // style={{ marginTop: "150px" }} */}
+            {/* >
+              A statistical study of university and institute graduates in one
+              year
+            </p> */}
           </div>
         </div>
       </div>
@@ -388,7 +432,7 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff] whitespace-nowrap">
-                  Total Student Enrollment
+                  {getTranslation("Total Student Enrollment", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] mt-1 font-bold">
                   {totalMetrics.totalStudentsEnrolled.toLocaleString()}{" "}
@@ -413,12 +457,12 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Number of Universities and Educational Institutions
+                  {getTranslation("Number of Universities and Educational Institutions", language)}
                 </span>
                 <div className="flex flex-col gap-1 mt-1">
                   <div className="flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px]">
                     <span className="text-white text-sm pl-2">
-                      Public Universities
+                      {getTranslation("Public Universities", language)}
                     </span>
                     <div className="absolute left-0 h-full w-[2px] bg-[#2CCAD3]/100"></div>
                     <span className="text-white text-2xl font-['Roboto_regular'] ml-auto pr-2 font-bold">
@@ -427,7 +471,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px]">
                     <span className="text-white text-sm pl-2">
-                      Private Universities
+                      {getTranslation("Private Universities", language)}
                     </span>
                     <div className="absolute left-0 h-full w-[2px] bg-[#2CCAD3]/100"></div>
                     <span className="text-white text-2xl font-['Roboto_regular'] ml-auto pr-2 font-bold">
@@ -451,7 +495,7 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Employment Rate
+                  {getTranslation("Employment Rate", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] mt-1 font-bold">
                   {totalMetrics.employmentRate}%
@@ -471,7 +515,7 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Total Graduates
+                  {getTranslation("Total Graduates", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] font-bold mt-1">
                   {totalMetrics.graduates.totalGraduates.toLocaleString()}
@@ -506,18 +550,18 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Average Salary
+                  {getTranslation("Average Salary", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] mt-1 font-bold">
                   {totalMetrics.averageSalary.toLocaleString()}{" "}
                   <span
                     style={{
                       fontFamily: "Roboto regular",
-                      fontSize: "1.2rem",
-                      fontWeight: 200,
+                      fontSize: "1.4rem",
+                      fontWeight: 300,
                     }}
                   >
-                    SAR
+                    {getTranslation("SAR", language)}
                   </span>
                 </div>
               </div>
@@ -532,7 +576,7 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <span className="text-xs sm:text-sm font-['Roboto_regular'] text-[#ffff]">
-                  Time to Employment
+                  {getTranslation("Time to Employment", language)}
                 </span>
                 <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-['Roboto_regular'] mt-1 font-bold">
                   {totalMetrics.timeToEmployment.overall.days}{" "}
@@ -543,7 +587,7 @@ export default function HomePage() {
                       fontWeight: 200,
                     }}
                   >
-                    days
+                    {getTranslation("days", language)}
                   </span>
                 </div>
               </div>
@@ -564,13 +608,13 @@ export default function HomePage() {
               {/* <div className="certificate-icon"></div> */}
               <div className="flex gap-1">
                 <span className="text-sm sm:text-base font-['Roboto_regular'] text-[#ffff]">
-                  Education
+                  {getTranslation("Education", language)}
                 </span>
                 <span className="text-sm sm:text-base font-['Roboto_regular'] text-[#ffff]">
-                  Degree
+                  {getTranslation("Degree", language)}
                 </span>
                 <span className="text-sm sm:text-base font-['Roboto_regular'] text-[#ffff]">
-                  Overview
+                  {getTranslation("Overview", language)}
                 </span>
               </div>
             </div>
@@ -580,7 +624,7 @@ export default function HomePage() {
               <div className="flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1">
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-[105%] -left-1.5">
+                  <div className="absolute -top-[115%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           389835
                         </span>
@@ -588,7 +632,7 @@ export default function HomePage() {
                     <div
                       className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
                       style={{
-                        height: "185%",
+                        height: "195%",
                       }}
                     >
                       {/* <div className="absolute bottom-5 -left-2">
@@ -635,7 +679,11 @@ export default function HomePage() {
                         height: "160%",
                       }}
                     >
-                      
+                      {/* <div className="absolute bottom-5 -left-1.5">
+                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
+                          39085
+                        </span>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -664,7 +712,7 @@ export default function HomePage() {
 
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                  <div className="absolute -top-[25%] -left-1.5"> 
+                  <div className="absolute -top-[25%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           11043
                         </span>
@@ -730,29 +778,35 @@ export default function HomePage() {
               </div>
               <div className="flex gap-x-6 px-0 text-[9px] sm:text-[11px]">
                 <div className="text-white text-center w-6 sm:w-10">
-                  Bachelor's
+                  {getTranslation("Bachelor's", language)}
                 </div>
                 <div className="text-white text-center w-6 sm:w-10">
-                  Master's
+                  {getTranslation("Master's", language)}
                 </div>
                 <div className="text-white text-center w-6 sm:w-12">
-                  Associate Diploma
+                  {getTranslation("Associate Diploma", language)}
                 </div>
                 <div className="text-white text-center w-6 sm:w-12">
-                  Intermediate Diploma
+                  {getTranslation("Intermediate Diploma", language)}
                 </div>
                 <div className="text-white text-center w-6 sm:w-10">
-                  Higher Diploma
+                  {getTranslation("Higher Diploma", language)}
                 </div>
                 <div className="text-white text-center w-6 sm:w-12">
-                  Fellowship
+                  {getTranslation("Fellowship", language)}
                 </div>
                 <div className="text-white text-center w-6 sm:w-0">
-                  PhD
+                  {getTranslation("PhD", language)}
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Data Source Note */}
+        <div className="left-0 text-right text-white text-[10px] sm:text-xs md:text-sm font-['Roboto_regular'] mt-2">
+          <p className="">{getTranslation("Data Source: National Labor Observatory", language)}</p>
+          <p className="">{getTranslation("Last Updated: January 2025", language)}</p>
         </div>
       </div>
     </div>

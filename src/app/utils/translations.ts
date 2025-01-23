@@ -1,0 +1,194 @@
+type Language = 'en' | 'ar';
+
+const translations: Record<string, Record<Language, string>> = {
+  "Education": {
+    en: "Education",
+    ar: "التعليم"
+  },
+  "Total Graduates": {
+    en: "Total Graduates",
+    ar: "إجمالي الخريجين"
+  },
+  "Average Salary": {
+    en: "Average Salary",
+    ar: "متوسط الراتب"
+  },
+  "Employment Rate": {
+    en: "Employment Rate",
+    ar: "معدل التوظيف"
+  },
+  "Time to Employment": {
+    en: "Time to Employment",
+    ar: "الوقت اللازم للتوظيف"
+  },
+  "Job Seekers": {
+    en: "Job Seekers",
+    ar: "الباحثين عن عمل"
+  },
+  "days": {
+    en: "days",
+    ar: "يوم"
+  },
+  "Total Student Enrollment": {
+    en: "Total Student Enrollment",
+    ar: "إجمالي عدد الطلاب المسجلين"
+  },
+  "Number of Universities and Educational Institutions": {
+    en: "Number of Universities and Educational Institutions",
+    ar: "عدد الجامعات والمؤسسات التعليمية"
+  },
+  "Public Universities": {
+    en: "Public Universities",
+    ar: "الجامعات الحكومية"
+  },
+  "Private Universities": {
+    en: "Private Universities",
+    ar: "الجامعات الخاصة"
+  },
+  "Bachelor's": {
+    en: "Bachelor's",
+    ar: "الليسانس"
+  },
+  "Master's": {
+    en: "Master's",
+    ar: "الماجستير"
+  },
+  "Associate Diploma": {
+    en: "Associate Diploma",
+    ar: "الدبلوم المشارك"
+  },
+  "Intermediate Diploma": {
+    en: "Intermediate Diploma",
+    ar: "الدبلوم المتوسط"
+  },
+  "Higher Diploma": {
+    en: "Higher Diploma",
+    ar: "الدبلوم العالي"
+  },
+  "Fellowship": {
+    en: "Fellowship",
+    ar: "الزمالة"
+  },
+  "PhD": {
+    en: "PhD",
+    ar: "دكتوراه"
+  },
+  "Degree": {
+    en: "Degree",
+    ar: "الدرجة"
+  },
+  "Overview": {
+    en: "Overview",
+    ar: "نظرة عامة"
+  },
+  "Data Source: National Labor Observatory": {
+    en: "Data Source: National Labor Observatory",
+    ar: "مصدر البيانات: مرصد العمل الوطني"
+  },
+  "Last Updated: January 2025": {
+    en: "Last Updated: January 2025",
+    ar: "اخر تحديث: يناير 2025"
+  },
+  "The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors": {
+    en: "The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors",
+    ar: "يوفر هذا الموقع رؤى من خريجي الجامعات، مما يساعد المؤسسات التعليمية وصناع القرار في تحليل نمو وتأثير مختلف التخصصات"
+  },
+  // Major names
+  "Information Technology": {
+    en: "Information Technology",
+    ar: "تقنية المعلومات"
+  },
+  "Business and Law": {
+    en: "Business and Law",
+    ar: "القانون والأعمال"
+  },
+  "Arts and Humanities": {
+    en: "Arts and Humanities",
+    ar: "الفنون والعلوم الإنسانية"
+  },
+  "Health and Welfare": {
+    en: "Health and Welfare",
+    ar: "الصحة والرفاهية"
+  },
+  "Sciences and Mathematics": {
+    en: "Sciences and Mathematics",
+    ar: "العلوم والرياضيات"
+  },
+  "Engineering": {
+    en: "Engineering",
+    ar: "الهندسة"
+  },
+  "Agriculture": {
+    en: "Agriculture",
+    ar: "الزراعة"
+  },
+  "Social Sciences": {
+    en: "Social Sciences",
+    ar: "العلوم الاجتماعية"
+  },
+  "Generic Programs": {
+    en: "Generic Programs",
+    ar: "البرامج العامة"
+  },
+  "Services": {
+    en: "Services",
+    ar: "الخدمات"
+  },
+  "employed": {
+    en: "employed",
+    ar: "موظف"
+  },
+  "graduates": {
+    en: "graduates",
+    ar: "خريج"
+  },
+  "Before Graduation": {
+    en: "Before Graduation",
+    ar: "قبل التخرج"
+  },
+  "Within First Year": {
+    en: "Within First Year",
+    ar: "خلال السنة الأولى"
+  },
+  "After First Year": {
+    en: "After First Year",
+    ar: "بعد السنة الأولى"
+  },
+  "No data available": {
+    en: "No data available",
+    ar: "لا توجد بيانات متاحة"
+  },
+  "Top Popular Occupations": {
+    en: "Top Popular Occupations",
+    ar: "أكثر الوظائف شيوعاً"
+  },
+  "Top 5 Occupation by Salary": {
+    en: "Top 5 Occupation by Salary",
+    ar: "أعلى 5 وظائف من حيث الراتب"
+  },
+  "Employment Rate by Narrow Major": {
+    en: "Employment Rate by Narrow Major",
+    ar: "معدل التوظيف حسب التخصص الدقيق"
+  },
+  "Narrow Majors By Time of Employment": {
+    en: "Narrow Majors By Time of Employment",
+    ar: "التخصصات الدقيقة حسب وقت التوظيف"
+  },
+  "Top Narrow Majors by Gender": {
+    en: "Top Narrow Majors by Gender",
+    ar: "أعلى التخصصات الدقيقة حسب الجنس"
+  },
+  "SAR": {
+    en: "SAR",
+    ar: "ريال"
+  },
+};
+
+export function getTranslation(key: string, language: Language): string {
+  const translation = translations[key];
+  if (!translation) {
+    console.warn(`Translation missing for key: ${key}`);
+    return key;
+  }
+  return translation[language] || key;
+}

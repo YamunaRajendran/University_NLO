@@ -2,6 +2,8 @@
 
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLanguage } from '../../context/LanguageContext';
+import { getTranslation } from '@/app/utils/translations';
 import {
   FaGraduationCap,
   FaLaptopCode,
@@ -35,6 +37,7 @@ interface CircleContent {
 }
 
 const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
+  const { language } = useLanguage();
   const [activeCircle, setActiveCircle] = useState(0);
   const router = useRouter();
 
@@ -47,67 +50,67 @@ const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
   const circleContent: CircleContent[] = [
     {
       icon: FaGraduationCap,
-      text: "Education",
+      text: getTranslation("Education", language),
       majorKey: "Education",
       position: { angle: -82, radius: 200, offsetX: 0, offsetY: 0, rotate: 10 },
     },
     {
       icon: FaLaptopCode,
-      text: "Information Technology",
+      text: getTranslation("Information Technology", language),
       majorKey: "Communications and Information Technology",
       position: { angle: -49, radius: 200, offsetX: 0, rotate: 30 },
     },
     {
       icon: FaBalanceScale,
-      text: "Business and Law",
+      text: getTranslation("Business and Law", language),
       majorKey: "Business, administration and law",
       position: { angle: -16, radius: 200, offsetX: 0, rotate: -5 },
     },
     {
       icon: FaPaintBrush,
-      text: "Arts and Humanities",
+      text: getTranslation("Arts and Humanities", language),
       majorKey: "Arts and Humanities",
       position: { angle: 17, radius: 200, offsetX: 0, rotate: 15 },
     },
     {
       icon: FaHeartbeat,
-      text: "Health and Welfare",
+      text: getTranslation("Health and Welfare", language),
       majorKey: "Health and Welfare",
       position: { angle: 50, radius: 200, offsetX: 0, rotate: -40 },
     },
     {
       icon: FaFlask,
-      text: "Sciences and Mathematics",
+      text: getTranslation("Sciences and Mathematics", language),
       majorKey: "Natural Sciences, Mathematics and Statistics",
       position: { angle: 83, radius: 200, offsetX: 0, rotate: 0 },
     },
     {
       icon: FaCogs,
-      text: "Engineering",
+      text: getTranslation("Engineering", language),
       majorKey: "Engineering, manufacturing and construction",
       position: { angle: 116, radius: 200, offsetX: 0, rotate: 30 },
     },
     {
       icon: FaSeedling,
-      text: "Agriculture",
+      text: getTranslation("Agriculture", language),
       majorKey: "Agriculture, Forestry, Fisheries and Veterinary",
       position: { angle: 149, radius: 200, offsetX: 0, rotate: -35 },
     },
     {
       icon: FaBook,
-      text: "Social Sciences",
+      text: getTranslation("Social Sciences", language),
       majorKey: "Social Sciences, Journalism, Information",
       position: { angle: 182, radius: 200, offsetX: 0, rotate: 0 },
     },
     {
       icon: FaUserGraduate,
-      text: "Generic Programs",
+      text: getTranslation("Generic Programs", language),
       majorKey: "Generic Programs and Qualifications",
       position: { angle: 215, radius: 200, offsetX: 0, rotate: 30 },
     },
     {
       icon: FaCog,
-      text: "Services",
+      text: getTranslation("Services", language),
       majorKey: "Services",
       position: { angle: 248, radius: 200, offsetX: 0, rotate: -30 },
     },
@@ -190,7 +193,7 @@ const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
             }}
           >
             <div
-              className={`w-[100px] h-[100px] chat-bubble ${bubbleDirection} small-circle border border-[#ffff] rounded-full ${
+              className={`w-[100px] h-[100px] chat-bubble ${bubbleDirection} small-circle border border-[#2ab1bb] rounded-full ${
                 activeCircle === index ? "small-circle-glow" : ""
               } ${GradientDirection} cursor-pointer hover:scale-110 transition-transform duration-300`}
               style={{

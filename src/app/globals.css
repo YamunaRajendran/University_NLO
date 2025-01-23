@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Font Face Declarations */
+/* @font-face {
+  font-family: 'Neo-Sans';
+  src: url('/fonts/alfont_com_AlFont_com_Neo-Sans-W23-l-1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} */
+
 /* Brand Colors */
 :root {
   /* Primary Colors */
@@ -45,11 +54,11 @@
   }
 
   /* Font Families */
-  --font-neo-sans-bold: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font-neo-sans-bold: 'Neo-Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-neo-sans-medium: system-ui, -apple-system, BlinkMacSystemFont,
+  --font-neo-sans-medium: 'Neo-Sans', system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-neo-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font-neo-sans: 'Neo-Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -99,7 +108,7 @@
   }
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border;
   }
@@ -107,7 +116,7 @@
     @apply bg-background text-foreground;
     font-family: var(--font-neo-sans);
   }
-}
+} */
 
 @keyframes marquee {
   0% {
@@ -248,7 +257,7 @@
 }
 
 .metric-glow {
-  animation: metricGlow 2s ease-in-out infinite;
+  animation: metricGlow 5s ease-in-out infinite;
 }
 
 .chat-bubble {
@@ -307,7 +316,7 @@
   left: 50%;
   transform: translateX(-50%);
   border-top-color: #477495;
-  opacity: 50;
+  opacity: 80;
   border-top-width: 30px;
 }
 

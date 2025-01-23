@@ -1,8 +1,9 @@
 "use client";
 
-import mockDataMajor from "./final_data_15-01 (version2).json";
+import mockDataMajorEn from "./mock_data_major.json";
+import mockDataMajorAr from "./major_insights_arabic.json";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BiFemale } from "react-icons/bi";
 import { BiMale } from "react-icons/bi";
@@ -17,6 +18,8 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { useLanguage } from '@/app/context/LanguageContext';
+import { getTranslation } from '@/app/utils/translations';
 
 interface SankeyCustomNodeData {
   id: string;
@@ -40,11 +43,297 @@ interface SankeyCustomLinkData {
   value: number;
 }
 
+const translations = {
+  charts: {
+    timeToEmployment: {
+      en: 'Time to Employment',
+      ar: 'الوقت حتى التوظيف'
+    },
+    topOccupations: {
+      en: 'Top Popular Occupations',
+      ar: 'أكثر المهن شيوعاً'
+    },
+    topNarrowMajorsByGender: {
+      en: 'Top Narrow Majors by Gender',
+      ar: 'أعلى التخصصات الدقيقة حسب الجنس'
+    },
+    topOccupationsBySalary: {
+      en: 'Top 5 Occupation by Salary',
+      ar: 'أعلى 5 مهن حسب الراتب'
+    },
+    employmentRate: {
+      en: 'Employment Rate',
+      ar: 'معدل التوظيف'
+    },
+    employmentRateByMajor: {
+      en: 'Employment Rate by Narrow Major',
+      ar: 'معدل التوظيف حسب التخصص الدقيق'
+    }
+  },
+  employmentTiming: {
+    beforeGraduation: {
+      en: 'Before graduation',
+      ar: 'قبل التخرج'
+    },
+    withinFirstYear: {
+      en: 'Within a year',
+      ar: 'خلال سنة'
+    },
+    afterFirstYear: {
+      en: 'More than a year',
+      ar: 'أكثر من سنة'
+    }
+  },
+  employed: {
+    en: 'employed',
+    ar: 'مستخدم'
+  },
+  graduates: {
+    en: 'graduates',
+    ar: 'خريجين'
+  },
+  SAR: {
+    en: 'SAR',
+    ar: 'ريال سعودي'
+  },
+  days: {
+    en: 'days',
+    ar: 'أيام'
+  }
+};
+
+const employmentTimingTranslations = {
+  beforeGraduation: translations.employmentTiming.beforeGraduation,
+  withinFirstYear: translations.employmentTiming.withinFirstYear,
+  afterFirstYear: translations.employmentTiming.afterFirstYear
+};
+
+const chartTitleTranslations = {
+  en: translations.charts.timeToEmployment.en,
+  ar: translations.charts.timeToEmployment.ar
+};
+
 export default function SecondPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { language } = useLanguage();
+
+  // Mapping between English and Arabic major names
+  const majorNameMapping = {
+    en: {
+      'Business, administration and law': 'Business, administration and law',
+      'Arts and Humanities': 'Arts and Humanities',
+      'Health and Welfare': 'Health and Welfare',
+      'Natural Sciences, Mathematics and Statistics': 'Natural Sciences, Mathematics and Statistics',
+      'Communications and Information Technology': 'Communications and Information Technology',
+      'Social Sciences, Journalism, Information': 'Social Sciences, Journalism, Information',
+      'Services': 'Services',
+      'Agriculture, Forestry, Fisheries and Veterinary': 'Agriculture, Forestry, Fisheries and Veterinary',
+      'Generic Programs and Qualifications': 'Generic Programs and Qualifications',
+      'Education': 'education',
+      'Engineering, manufacturing and construction': 'Engineering, manufacturing and construction'
+    },
+    ar: {
+      'Business, administration and law': 'الأعمال والإدارة والقانون',
+      'Arts and Humanities': 'الفنون والعلوم الإنسانية',
+      'Health and Welfare': 'الصحة والرفاه',
+      'Natural Sciences, Mathematics and Statistics': 'العلوم الطبيعية والرياضيات والإحصاء',
+      'Communications and Information Technology': 'تقنية الاتصالات والمعلومات',
+      'Social Sciences, Journalism, Information': 'العلوم الاجتماعية والصحافة والإعلام',
+      'Services': 'الخدمات',
+      'Agriculture, Forestry, Fisheries and Veterinary': 'الزراعة والحراجة ومصائد الأسماك والبيطرة',
+      'Generic Programs and Qualifications': 'البرامج العامة والمؤهلات',
+      'Education': 'التعليم',
+      'Engineering, manufacturing and construction': 'الهندسة والتصنيع والبناء'
+    }
+  };
+  const narrowMajorMapping = {
+    'Business and administration': {
+      en: 'Business and administration',
+      ar: 'الأعمال والإدارة'
+    },
+    'law': {
+      en: 'law',
+      ar: 'القانون'
+    },
+    'health': {
+      en: 'health',
+      ar: 'الصحة'
+    },
+    'Welfare': {
+      en: 'Welfare',
+      ar: 'الرفاه'
+    },
+    'Education': {
+      en: 'Education',
+      ar: 'التعليم'
+    },
+    'Personal services': {
+      en: 'Personal services',
+      ar: 'الخدمات الشخصية'
+    },
+    'Transportation services': {
+      en: 'Transportation services',
+      ar: 'خدمات النقل'
+    },
+    'Security service': {
+      en: 'Security service',
+      ar: 'خدمات الأمن'
+    },
+    'Basic programs and qualifications': {
+      en: 'Basic programs and qualifications',
+      ar: 'البرامج الأساسية والمؤهلات'
+    },
+    'Skills and personal development development': {
+      en: 'Skills and personal development development',
+      ar: 'تنمية المهارات والتنمية الشخصية'
+    },
+    'General hygiene and occupational health services': {
+      en: 'General hygiene and occupational health services',
+      ar: 'خدمات النظافة العامة والصحة المهنية'
+    },
+    'Social and behavioral sciences': {
+      en: 'Social and behavioral sciences',
+      ar: 'العلوم الاجتماعية والسلوكية'
+    },
+    'Journalism and media': {
+      en: 'Journalism and media',
+      ar: 'الصحافة والإعلام'
+    },
+    'Languages': {
+      en: 'Languages',
+      ar: 'اللغات'
+    },
+    'Human studies except languages': {
+      en: 'Human studies except languages',
+      ar: 'الدراسات الإنسانية باستثناء اللغات'
+    },
+    'Religion and theology': {
+      en: 'Religion and theology',
+      ar: 'الدين واللاهوت'
+    },
+    'Fine arts': {
+      en: 'Fine arts',
+      ar: 'الفنون الجميلة'
+    },
+    'Arts and humanities - general programs': {
+      en: 'Arts and humanities - general programs',
+      ar: 'الفنون والعلوم الإنسانية - البرامج العامة'
+    },
+    'Biological and related sciences': {
+      en: 'Biological and related sciences',
+      ar: 'العلوم البيولوجية والعلوم ذات الصلة'
+    },
+    'Environment': {
+      en: 'Environment',
+      ar: 'البيئة'
+    },
+    'Physical sciences': {
+      en: 'Physical sciences',
+      ar: 'العلوم الفيزيائية'
+    },
+    'Mathematics and statistics': {
+      en: 'Mathematics and statistics',
+      ar: 'الرياضيات والإحصاء'
+    },
+    'Information and Communication Technologies (ICTs)': {
+      en: 'Information and Communication Technologies (ICTs)',
+      ar: 'تكنولوجيا المعلومات والاتصالات'
+    },
+    'Engineering and engineering trades': {
+      en: 'Engineering and engineering trades',
+      ar: 'الهندسة والتجارة الهندسية'
+    },
+    'Manufacturing and processing': {
+      en: 'Manufacturing and processing',
+      ar: 'التصنيع والمعالجة'
+    },
+    'Architecture and construction': {
+      en: 'Architecture and construction',
+      ar: 'العمارة والبناء'
+    },
+    'Agriculture': {
+      en: 'Agriculture',
+      ar: 'الزراعة'
+    },
+    'Forestry': {
+      en: 'Forestry',
+      ar: 'الغابات'
+    },
+    'Fisheries': {
+      en: 'Fisheries',
+      ar: 'مصايد الأسماك'
+    },
+    'Veterinary': {
+      en: 'Veterinary',
+      ar: 'الطب البيطري'
+    },
+    'Dental studies': {
+      en: 'Dental studies',
+      ar: 'دراسات طب الأسنان'
+    },
+    'Medicine': {
+      en: 'Medicine',
+      ar: 'الطب'
+    },
+    'Nursing and midwifery': {
+      en: 'Nursing and midwifery',
+      ar: 'التمريض والقبالة'
+    },
+    'Medical diagnostic and treatment technology': {
+      en: 'Medical diagnostic and treatment technology',
+      ar: 'تكنولوجيا التشخيص والعلاج الطبي'
+    },
+    'Therapy and rehabilitation': {
+      en: 'Therapy and rehabilitation',
+      ar: 'العلاج وإعادة التأهيل'
+    },
+    'Pharmacy': {
+      en: 'Pharmacy',
+      ar: 'الصيدلة'
+    },
+    'Traditional and complementary medicine and therapy': {
+      en: 'Traditional and complementary medicine and therapy',
+      ar: 'الطب والعلاج التقليدي والتكميلي'
+    },
+    'Multi -disciplinary programs and qualifications include engineering, manufacturing and construction': {
+      en: 'Multi -disciplinary programs and qualifications include engineering, manufacturing and construction',
+      ar: 'برامج ومؤهلات متعددة التخصصات تتضمن الهندسة والتصنيع والبناء'
+    }
+  };
+  
+  
+
+  // Reverse mapping to get English name from Arabic
+  const getEnglishName = (name: string) => {
+    if (language === 'en') return name;
+    
+    // Find the English key that maps to this Arabic name
+    const englishKey = Object.keys(majorNameMapping.ar).find(
+      key => majorNameMapping.ar[key] === name
+    );
+    
+    return englishKey || name;
+  };
+
+  // Function to handle navigation to narrow major page
+  const handleNarrowMajorClick = (narrowMajor: string, generalMajor: string) => {
+    // Get the English names for both narrow and general majors
+    const englishNarrowMajor = Object.entries(majorNameMapping).find(
+      ([_, value]) => value[language] === narrowMajor
+    )?.[0] || narrowMajor;
+
+    const englishGeneralMajor = Object.entries(majorNameMapping).find(
+      ([_, value]) => value[language] === generalMajor
+    )?.[0] || generalMajor;
+    
+    router.push(
+      `/narrow_major?major=${encodeURIComponent(englishNarrowMajor)}&generalMajor=${encodeURIComponent(englishGeneralMajor)}`
+    );
+  };
+
   const [selectedMajor, setSelectedMajor] = useState(
-    "Business, administration and law"
+    majorNameMapping[language]['Business, administration and law']
   );
 
   // Color mapping for majors and employment timing
@@ -105,37 +394,191 @@ export default function SecondPage() {
     "Before Graduation": "#FFB74D", // Light orange
     "Within First Year": "#64B5F6", // Light blue
     "After First Year": "#81C784", // Light green
+    "قبل التخرج": "#FFB74D", // Light orange (Arabic)
+    "خلال السنة الأولى": "#64B5F6", // Light blue (Arabic)
+    "بعد السنة الأولى": "#81C784", // Light green (Arabic)
   };
 
   // Helper function to get color for narrow major
   const getNarrowMajorColor = (narrowMajor: string) => {
-    // Return the specific color for the narrow major
-    return colorMapping[narrowMajor] || "#6366f1"; // Default color if not found
+    // Find the English key for this narrow major
+    const englishKey = Object.entries(narrowMajorMapping).find(([key, value]) => 
+      value.en === narrowMajor || value.ar === narrowMajor
+    )?.[0];
+
+    return colorMapping[englishKey || narrowMajor] || "#6366f1";
   };
+
+  // Helper function to get color for timing nodes
+  const getTimingNodeColor = (nodeId: string) => {
+    // Create a mapping that includes both English and Arabic translations
+    const timingColors = {
+      [getTranslation("Before Graduation", "en")]: "#FFB74D",
+      [getTranslation("Within First Year", "en")]: "#64B5F6",
+      [getTranslation("After First Year", "en")]: "#81C784",
+      [getTranslation("Before Graduation", "ar")]: "#FFB74D",
+      [getTranslation("Within First Year", "ar")]: "#64B5F6",
+      [getTranslation("After First Year", "ar")]: "#81C784"
+    };
+    return timingColors[nodeId] || "#6366f1";
+  };
+
+  // Get the appropriate data file based on language
+  const currentData = language === 'en' ? mockDataMajorEn : mockDataMajorAr;
+
+  // Update selected major when language changes
+  useEffect(() => {
+    // Find the English name for the current major
+    const currentEnglishName = Object.entries(majorNameMapping[language === 'en' ? 'ar' : 'en']).find(
+      ([_, value]) => value === selectedMajor
+    )?.[0];
+
+    if (currentEnglishName) {
+      const newMajorName = majorNameMapping[language][currentEnglishName];
+      console.log('Language changed:', language);
+      console.log('Current major:', selectedMajor);
+      console.log('New major name:', newMajorName);
+      setSelectedMajor(newMajorName);
+    }
+  }, [language]);
 
   useEffect(() => {
     const majorParam = searchParams.get("major");
     if (majorParam) {
-      setSelectedMajor(decodeURIComponent(majorParam));
+      const decodedMajor = decodeURIComponent(majorParam);
+      // If the major param is in English, translate it to the current language
+      const translatedMajor = majorNameMapping[language][decodedMajor] || decodedMajor;
+      setSelectedMajor(translatedMajor);
     }
-  }, [searchParams]);
+  }, [searchParams, language]);
 
   // Find the selected major's data
-  const majorData =
-    mockDataMajor.majorsInsights.byGeneralMajor.generalMajors.find(
-      (major) =>
-        major.generalMajor.toLowerCase() === selectedMajor.toLowerCase()
-    );
+  const majorData = currentData.majorsInsights.byGeneralMajor.generalMajors.find(
+    (major) => {
+      console.log('Comparing:', major.generalMajor, 'with:', selectedMajor);
+      return major.generalMajor === selectedMajor;
+    }
+  );
+
+  console.log('Selected Major:', selectedMajor);
+  console.log('Current Language:', language);
+  console.log('Found Major Data:', majorData);
 
   const overviewStats = majorData?.overall.totalMetrics;
-  const topOccupations =
-    majorData?.overall.topOccupationsInsights.highestPaying || [];
-  const narrowMajors =
-    majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming || [];
+  const topOccupations = majorData?.overall.topOccupationsInsights.highestPaying || [];
+  const narrowMajors = majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming || [];
+
+  // Function to get English value from translation mapping
+  const getEnglishValue = (currentValue: string, mappings: Record<string, { en: string; ar: string }> | { en: Record<string, string>; ar: Record<string, string> }) => {
+    // Check if mappings has the structure { en: Record, ar: Record }
+    if ('en' in mappings && typeof mappings.en === 'object') {
+      const isEnglishValue = Object.values(mappings.en).includes(currentValue);
+      if (isEnglishValue) return currentValue;
+
+      // Find the key in Arabic values that matches currentValue
+      const arabicKey = Object.entries(mappings.ar).find(([_, value]) => value === currentValue)?.[0];
+      return arabicKey ? mappings.en[arabicKey] : currentValue;
+    } 
+    // Handle structure where each key has { en, ar } values
+    else {
+      // First check if this is already an English value
+      const isEnglishValue = Object.values(mappings).some(mapping => mapping.en === currentValue);
+      if (isEnglishValue) return currentValue;
+
+      // If not, find the English value from Arabic
+      const entry = Object.entries(mappings).find(([_, value]) => value.ar === currentValue);
+      return entry ? entry[1].en : currentValue;
+    }
+  };
+
+  const handleMajorSelect = (selectedMajor: string) => {
+    // Convert to English if needed
+    const englishMajor = getEnglishValue(selectedMajor, majorNameMapping);
+    
+    const params = new URLSearchParams();
+    params.set('major', encodeURIComponent(englishMajor));
+    router.push(`/majors?${params.toString()}`);
+  };
+
+  const handleNarrowMajorSelect = (narrowMajor: string) => {
+    if (!selectedMajor) return;
+
+    // Convert both to English if needed
+    const englishGeneralMajor = getEnglishValue(selectedMajor, majorNameMapping);
+    const englishNarrowMajor = getEnglishValue(narrowMajor, narrowMajorMapping);
+
+    router.push(`/narrow_major?major=${encodeURIComponent(englishNarrowMajor)}&generalMajor=${encodeURIComponent(englishGeneralMajor)}`);
+  };
+
+  // Display functions to show correct language while maintaining English URLs
+  const displayMajor = selectedMajor ? 
+    (majorNameMapping[language][decodeURIComponent(selectedMajor)] || decodeURIComponent(selectedMajor)) : '';
+
+  const sankeyData = useMemo(() => {
+    if (!majorData?.overall?.topNarrowMajorsInsights?.topByEmploymentTiming) {
+      return { nodes: [], links: [] };
+    }
+
+    const data = {
+      nodes: [
+        { 
+          id: getTranslation("Before Graduation", language), 
+          nodeColor: getTimingNodeColor(getTranslation("Before Graduation", language)) 
+        },
+        { 
+          id: getTranslation("Within First Year", language), 
+          nodeColor: getTimingNodeColor(getTranslation("Within First Year", language)) 
+        },
+        { 
+          id: getTranslation("After First Year", language), 
+          nodeColor: getTimingNodeColor(getTranslation("After First Year", language)) 
+        }
+      ],
+      links: []
+    };
+
+    // Add nodes and links for each major
+    majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.forEach((major) => {
+      // Add node for narrow major if it doesn't exist
+      if (!data.nodes.find(n => n.id === major.narrowMajor)) {
+        data.nodes.push({
+          id: major.narrowMajor,
+          nodeColor: getNarrowMajorColor(major.narrowMajor)
+        });
+      }
+
+      // Add links for each timing category
+      if (major.employmentTiming?.beforeGraduation?.percentage > 0) {
+        data.links.push({
+          source: major.narrowMajor,
+          target: getTranslation("Before Graduation", language),
+          value: major.employmentTiming.beforeGraduation.percentage
+        });
+      }
+
+      if (major.employmentTiming?.withinFirstYear?.percentage > 0) {
+        data.links.push({
+          source: major.narrowMajor,
+          target: getTranslation("Within First Year", language),
+          value: major.employmentTiming.withinFirstYear.percentage
+        });
+      }
+
+      if (major.employmentTiming?.afterFirstYear?.percentage > 0) {
+        data.links.push({
+          source: major.narrowMajor,
+          target: getTranslation("After First Year", language),
+          value: major.employmentTiming.afterFirstYear.percentage
+        });
+      }
+    });
+
+    return data;
+  }, [majorData, language]);
 
   return (
     <div
-      className="min-h-screen bg-transparent backdrop-blur-sm  px-2 "
+      className="min-h-screen bg-transparent backdrop-blur-sm px-2"
       style={{ marginTop: "-30px" }}
     >
       {/* Content */}
@@ -143,7 +586,7 @@ export default function SecondPage() {
         {/* Major Title */}
         <div className="mb-5">
           <h1 className="text-white font-['Roboto_Regular'] text-2xl text-center">
-            {selectedMajor}
+            {displayMajor}
           </h1>
         </div>
 
@@ -162,14 +605,14 @@ export default function SecondPage() {
               >
                 <Image
                   src="/icons/graduateicon.svg"
-                  alt="Employment"
+                  alt={getTranslation("Total Graduates", language)}
                   width={52}
                   height={42}
                 />
               </div>
               <div>
                 <p className="text-sm font-['Roboto_Regular'] text-white">
-                  Total Graduates
+                  {getTranslation("Total Graduates", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.graduates.totalGraduates.toLocaleString()}
@@ -209,11 +652,11 @@ export default function SecondPage() {
               </div>
               <div>
                 <p className="text-sm font-['Roboto_Regular'] text-white">
-                  Average Salary
+                  {getTranslation("Average Salary", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.averageSalary.toLocaleString()}
-                  <span className="font-normal text-lg">SAR</span>
+                  <span className="font-normal text-lg"> {getTranslation("SAR", language)}</span>
                 </p>
               </div>
             </div>
@@ -236,11 +679,11 @@ export default function SecondPage() {
               </div>
               <div>
                 <p className="text-sm font-['Roboto_Regular'] text-white">
-                  Time to Employment
+                  {getTranslation("Time to Employment", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.timeToEmployment.overall.days}
-                  <span className="font-normal text-lg">days</span>
+                  <span className="font-normal text-lg"> {getTranslation("days", language)}</span>
                 </p>
               </div>
             </div>
@@ -266,7 +709,7 @@ export default function SecondPage() {
               </div>
               <div>
                 <p className="text-sm font-['Roboto_Regular'] text-white">
-                  Employment Rate
+                  {getTranslation("Employment Rate", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.employmentRate}%
@@ -289,7 +732,7 @@ export default function SecondPage() {
                     }}
                   >
                     <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
-                      before gudurate
+                      {getTranslation(employmentTimingTranslations.beforeGraduation[language], language)}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
                       {
@@ -309,7 +752,7 @@ export default function SecondPage() {
                     }}
                   >
                     <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
-                      within first year
+                      {getTranslation(employmentTimingTranslations.withinFirstYear[language], language)}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
                       {
@@ -329,7 +772,7 @@ export default function SecondPage() {
                     }}
                   >
                     <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
-                      After first year
+                      {getTranslation(employmentTimingTranslations.afterFirstYear[language], language)}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
                       {
@@ -364,7 +807,9 @@ export default function SecondPage() {
                   height={24}
                 />
               </div>
-              <span className="text-white">Top Popular Occupations</span>
+              <span className="text-white">
+                {translations.charts.topOccupations[language]}
+              </span>
             </h2>
             <div className="h-[254px] flex flex-col justify-end relative">
               <div className="flex justify-between items-end h-[200px] px-4">
@@ -430,7 +875,7 @@ export default function SecondPage() {
               {!majorData?.overall?.topOccupationsInsights?.mostPopular
                 ?.length && (
                 <div className="flex items-center justify-center h-[200px] text-white">
-                  No data available
+                  {getTranslation("No data available", language)}
                 </div>
               )}
             </div>
@@ -449,7 +894,9 @@ export default function SecondPage() {
                   height={24}
                 />
               </div>
-              <span className="text-white">Degree</span>
+              <span className="text-white">
+                {getTranslation("Degree", language)}
+              </span>
             </h2>
             <div className="space-y-4 relative pr-28">
               {/* Vertical line */}
@@ -477,7 +924,7 @@ export default function SecondPage() {
                       <div className="relative flex-1 h-8 flex items-center">
                         {/* Bar with total graduates */}
                         <div
-                          className="absolute border-[1px] border-white left-0 top-1/2 -translate-y-1/2 h-7 rounded-r-full group-hover:opacity-90 transition-opacity"
+                          className="absolute border-[1px] border-white left-0 top-1/2 -translate-y-1/2 h-7 rounded-r-full group-hover:opacity-90 transition-opacity cursor-pointer"
                           style={{
                             width: `${percentage}%`,
                             maxWidth: "100%",
@@ -502,7 +949,7 @@ export default function SecondPage() {
                         >
                           <div className="bg-[#2CCAD3]/20 rounded-full px-3 py-1">
                             <span className="text-white text-sm font-['Roboto_Regular'] whitespace-nowrap">
-                              {level.employmentRate}% employed
+                              {level.employmentRate}% {getTranslation("employed", language)}
                             </span>
                           </div>
                         </div>
@@ -513,7 +960,7 @@ export default function SecondPage() {
               {!majorData?.overall.totalMetrics.educationLevelInsights
                 ?.length && (
                 <div className="flex items-center justify-center h-[200px] text-white">
-                  No data available
+                  {getTranslation("No data available", language)}
                 </div>
               )}
             </div>
@@ -534,7 +981,9 @@ export default function SecondPage() {
                   />
                 </div>
               </div>
-              <span className="text-white">Top Narrow Majors by Gender</span>
+              <span className="text-white">
+                {translations.charts.topNarrowMajorsByGender[language]}
+              </span>
             </h2>
             <div className="space-y-4">
               {majorData?.overall?.topNarrowMajorsInsights?.topByGender
@@ -546,7 +995,7 @@ export default function SecondPage() {
                         {major.narrowMajor}
                       </span>
                       <span className="text-xs font-['Roboto_Regular'] text-white">
-                        {major.graduates} graduates
+                        {major.graduates} {getTranslation("graduates", language)}
                       </span>
                     </div>
                     <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
@@ -557,15 +1006,7 @@ export default function SecondPage() {
                           width: `${major.genderDistribution.male.percentage}%`,
                           left: 0,
                         }}
-                        onClick={() => {
-                          router.push(
-                            `/narrow_major?major=${encodeURIComponent(
-                              major.narrowMajor
-                            )}&generalMajor=${encodeURIComponent(
-                              selectedMajor
-                            )}`
-                          );
-                        }}
+                        onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
                       >
                         <div className="absolute left-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
                           <BiMale style={{ color: "#2CCAD3" }} />
@@ -581,21 +1022,13 @@ export default function SecondPage() {
                           width: `${major.genderDistribution.female.percentage}%`,
                           right: 0,
                         }}
-                        onClick={() => {
-                          router.push(
-                            `/narrow_major?major=${encodeURIComponent(
-                              major.narrowMajor
-                            )}&generalMajor=${encodeURIComponent(
-                              selectedMajor
-                            )}`
-                          );
-                        }}
+                        onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
                       >
                         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
                           <span className="text-xs font-['Roboto_Regular'] text-white">
                             {major.genderDistribution.female.percentage}%
                           </span>
-                          <BiFemale style={{ color: "#fe1684" }} />
+                          <BiFemale style={{ color: "#2CCAD3" }} />
                         </div>
                       </div>
                     </div>
@@ -604,7 +1037,7 @@ export default function SecondPage() {
               {!majorData?.overall?.topNarrowMajorsInsights?.topByGender
                 ?.length && (
                 <div className="flex items-center justify-center h-[200px] text-white">
-                  No data available
+                  {getTranslation("No data available", language)}
                 </div>
               )}
             </div>
@@ -629,7 +1062,9 @@ export default function SecondPage() {
                   height={24}
                 />
               </div>
-              <span className="text-white">Top 5 Occupation by Salary</span>
+              <span className="text-white">
+                {translations.charts.topOccupationsBySalary[language]}
+              </span>
             </h2>
             {/* Container for chart and legends */}
             <div className="flex flex-col items-center gap-4">
@@ -726,104 +1161,26 @@ export default function SecondPage() {
                 />
               </div>
               <span className="text-white">
-                Narrow Majors By Time of Employment
+                {translations.charts.timeToEmployment[language]}
               </span>
             </h2>
 
             {/* Chart */}
             <div className="flex justify-center">
-              <div className="h-[400px] w-full max-w-[450px]">
-                {majorData?.overall.topNarrowMajorsInsights
-                  .topByEmploymentTiming.length > 0 ? (
+              <div className="h-[400px] w-full max-w-[500px]">
+                {sankeyData.nodes.length > 0 && (
                   <ResponsiveSankey
-                    data={{
-                      nodes: [
-                        ...majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.map(
-                          (major) => ({
-                            id: major.narrowMajor,
-                            nodeColor: getNarrowMajorColor(major.narrowMajor),
-                          })
-                        ),
-                        {
-                          id: "Before Graduation",
-                          nodeColor: colorMapping["Before Graduation"],
-                        },
-                        {
-                          id: "Within First Year",
-                          nodeColor: colorMapping["Within First Year"],
-                        },
-                        {
-                          id: "After First Year",
-                          nodeColor: colorMapping["After First Year"],
-                        },
-                      ],
-                      links:
-                        majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.flatMap(
-                          (major) => [
-                            {
-                              source: major.narrowMajor,
-                              target: "Before Graduation",
-                              value:
-                                major.employmentTiming.beforeGraduation
-                                  .percentage,
-                            },
-                            {
-                              source: major.narrowMajor,
-                              target: "Within First Year",
-                              value:
-                                major.employmentTiming.withinFirstYear
-                                  .percentage,
-                            },
-                            {
-                              source: major.narrowMajor,
-                              target: "After First Year",
-                              value:
-                                major.employmentTiming.afterFirstYear
-                                  .percentage,
-                            },
-                          ]
-                        ),
-                    }}
-                    onClick={(
-                      node: SankeyNodeDatum<
-                        SankeyCustomNodeData,
-                        SankeyCustomLinkData
-                      >
-                    ) => {
-                      console.log(node);
-                      if (
-                        node.id !== "Before Graduation" &&
-                        node.id !== "Within First Year" &&
-                        node.id !== "After First Year"
-                      ) {
-                        router.push(
-                          `/narrow_major?major=${encodeURIComponent(
-                            node.id || node.source.id
-                          )}&generalMajor=${encodeURIComponent(selectedMajor)}`
-                        );
-                      }
-                    }}
-                    margin={{ top: 20, right: 120, bottom: 20, left: 150 }}
+                    data={sankeyData}
+                    margin={{ top: 20, right: 115, bottom: 20, left: 130 }}
                     align="justify"
-                    colors={(node) => {
-                      if (
-                        [
-                          "Before Graduation",
-                          "Within First Year",
-                          "After First Year",
-                        ].includes(node.id)
-                      ) {
-                        return colorMapping[node.id];
-                      }
-                      return getNarrowMajorColor(node.id);
-                    }}
+                    colors={(node) => node.nodeColor || "#6366f1"}
                     nodeOpacity={1}
-                    nodeThickness={10}
-                    nodeInnerPadding={2}
-                    nodeSpacing={16}
+                    nodeThickness={20}
+                    nodeInnerPadding={3}
+                    nodeSpacing={24}
                     nodeBorderWidth={0}
                     nodeBorderRadius={3}
-                    linkOpacity={0.5}
+                    linkOpacity={0.3}
                     linkHoverOpacity={0.7}
                     linkContract={3}
                     enableLinkGradient={true}
@@ -871,8 +1228,7 @@ export default function SecondPage() {
                         text: {
                           fontSize: 15,
                           fill: "#fff",
-                          fontFamily: "Roboto",
-                          dominantBaseline: "middle",
+                          fontFamily: "Roboto_Regular",
                         },
                       },
                       tooltip: {
@@ -886,10 +1242,6 @@ export default function SecondPage() {
                       },
                     }}
                   />
-                ) : (
-                  <div className="flex items-center justify-center h-[200px] text-white">
-                    No data available
-                  </div>
                 )}
               </div>
             </div>
@@ -909,7 +1261,7 @@ export default function SecondPage() {
                 />
               </div>
               <span className="text-white">
-                Employment Rate by Narrow Major
+                {translations.charts.employmentRateByMajor[language]}
               </span>
             </h2>
             <div className="space-y-4 relative" style={{ top: "30px" }}>
@@ -926,15 +1278,7 @@ export default function SecondPage() {
                     <div key={index} className="flex items-center group">
                       <div
                         className="w-[200px] relative cursor-pointer"
-                        onClick={() => {
-                          router.push(
-                            `/narrow_major?major=${encodeURIComponent(
-                              major.narrowMajor
-                            )}&generalMajor=${encodeURIComponent(
-                              selectedMajor
-                            )}`
-                          );
-                        }}
+                        onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
                       >
                         <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
                         <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white px-3 py-1 block break-words">
@@ -950,15 +1294,7 @@ export default function SecondPage() {
                             background:
                               "linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                           }}
-                          onClick={() => {
-                            router.push(
-                              `/narrow_major?major=${encodeURIComponent(
-                                major.narrowMajor
-                              )}&generalMajor=${encodeURIComponent(
-                                selectedMajor
-                              )}`
-                            );
-                          }}
+                          onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
                         >
                           <div className="absolute top-1/2 -translate-y-1/2">
                             <span className="text-base font-['Roboto_Regular'] font-bold text-white">
@@ -973,7 +1309,7 @@ export default function SecondPage() {
               {!majorData?.overall?.topNarrowMajorsInsights?.topByGender
                 ?.length && (
                 <div className="flex items-center justify-center h-[200px] text-white">
-                  No data available
+                  {getTranslation("No data available", language)}
                 </div>
               )}
             </div>

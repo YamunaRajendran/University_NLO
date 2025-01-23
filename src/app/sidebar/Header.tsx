@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+import LanguageToggle from "../components/LanguageToggle";
 
 export function Header() {
   const router = useRouter();
@@ -12,7 +13,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 h-20 bg-transparent backdrop-blur-sm">
       <div className="h-full px-8 flex items-center justify-between">
-        <div className="flex gap-2">
+        <div className="flex items-center gap-4">
+          <LanguageToggle />
           {!isOverviewPage && (
             <button
               onClick={() => router.back()}

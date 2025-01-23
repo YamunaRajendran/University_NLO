@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# data, output,extra code directories
+# /public/output/
+/public/data/
+/public/data_generation - Copy/
+/public/data_generation - latest/
+/public/output
+
+#requirements file
+requirements.txt
