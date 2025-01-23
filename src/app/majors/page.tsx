@@ -1192,6 +1192,18 @@ export default function SecondPage() {
                       modifiers: [["darker", 1]],
                     }}
                     animate={true}
+                    onClick={(node: SankeyNodeDatum<{ id: string; nodeColor: string; source?: { id: string } }, { source: string; target: string; value: number }>) => {
+                      if (![
+                        getTranslation("Before Graduation", language),
+                        getTranslation("Within First Year", language),
+                        getTranslation("After First Year", language)
+                      ].includes(node.id)) {
+                        const narrowMajor = node.id || node.source?.id;
+                        if (narrowMajor) {
+                          handleNarrowMajorSelect(narrowMajor);
+                        }
+                      }
+                    }}
                     label={(node) => {
                       // Get the label text
                       const text = node.id;
