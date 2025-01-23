@@ -194,9 +194,9 @@ export default function HomePage() {
     <h1 className="absolute -top-1.5 px-2 text-[#2ab1bb] text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl font-['Roboto_regular'] w-full">
       {getTranslation("Saudi Arabia Graduates Observation (Readings, Statistics)", language).split('').map((char, index, array) => (
         <span key={index} className="animate-glow-letter" style={{ 
-          animationDelay: `${(index * 0.1)}s`
+          animationDelay: `${(index * 0.05)}s`
         }}>
-          {char}
+          {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
     </h1>
