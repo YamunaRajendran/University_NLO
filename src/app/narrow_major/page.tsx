@@ -21,6 +21,20 @@ import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import mockDataMajorEn from "@/app/majors/final_data_15-01 (version2).json";
 import mockDataMajorAr from "@/app/majors/major_insights_arabic.json";
+import React from 'react';
+import {
+  FaGraduationCap,
+  FaLaptopCode,
+  FaBalanceScale,
+  FaPaintBrush,
+  FaHeartbeat,
+  FaFlask,
+  FaCogs,
+  FaSeedling,
+  FaBook,
+  FaUserGraduate,
+  FaCog,
+} from "react-icons/fa";
 
 interface SankeyCustomNodeData {
   id: string;
@@ -71,7 +85,7 @@ const majorNameMapping = {
     ar: 'تقنية الاتصالات والمعلومات'
   },
   'Social Sciences, Journalism, Information': {
-    en: 'Social Sciences, Journalism, Information and Media',
+    en: 'Social Sciences, Journalism, Information',
     ar: 'العلوم الاجتماعية والصحافة والإعلام'
   },
   'Services': {
@@ -86,7 +100,7 @@ const majorNameMapping = {
     en: 'Generic Programs and Qualifications',
     ar: 'البرامج العامة والمؤهلات'
   },
-  'education': {
+  'Education': {
     en: 'Education',
     ar: 'التعليم'
   },
@@ -125,8 +139,8 @@ const narrowMajorMapping = {
     en: 'Transportation services',
     ar: 'خدمات النقل'
   },
-  'Security service': {
-    en: 'Security service',
+  'security service': {
+    en: 'security service',
     ar: 'خدمات الأمن'
   },
   'Basic programs and qualifications': {
@@ -253,16 +267,18 @@ export default function ThirdPage() {
     const generalMajorName = selectedGeneralMajor ? decodeURIComponent(selectedGeneralMajor) : '';
     
     // Find the mapping key by comparing case-insensitively
-    const generalMajorKey = Object.keys(majorNameMapping).find(
-      key => key.toLowerCase() === generalMajorName.toLowerCase()
-    ) || generalMajorName;
+    // const generalMajorKey = Object.keys(majorNameMapping).find(
+    //   key => key.toLowerCase() === generalMajorName.toLowerCase()
+    // ) || generalMajorName;
     
-    const mappedGeneralMajorName = majorNameMapping[generalMajorKey]?.[language] || generalMajorName;
-
+    // const mappedGeneralMajorName = majorNameMapping[generalMajorKey]?.[language] || generalMajorName;
+    const mappedGeneralMajorName = majorNameMapping[generalMajorName]?.[language] || generalMajorName;
     console.log('Looking for general major:', mappedGeneralMajorName);
     
     const foundGeneralMajor = currentData.majorsInsights.byGeneralMajor.generalMajors.find(
-      (major) => major.generalMajor.toLowerCase() === mappedGeneralMajorName.toLowerCase()
+      // (major) => major.generalMajor.toLowerCase() === mappedGeneralMajorName.toLowerCase()
+      (major) => major.generalMajor === mappedGeneralMajorName
+
     );
     
     setGeneralMajorData(foundGeneralMajor);
@@ -272,16 +288,19 @@ export default function ThirdPage() {
       const narrowMajorName = selectedNarrowMajor ? decodeURIComponent(selectedNarrowMajor) : '';
       
       // Find the mapping key by comparing case-insensitively
-      const narrowMajorKey = Object.keys(narrowMajorMapping).find(
-        key => key.toLowerCase() === narrowMajorName.toLowerCase()
-      ) || narrowMajorName;
+      // const narrowMajorKey = Object.keys(narrowMajorMapping).find(
+      //   key => key.toLowerCase() === narrowMajorName.toLowerCase()
+      // ) || narrowMajorName;
       
-      const mappedNarrowMajorName = narrowMajorMapping[narrowMajorKey]?.[language] || narrowMajorName;
+      // const mappedNarrowMajorName = narrowMajorMapping[narrowMajorKey]?.[language] || narrowMajorName;
+      const mappedNarrowMajorName = narrowMajorMapping[narrowMajorName]?.[language] || narrowMajorName;
 
       console.log('Looking for narrow major:', mappedNarrowMajorName);
       
       const foundNarrowMajor = foundGeneralMajor.byNarrowMajor.narrowMajors.find(
-        (major) => major.narrowMajor.toLowerCase() === mappedNarrowMajorName.toLowerCase()
+        // (major) => major.narrowMajor.toLowerCase() === mappedNarrowMajorName.toLowerCase()
+        (major) => major.narrowMajor === mappedNarrowMajorName
+
       );
 
       console.log('Found narrow major:', foundNarrowMajor);
@@ -329,15 +348,52 @@ export default function ThirdPage() {
     return timingNodes[nodeId] || "#6366f1";
   };
 
+  // Get icon based on major name
+  const getMajorIcon = (majorName: string) => {
+    const iconMapping = {
+      'Education': FaGraduationCap,
+      'Communications and Information Technology': FaLaptopCode,
+      'Business, administration and law': FaBalanceScale,
+      'Arts and Humanities': FaPaintBrush,
+      'Health and Welfare': FaHeartbeat,
+      'Natural Sciences, Mathematics and Statistics': FaFlask,
+      'Engineering, manufacturing and construction': FaCogs,
+      'Agriculture, Forestry, Fisheries and Veterinary': FaSeedling,
+      'Social Sciences, Journalism, Information': FaBook,
+      'Generic Programs and Qualifications': FaUserGraduate,
+      'Services': FaCog,
+    };
+
+    // Get English version of major name for mapping
+    const englishMajor = Object.entries(majorNameMapping).find(
+      ([_, value]) => value[language] === majorName
+    )?.[0] || majorName;
+
+    return iconMapping[englishMajor as keyof typeof iconMapping];
+  };
+
   return (
-    <div className="min-h-screen bg-transparent backdrop-blur-sm px-2">
+    <div className="min-h-screen bg-transparent backdrop-blur-sm px-2" style={{ marginTop: "-30px" }}>
       {/* Content */}
       <div className="relative z-10 container mx-auto px-2 py-8 max-w-full w-[99%]">
         {/* Major Title */}
         <div className="mb-5">
-          <h1 className="text-white font-['Roboto_Regular'] text-2xl text-center">
+          {/* General Major Title */}
+          <div className="flex justify-center items-center gap-3 mb-3">
+            {generalMajorData?.generalMajor && getMajorIcon(generalMajorData.generalMajor) && (
+              <div className="text-3xl text-[#2CCAD3]">
+                {React.createElement(getMajorIcon(generalMajorData.generalMajor))}
+              </div>
+            )}
+            <h1 className="text-white font-['Roboto_Regular'] text-2xl text-center">
             {displayNarrowMajor}
-          </h1>
+              {/* {generalMajorData?.generalMajor} */}
+            </h1>
+          </div>
+          {/* Narrow Major Title */}
+          {/* <h2 className="text-white/70 font-['Roboto_Regular'] text-xl text-center">
+            {narrowMajorData?.narrowMajor}
+          </h2> */}
         </div>
 
         {/* Overview Stats */}
@@ -374,7 +430,7 @@ export default function ThirdPage() {
                       {overviewStats?.graduates.male.percentage}%
                     </span>
                   </div>
-                  <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-2 py-0.5">
+                  <div className="bg-[#fe1672]/70 rounded-full flex items-center gap-1 px-2 py-0.5">
                     <BiFemale style={{ color: "#2CCAD3" }} />
                     <span className="text-xs font-['Roboto_Regular'] text-white">
                       {overviewStats?.graduates.female.percentage}%
@@ -405,8 +461,14 @@ export default function ThirdPage() {
                   {getTranslation("Time to Employment", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
-                  {narrowMajorData?.overall.totalMetrics.timeToEmployment.overall.days}
-                  <span className="font-normal text-lg"> {getTranslation("days", language)}</span>
+                  {
+                    narrowMajorData?.overall.totalMetrics.timeToEmployment
+                      .overall.days
+                  }
+                  <span className="font-normal text-lg">
+                    {" "}
+                    {getTranslation("days", language)}
+                  </span>
                 </p>
               </div>
             </div>
@@ -433,7 +495,10 @@ export default function ThirdPage() {
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {narrowMajorData?.overall.totalMetrics.averageSalary.toLocaleString()}
-                  <span className="font-normal text-lg"> {getTranslation("SAR", language)}</span>
+                  <span className="font-normal text-lg">
+                    {" "}
+                    {getTranslation("SAR", language)}
+                  </span>
                 </p>
               </div>
             </div>
@@ -631,7 +696,7 @@ export default function ThirdPage() {
           {/* Top 5 Occupation by Salary */}
           <Col xs={24} lg={11}>
             <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
-              <h2 className="text-xl font-['Neo_Sans_Bold'] mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-[Roboto_Regular'] mb-6 flex items-center gap-2">
                 <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
                   <Image
                     src="/icons/occupation.svg"
@@ -859,7 +924,8 @@ export default function ThirdPage() {
                           >
                             <div className="bg-[#2CCAD3]/20 rounded-full px-3 py-1">
                               <span className="text-white text-sm font-['Roboto_Regular'] whitespace-nowrap">
-                              {level.employmentRate}% {getTranslation("employed", language)}
+                                {level.employmentRate}%{" "}
+                                {getTranslation("employed", language)}
                               </span>
                             </div>
                           </div>
@@ -899,7 +965,9 @@ export default function ThirdPage() {
                         data={{
                           nodes: [
                             {
-                              id: getMappedNarrowMajorName(selectedNarrowMajor || ""),
+                              id: getMappedNarrowMajorName(
+                                selectedNarrowMajor || ""
+                              ),
                               nodeColor: getNarrowMajorColor(
                                 selectedNarrowMajor || "",
                                 selectedGeneralMajor
@@ -920,22 +988,37 @@ export default function ThirdPage() {
                           ],
                           links: [
                             {
-                              source: getMappedNarrowMajorName(selectedNarrowMajor || ""),
-                              target: getTranslation("Before Graduation", language),
+                              source: getMappedNarrowMajorName(
+                                selectedNarrowMajor || ""
+                              ),
+                              target: getTranslation(
+                                "Before Graduation",
+                                language
+                              ),
                               value:
                                 narrowMajorData.overall.totalMetrics
                                   .timeToEmployment.beforeGraduation.percentage,
                             },
                             {
-                              source: getMappedNarrowMajorName(selectedNarrowMajor || ""),
-                              target: getTranslation("Within First Year", language),
+                              source: getMappedNarrowMajorName(
+                                selectedNarrowMajor || ""
+                              ),
+                              target: getTranslation(
+                                "Within First Year",
+                                language
+                              ),
                               value:
                                 narrowMajorData.overall.totalMetrics
                                   .timeToEmployment.withinFirstYear.percentage,
                             },
                             {
-                              source: getMappedNarrowMajorName(selectedNarrowMajor || ""),
-                              target: getTranslation("After First Year", language),
+                              source: getMappedNarrowMajorName(
+                                selectedNarrowMajor || ""
+                              ),
+                              target: getTranslation(
+                                "After First Year",
+                                language
+                              ),
                               value:
                                 narrowMajorData.overall.totalMetrics
                                   .timeToEmployment.afterFirstYear.percentage,
@@ -952,10 +1035,12 @@ export default function ThirdPage() {
                           ];
                           if (timingNodes.includes(node.id)) {
                             // Map back to English key for color mapping
-                            const englishKey = Object.keys(colorMapping).find(key => 
-                              getTranslation(key, language) === node.id
+                            const englishKey = Object.keys(colorMapping).find(
+                              (key) => getTranslation(key, language) === node.id
                             );
-                            return colorMapping[englishKey || "Before Graduation"];
+                            return colorMapping[
+                              englishKey || "Before Graduation"
+                            ];
                           }
                           return getNarrowMajorColor(
                             selectedNarrowMajor || "",
@@ -1066,7 +1151,9 @@ export default function ThirdPage() {
                           {major.name}
                         </span>
                         <span className="text-xs font-['Roboto_Regular'] text-white">
-                        {major.graduates} {getTranslation("graduates", language)}                        </span>
+                          {major.graduates}{" "}
+                          {getTranslation("graduates", language)}{" "}
+                        </span>
                       </div>
                       <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
                         {/* Male percentage */}

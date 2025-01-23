@@ -681,7 +681,7 @@
           "totalStudentsEnrolled": 600000
         },
         {
-          "generalMajor": "education",
+          "generalMajor": "Education",
           "graduates": {
             "totalGraduates": 23846,
             "male": {
@@ -3081,7 +3081,7 @@
           }
         },
         {
-          "generalMajor": "education",
+          "generalMajor": "Education",
           "overall": {
             "totalMetrics": {
               "graduates": {
@@ -3169,7 +3169,7 @@
             "topNarrowMajorsInsights": {
               "topByEmploymentTiming": [
                 {
-                  "narrowMajor": "education",
+                  "narrowMajor": "Education",
                   "graduates": 23846,
                   "employmentTiming": {
                     "beforeGraduation": {
@@ -3189,7 +3189,7 @@
               ],
               "topByEmploymentRate": [
                 {
-                  "narrowMajor": "education",
+                  "narrowMajor": "Education",
                   "graduates": 23846,
                   "employmentRate": 43.9,
                   "genderDistribution": {
@@ -3206,7 +3206,7 @@
               ],
               "topByGender": [
                 {
-                  "narrowMajor": "education",
+                  "narrowMajor": "Education",
                   "graduates": 23846,
                   "employmentRate": 43.9,
                   "genderDistribution": {
@@ -3302,7 +3302,7 @@
           "byNarrowMajor": {
             "narrowMajors": [
               {
-                "narrowMajor": "education",
+                "narrowMajor": "Education",
                 "overall": {
                   "totalMetrics": {
                     "graduates": {

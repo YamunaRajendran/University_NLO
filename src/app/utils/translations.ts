@@ -49,6 +49,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Bachelor's",
     ar: "الليسانس"
   },
+  "Saudi Arabia Graduates Observation (Readings, Statistics)": {
+    en: "Saudi Arabia Graduates Observation (Readings, Statistics)",
+    ar: "مرصد خريجي المملكة العربية السعودية (قراءات وإحصائيات)"
+  },
   "Master's": {
     en: "Master's",
     ar: "الماجستير"

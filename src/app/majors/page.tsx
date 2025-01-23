@@ -1,5 +1,5 @@
 "use client";
-
+import React from 'react';
 import mockDataMajorEn from "./mock_data_major.json";
 import mockDataMajorAr from "./major_insights_arabic.json";
 import Image from "next/image";
@@ -9,6 +9,19 @@ import { BiFemale } from "react-icons/bi";
 import { BiMale } from "react-icons/bi";
 import { PiMoneyFill } from "react-icons/pi";
 import { FaBusinessTime } from "react-icons/fa6";
+import {
+  FaGraduationCap,
+  FaLaptopCode,
+  FaBalanceScale,
+  FaPaintBrush,
+  FaHeartbeat,
+  FaFlask,
+  FaCogs,
+  FaSeedling,
+  FaBook,
+  FaUserGraduate,
+  FaCog,
+} from "react-icons/fa";
 // import { GiGraduateCap } from "react-icons/gi";
 import { Row, Col } from "antd";
 import { ResponsiveSankey, SankeyNodeDatum } from "@nivo/sankey";
@@ -130,7 +143,7 @@ export default function SecondPage() {
       'Services': 'Services',
       'Agriculture, Forestry, Fisheries and Veterinary': 'Agriculture, Forestry, Fisheries and Veterinary',
       'Generic Programs and Qualifications': 'Generic Programs and Qualifications',
-      'Education': 'education',
+      'Education': 'Education',
       'Engineering, manufacturing and construction': 'Engineering, manufacturing and construction'
     },
     ar: {
@@ -148,159 +161,139 @@ export default function SecondPage() {
     }
   };
   const narrowMajorMapping = {
-    'Business and administration': {
-      en: 'Business and administration',
-      ar: 'الأعمال والإدارة'
-    },
-    'law': {
-      en: 'law',
-      ar: 'القانون'
-    },
-    'health': {
-      en: 'health',
-      ar: 'الصحة'
-    },
-    'Welfare': {
-      en: 'Welfare',
-      ar: 'الرفاه'
-    },
-    'Education': {
-      en: 'Education',
-      ar: 'التعليم'
-    },
-    'Personal services': {
-      en: 'Personal services',
-      ar: 'الخدمات الشخصية'
-    },
-    'Transportation services': {
-      en: 'Transportation services',
-      ar: 'خدمات النقل'
-    },
-    'Security service': {
-      en: 'Security service',
-      ar: 'خدمات الأمن'
-    },
-    'Basic programs and qualifications': {
-      en: 'Basic programs and qualifications',
-      ar: 'البرامج الأساسية والمؤهلات'
-    },
-    'Skills and personal development development': {
-      en: 'Skills and personal development development',
-      ar: 'تنمية المهارات والتنمية الشخصية'
-    },
-    'General hygiene and occupational health services': {
-      en: 'General hygiene and occupational health services',
-      ar: 'خدمات النظافة العامة والصحة المهنية'
-    },
-    'Social and behavioral sciences': {
-      en: 'Social and behavioral sciences',
-      ar: 'العلوم الاجتماعية والسلوكية'
-    },
-    'Journalism and media': {
-      en: 'Journalism and media',
-      ar: 'الصحافة والإعلام'
-    },
-    'Languages': {
-      en: 'Languages',
-      ar: 'اللغات'
-    },
-    'Human studies except languages': {
-      en: 'Human studies except languages',
-      ar: 'الدراسات الإنسانية باستثناء اللغات'
-    },
-    'Religion and theology': {
-      en: 'Religion and theology',
-      ar: 'الدين واللاهوت'
-    },
-    'Fine arts': {
-      en: 'Fine arts',
-      ar: 'الفنون الجميلة'
-    },
-    'Arts and humanities - general programs': {
-      en: 'Arts and humanities - general programs',
-      ar: 'الفنون والعلوم الإنسانية - البرامج العامة'
-    },
-    'Biological and related sciences': {
-      en: 'Biological and related sciences',
-      ar: 'العلوم البيولوجية والعلوم ذات الصلة'
-    },
-    'Environment': {
-      en: 'Environment',
-      ar: 'البيئة'
-    },
-    'Physical sciences': {
-      en: 'Physical sciences',
-      ar: 'العلوم الفيزيائية'
-    },
-    'Mathematics and statistics': {
-      en: 'Mathematics and statistics',
-      ar: 'الرياضيات والإحصاء'
-    },
-    'Information and Communication Technologies (ICTs)': {
-      en: 'Information and Communication Technologies (ICTs)',
-      ar: 'تكنولوجيا المعلومات والاتصالات'
-    },
-    'Engineering and engineering trades': {
-      en: 'Engineering and engineering trades',
-      ar: 'الهندسة والتجارة الهندسية'
-    },
-    'Manufacturing and processing': {
-      en: 'Manufacturing and processing',
-      ar: 'التصنيع والمعالجة'
-    },
-    'Architecture and construction': {
-      en: 'Architecture and construction',
-      ar: 'العمارة والبناء'
-    },
-    'Agriculture': {
-      en: 'Agriculture',
-      ar: 'الزراعة'
-    },
-    'Forestry': {
-      en: 'Forestry',
-      ar: 'الغابات'
-    },
-    'Fisheries': {
-      en: 'Fisheries',
-      ar: 'مصايد الأسماك'
-    },
-    'Veterinary': {
-      en: 'Veterinary',
-      ar: 'الطب البيطري'
-    },
-    'Dental studies': {
-      en: 'Dental studies',
-      ar: 'دراسات طب الأسنان'
-    },
-    'Medicine': {
-      en: 'Medicine',
-      ar: 'الطب'
-    },
-    'Nursing and midwifery': {
-      en: 'Nursing and midwifery',
-      ar: 'التمريض والقبالة'
-    },
-    'Medical diagnostic and treatment technology': {
-      en: 'Medical diagnostic and treatment technology',
-      ar: 'تكنولوجيا التشخيص والعلاج الطبي'
-    },
-    'Therapy and rehabilitation': {
-      en: 'Therapy and rehabilitation',
-      ar: 'العلاج وإعادة التأهيل'
-    },
-    'Pharmacy': {
-      en: 'Pharmacy',
-      ar: 'الصيدلة'
-    },
-    'Traditional and complementary medicine and therapy': {
-      en: 'Traditional and complementary medicine and therapy',
-      ar: 'الطب والعلاج التقليدي والتكميلي'
-    },
-    'Multi -disciplinary programs and qualifications include engineering, manufacturing and construction': {
-      en: 'Multi -disciplinary programs and qualifications include engineering, manufacturing and construction',
-      ar: 'برامج ومؤهلات متعددة التخصصات تتضمن الهندسة والتصنيع والبناء'
-    }
-  };
+  'Business and administration': {
+    en: 'Business and administration',
+    ar: 'الأعمال والإدارة'
+  },
+  'law': {
+    en: 'law',
+    ar: 'القانون'
+  },
+  'health': {
+    en: 'health',
+    ar: 'الصحة'
+  },
+  'Welfare': {
+    en: 'Welfare',
+    ar: 'الرفاه'
+  },
+  'Education': {
+    en: 'Education',
+    ar: 'التعليم'
+  },
+  'Personal services': {
+    en: 'Personal services',
+    ar: 'الخدمات الشخصية'
+  },
+  'Transportation services': {
+    en: 'Transportation services',
+    ar: 'خدمات النقل'
+  },
+  'security service': {
+    en: 'security service',
+    ar: 'خدمات الأمن'
+  },
+  'Basic programs and qualifications': {
+    en: 'Basic programs and qualifications',
+    ar: 'البرامج الأساسية والمؤهلات'
+  },
+  'Skills and personal development development': {
+    en: 'Skills and personal development development',
+    ar: 'تنمية المهارات والتنمية الشخصية'
+  },
+  'General hygiene and occupational health services': {
+    en: 'General hygiene and occupational health services',
+    ar: 'خدمات النظافة العامة والصحة المهنية'
+  },
+  'Social and behavioral sciences': {
+    en: 'Social and behavioral sciences',
+    ar: 'العلوم الاجتماعية والسلوكية'
+  },
+  'Journalism and media': {
+    en: 'Journalism and media',
+    ar: 'الصحافة والإعلام'
+  },
+  'Languages': {
+    en: 'Languages',
+    ar: 'اللغات'
+  },
+  'Human studies except languages': {
+    en: 'Human studies except languages',
+    ar: 'الدراسات الإنسانية باستثناء اللغات'
+  },
+  'Arts': {
+    en: 'Arts',
+    ar: 'الفنون'
+  },
+  'Physical sciences': {
+    en: 'Physical sciences',
+    ar: 'العلوم الفيزيائية'
+  },
+  'Biological sciences and related sciences': {
+    en: 'Biological sciences and related sciences',
+    ar: 'العلوم البيولوجية والعلوم المتصلة بها'
+  },
+  'Mathematics and Statistics': {
+    en: 'Mathematics and Statistics',
+    ar: 'الرياضيات والإحصاء'
+  },
+  'environment': {
+    en: 'environment',
+    ar: 'البيئة'
+  },
+  'Engineering and engineering crafts': {
+    en: 'Engineering and engineering crafts',
+    ar: 'الهندسة والحرف الهندسية'
+  },
+  'Architecture and construction': {
+    en: 'Architecture and construction',
+    ar: 'الهندسة المعمارية والبناء'
+  },
+  'Manufacturing and processing': {
+    en: 'Manufacturing and processing',
+    ar: 'التصنيع والمعالجة'
+  },
+  'Forestry': {
+    en: 'Forestry',
+    ar: 'الحراجة'
+  },
+  'Veterinary': {
+    en: 'Veterinary',
+    ar: 'البيطرة'
+  },
+  'Agriculture': {
+    en: 'Agriculture',
+    ar: 'الزراعة'
+  },
+  'Communications and Information Technology': {
+    en: 'Communications and Information Technology',
+    ar: 'تقنية الاتصالات والمعلومات'
+  },
+  'Multi -disciplinary programs and qualifications include telecommunications and information technology': {
+    en: 'Multi -disciplinary programs and qualifications include telecommunications and information technology',
+    ar: 'البرامج والمؤهلات متعددة التخصصات تتضمن تقنية الاتصالات والمعلومات'
+  },
+  'Unlimited programs in business, administration and law': {
+    en: 'Unlimited programs in business, administration and law',
+    ar: 'برامج غير محددة في الأعمال والإدارة والقانون'
+  },
+  'Multidisciplinary programs and qualifications include health and wellbeing': {
+    en: 'Multidisciplinary programs and qualifications include health and wellbeing',
+    ar: 'البرامج والمؤهلات متعددة التخصصات تتضمن الصحة والرفاه'
+  },
+  'Other programs in natural sciences, mathematics and statistics are not classified elsewhere': {
+    en: 'Other programs in natural sciences, mathematics and statistics are not classified elsewhere',
+    ar: 'برامج أخرى في العلوم الطبيعية والرياضيات والإحصاء غير مصنفة في مكان آخر'
+  },
+  'Multiple specialties programs and qualifications include natural sciences, mathematics and statistics': {
+    en: 'Multiple specialties programs and qualifications include natural sciences, mathematics and statistics',
+    ar: 'برامج ومؤهلات متعددة التخصصات تتضمن العلوم الطبيعية والرياضيات والإحصاء'
+  },
+  'Multi -disciplinary programs and qualifications include engineering, manufacturing and construction': {
+    en: 'Multi -disciplinary programs and qualifications include engineering, manufacturing and construction',
+    ar: 'برامج ومؤهلات متعددة التخصصات تتضمن الهندسة والتصنيع والبناء'
+  }
+};
   
   
 
@@ -345,11 +338,12 @@ export default function SecondPage() {
     Law: "#FFD700", // Gold
     Languages: "#FF4500", // Orange red
     "Human studies except languages": "#4169E1", // Royal blue
-    Arts: "#32CD32", // Lime green
+    "Arts": "#32CD32", // Lime green
     "Physical sciences": "#FF8C00", // Dark orange
     "Biological sciences and related sciences": "#BA55D3", // Medium orchid
     "Mathematics and Statistics": "#00CED1", // Dark turquoise
     Environment: "#FF69B4", // Hot pink
+    "environment": "#FF69B4", // Hot pink
     "Engineering and engineering crafts": "#7B68EE", // Medium slate blue
     "Architecture and construction": "#3CB371", // Medium sea green
     "Manufacturing and processing": "#CD853F", // Peru
@@ -384,11 +378,10 @@ export default function SecondPage() {
     "Transportation services": "#33FFB2", // Mint
     "security service": "#FFB233", // Orange
     "Communications and Information Technology": "#3366FF", // Royal blue
-    "Telecommunications and information technology": "#FF3366", // Rose
+    "Telecommunications and information technology": "#3366FF", // Royal blue
     law: "#FFD700", // Gold
     health: "#4B0082", // Indigo
-    "Generic programs and qualifications include health and wellbeing":
-      "#9932CC", // Dark orchid
+    "Generic programs and qualifications include health and wellbeing": "#9932CC", // Dark orchid
 
     // Employment timing nodes
     "Before Graduation": "#FFB74D", // Light orange
@@ -576,6 +569,30 @@ export default function SecondPage() {
     return data;
   }, [majorData, language]);
 
+  // Get icon based on major name
+  const getMajorIcon = (majorName: string) => {
+    const iconMapping = {
+      'Education': FaGraduationCap,
+      'Communications and Information Technology': FaLaptopCode,
+      'Business, administration and law': FaBalanceScale,
+      'Arts and Humanities': FaPaintBrush,
+      'Health and Welfare': FaHeartbeat,
+      'Natural Sciences, Mathematics and Statistics': FaFlask,
+      'Engineering, manufacturing and construction': FaCogs,
+      'Agriculture, Forestry, Fisheries and Veterinary': FaSeedling,
+      'Social Sciences, Journalism, Information': FaBook,
+      'Generic Programs and Qualifications': FaUserGraduate,
+      'Services': FaCog,
+    };
+
+    // Get English version of major name for mapping
+    const englishMajor = Object.entries(majorNameMapping.ar).find(
+      ([_, value]) => value === majorName
+    )?.[0] || majorName;
+
+    return iconMapping[englishMajor as keyof typeof iconMapping];
+  };
+
   return (
     <div
       className="min-h-screen bg-transparent backdrop-blur-sm px-2"
@@ -584,7 +601,12 @@ export default function SecondPage() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-2 py-8 max-w-full w-[99%]">
         {/* Major Title */}
-        <div className="mb-5">
+        <div className="mb-5 flex justify-center items-center gap-3">
+          {selectedMajor && getMajorIcon(selectedMajor) && (
+            <div className="text-3xl text-[#2CCAD3]">
+              {React.createElement(getMajorIcon(selectedMajor))}
+            </div>
+          )}
           <h1 className="text-white font-['Roboto_Regular'] text-2xl text-center">
             {displayMajor}
           </h1>
@@ -624,7 +646,7 @@ export default function SecondPage() {
                       {overviewStats?.graduates.male.percentage}%
                     </span>
                   </div>
-                  <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-2 py-0.5">
+                  <div className="bg-[#fe1672]/70 rounded-full flex items-center gap-1 px-2 py-0.5">
                     <BiFemale style={{ color: "#2CCAD3" }} />
                     <span className="text-xs font-['Roboto_Regular'] text-white">
                       {overviewStats?.graduates.female.percentage}%
@@ -656,7 +678,10 @@ export default function SecondPage() {
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.averageSalary.toLocaleString()}
-                  <span className="font-normal text-lg"> {getTranslation("SAR", language)}</span>
+                  <span className="font-normal text-lg">
+                    {" "}
+                    {getTranslation("SAR", language)}
+                  </span>
                 </p>
               </div>
             </div>
@@ -683,7 +708,10 @@ export default function SecondPage() {
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.timeToEmployment.overall.days}
-                  <span className="font-normal text-lg"> {getTranslation("days", language)}</span>
+                  <span className="font-normal text-lg">
+                    {" "}
+                    {getTranslation("days", language)}
+                  </span>
                 </p>
               </div>
             </div>
@@ -732,7 +760,10 @@ export default function SecondPage() {
                     }}
                   >
                     <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
-                      {getTranslation(employmentTimingTranslations.beforeGraduation[language], language)}
+                      {getTranslation(
+                        employmentTimingTranslations.beforeGraduation[language],
+                        language
+                      )}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
                       {
@@ -752,7 +783,10 @@ export default function SecondPage() {
                     }}
                   >
                     <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
-                      {getTranslation(employmentTimingTranslations.withinFirstYear[language], language)}
+                      {getTranslation(
+                        employmentTimingTranslations.withinFirstYear[language],
+                        language
+                      )}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
                       {
@@ -772,7 +806,10 @@ export default function SecondPage() {
                     }}
                   >
                     <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
-                      {getTranslation(employmentTimingTranslations.afterFirstYear[language], language)}
+                      {getTranslation(
+                        employmentTimingTranslations.afterFirstYear[language],
+                        language
+                      )}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
                       {
@@ -949,7 +986,8 @@ export default function SecondPage() {
                         >
                           <div className="bg-[#2CCAD3]/20 rounded-full px-3 py-1">
                             <span className="text-white text-sm font-['Roboto_Regular'] whitespace-nowrap">
-                              {level.employmentRate}% {getTranslation("employed", language)}
+                              {level.employmentRate}%{" "}
+                              {getTranslation("employed", language)}
                             </span>
                           </div>
                         </div>
@@ -995,7 +1033,8 @@ export default function SecondPage() {
                         {major.narrowMajor}
                       </span>
                       <span className="text-xs font-['Roboto_Regular'] text-white">
-                        {major.graduates} {getTranslation("graduates", language)}
+                        {major.graduates}{" "}
+                        {getTranslation("graduates", language)}
                       </span>
                     </div>
                     <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
@@ -1006,7 +1045,9 @@ export default function SecondPage() {
                           width: `${major.genderDistribution.male.percentage}%`,
                           left: 0,
                         }}
-                        onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
+                        onClick={() =>
+                          handleNarrowMajorSelect(major.narrowMajor)
+                        }
                       >
                         <div className="absolute left-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
                           <BiMale style={{ color: "#2CCAD3" }} />
@@ -1022,7 +1063,9 @@ export default function SecondPage() {
                           width: `${major.genderDistribution.female.percentage}%`,
                           right: 0,
                         }}
-                        onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
+                        onClick={() =>
+                          handleNarrowMajorSelect(major.narrowMajor)
+                        }
                       >
                         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
                           <span className="text-xs font-['Roboto_Regular'] text-white">
@@ -1192,12 +1235,23 @@ export default function SecondPage() {
                       modifiers: [["darker", 1]],
                     }}
                     animate={true}
-                    onClick={(node: SankeyNodeDatum<{ id: string; nodeColor: string; source?: { id: string } }, { source: string; target: string; value: number }>) => {
-                      if (![
-                        getTranslation("Before Graduation", language),
-                        getTranslation("Within First Year", language),
-                        getTranslation("After First Year", language)
-                      ].includes(node.id)) {
+                    onClick={(
+                      node: SankeyNodeDatum<
+                        {
+                          id: string;
+                          nodeColor: string;
+                          source?: { id: string };
+                        },
+                        { source: string; target: string; value: number }
+                      >
+                    ) => {
+                      if (
+                        ![
+                          getTranslation("Before Graduation", language),
+                          getTranslation("Within First Year", language),
+                          getTranslation("After First Year", language),
+                        ].includes(node.id)
+                      ) {
                         const narrowMajor = node.id || node.source?.id;
                         if (narrowMajor) {
                           handleNarrowMajorSelect(narrowMajor);
@@ -1290,7 +1344,9 @@ export default function SecondPage() {
                     <div key={index} className="flex items-center group">
                       <div
                         className="w-[200px] relative cursor-pointer"
-                        onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
+                        onClick={() =>
+                          handleNarrowMajorSelect(major.narrowMajor)
+                        }
                       >
                         <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
                         <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white px-3 py-1 block break-words">
@@ -1306,7 +1362,9 @@ export default function SecondPage() {
                             background:
                               "linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                           }}
-                          onClick={() => handleNarrowMajorSelect(major.narrowMajor)}
+                          onClick={() =>
+                            handleNarrowMajorSelect(major.narrowMajor)
+                          }
                         >
                           <div className="absolute top-1/2 -translate-y-1/2">
                             <span className="text-base font-['Roboto_Regular'] font-bold text-white">
