@@ -481,7 +481,7 @@ export default function ThirdPage() {
                         "linear-gradient(90deg, #176481 0%, #1E1F5E 100%)",
                     }}
                   >
-                    <span className="text-sm font-['Roboto_Regular'] text-white/50 ml-1">
+                    <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
                       {getTranslation("Before Graduation", language)}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
@@ -501,7 +501,7 @@ export default function ThirdPage() {
                         "linear-gradient(90deg, #176481 0%, #1E1F5E 100%)",
                     }}
                   >
-                    <span className="text-sm text-white/50 ml-1">
+                    <span className="text-sm text-white ml-1">
                       {getTranslation("Within First Year", language)}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
@@ -521,7 +521,7 @@ export default function ThirdPage() {
                         "linear-gradient(90deg, #176481 0%, #1E1F5E 100%)",
                     }}
                   >
-                    <span className="text-sm text-white/50 ml-1">
+                    <span className="text-sm text-white ml-1">
                       {getTranslation("After First Year", language)}
                     </span>
                     <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
@@ -755,7 +755,7 @@ export default function ThirdPage() {
                       <div key={index} className="flex items-center group">
                         <div className="w-[180px] relative">
                           <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
-                          <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white/70 px-3 py-1 block break-words capitalize">
+                          <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white px-3 py-1 block break-words capitalize">
                             {major.name}
                           </span>
                         </div>
@@ -782,7 +782,7 @@ export default function ThirdPage() {
                 )}
                 {!narrowMajorData?.overall.topMajorsInsights.topByEmploymentRate
                   ?.length && (
-                  <div className="flex items-center justify-center h-[200px] text-white/40">
+                  <div className="flex items-center justify-center h-[200px] text-white">
                     {getTranslation("No data available", language)}
                   </div>
                 )}
@@ -827,7 +827,7 @@ export default function ThirdPage() {
                       <div key={index} className="flex items-center group">
                         <div className="w-[160px] relative">
                           <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
-                          <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white/70 px-3 py-1 block truncate">
+                          <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white px-3 py-1 block truncate">
                             {level.educationLevel}
                           </span>
                         </div>
@@ -1028,7 +1028,7 @@ export default function ThirdPage() {
                     )}
                     {!narrowMajorData?.overall.totalMetrics
                       .timeToEmployment && (
-                      <div className="flex items-center justify-center h-[20px] text-white/40">
+                      <div className="flex items-center justify-center h-[20px] text-white">
                         {getTranslation("No data available", language)}
                       </div>
                     )}
@@ -1062,10 +1062,10 @@ export default function ThirdPage() {
                   .map((major, index) => (
                     <div key={index} className="relative">
                       <div className="mb-1 flex justify-between items-center">
-                        <span className="text-sm font-['Roboto_Regular'] text-white/70">
+                        <span className="text-sm font-['Roboto_Regular'] text-white">
                           {major.name}
                         </span>
-                        <span className="text-xs font-['Roboto_Regular'] text-white/50">
+                        <span className="text-xs font-['Roboto_Regular'] text-white">
                         {major.graduates} {getTranslation("graduates", language)}                        </span>
                       </div>
                       <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
@@ -1104,7 +1104,7 @@ export default function ThirdPage() {
                   ))}
                 {!narrowMajorData?.overall.topMajorsInsights.topByGender
                   ?.length && (
-                  <div className="flex items-center justify-center h-[200px] text-white/40">
+                  <div className="flex items-center justify-center h-[200px] text-white">
                     {getTranslation("No data available", language)}
                   </div>
                 )}
