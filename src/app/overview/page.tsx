@@ -3,7 +3,7 @@
 import Image from "next/image";
 import nloSymbol from "../../../public/logo/nlo_logo_symbol.png";
 import mockData from "./major_insights_english.json";
-import arabicData from './major_insights_arabic 3.json';
+import arabicData from "./major_insights_arabic 3.json";
 import { useEffect, useState } from "react";
 import SmallCircles from "@/app/overview/component/Small";
 import { PiMoneyFill } from "react-icons/pi";
@@ -27,11 +27,11 @@ import {
   FaBook,
   FaUserGraduate,
   FaCog,
-  FaNewspaper
+  FaNewspaper,
 } from "react-icons/fa";
 
-import { useLanguage } from '@/app/context/LanguageContext';
-import { getTranslation } from '@/app/utils/translations';
+import { useLanguage } from "@/app/context/LanguageContext";
+import { getTranslation } from "@/app/utils/translations";
 
 const CircularText = ({
   text,
@@ -77,7 +77,7 @@ const CircularText = ({
 
 export default function HomePage() {
   const { language } = useLanguage();
-  const data = language === 'ar' ? arabicData : mockData;
+  const data = language === "ar" ? arabicData : mockData;
   const { totalMetrics, overall } = data.majorsInsights;
   const [animate, setAnimate] = useState(false);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
@@ -100,31 +100,36 @@ export default function HomePage() {
 
     // Map English major names to Arabic major names
     const majorNameMap = {
-      "education": "التعليم",
+      education: "التعليم",
       "communications and information technology": "تقنية الاتصالات والمعلومات",
       "business, administration and law": "الأعمال والإدارة والقانون",
       "arts and humanities": "الفنون والعلوم الإنسانية",
       "health and welfare": "الصحة والرفاه",
-      "natural sciences, mathematics and statistics": "العلوم الطبيعية والرياضيات والإحصاء",
+      "natural sciences, mathematics and statistics":
+        "العلوم الطبيعية والرياضيات والإحصاء",
       "engineering, manufacturing and construction": "الهندسة والتصنيع والبناء",
-      "agriculture, forestry, fisheries and veterinary": "الزراعة والحراجة ومصائد الأسماك والبيطرة",
-      "social sciences, journalism, information": "العلوم الاجتماعية والصحافة والإعلام",
+      "agriculture, forestry, fisheries and veterinary":
+        "الزراعة والحراجة ومصائد الأسماك والبيطرة",
+      "social sciences, journalism, information":
+        "العلوم الاجتماعية والصحافة والإعلام",
       "generic programs and qualifications": "البرامج العامة والمؤهلات",
-      "services": "الخدمات"
+      services: "الخدمات",
     };
 
-    const searchMajor = language === 'ar' 
-      ? majorNameMap[selectedMajor.toLowerCase()] || selectedMajor 
-      : selectedMajor;
+    const searchMajor =
+      language === "ar"
+        ? majorNameMap[selectedMajor.toLowerCase()] || selectedMajor
+        : selectedMajor;
 
-    const majorData = overall.basicMetrics.find(
-      (major) => {
-        const majorName = language === 'ar' 
-          ? major.generalMajor 
-          : Object.entries(majorNameMap).find(([eng, ar]) => ar === major.generalMajor)?.[0] || major.generalMajor;
-        return majorName.toLowerCase().includes(searchMajor.toLowerCase());
-      }
-    );
+    const majorData = overall.basicMetrics.find((major) => {
+      const majorName =
+        language === "ar"
+          ? major.generalMajor
+          : Object.entries(majorNameMap).find(
+              ([eng, ar]) => ar === major.generalMajor
+            )?.[0] || major.generalMajor;
+      return majorName.toLowerCase().includes(searchMajor.toLowerCase());
+    });
 
     const majorIcons = {
       education: FaGraduationCap,
@@ -145,13 +150,13 @@ export default function HomePage() {
 
     return majorData
       ? {
-          title: language === 'ar' ? majorData.generalMajor : selectedMajor,
+          title: language === "ar" ? majorData.generalMajor : selectedMajor,
           icon: selectedIcon,
           graduates: majorData.graduates,
           employmentRate: majorData.employmentRate,
           averageSalary: majorData.averageSalary,
           timeToEmployment: majorData.timeToEmployment,
-          totalJobSeekers: majorData.totalJobSeekers
+          totalJobSeekers: majorData.totalJobSeekers,
         }
       : {
           title: selectedMajor || getTranslation("Education", language),
@@ -160,7 +165,7 @@ export default function HomePage() {
           employmentRate: totalMetrics.employmentRate,
           averageSalary: totalMetrics.averageSalary,
           timeToEmployment: totalMetrics.timeToEmployment,
-          totalJobSeekers: totalMetrics.totalJobSeekers
+          totalJobSeekers: totalMetrics.totalJobSeekers,
         };
   };
 
@@ -169,7 +174,8 @@ export default function HomePage() {
   const metrics = [
     {
       icon: <PiGraduationCapFill className="text-4xl text-violet-600" />,
-      value: data.majorsInsights.totalMetrics.graduates.totalGraduates.toLocaleString(),
+      value:
+        data.majorsInsights.totalMetrics.graduates.totalGraduates.toLocaleString(),
       label: getTranslation("Total Graduates", language),
     },
     {
@@ -179,7 +185,9 @@ export default function HomePage() {
     },
     {
       icon: <FaBusinessTime className="text-4xl text-violet-600" />,
-      value: `${data.majorsInsights.totalMetrics.timeToEmployment.overall.days} ${getTranslation("days", language)}`,
+      value: `${
+        data.majorsInsights.totalMetrics.timeToEmployment.overall.days
+      } ${getTranslation("days", language)}`,
       label: getTranslation("Time to Employment", language),
     },
     {
@@ -208,8 +216,11 @@ export default function HomePage() {
             ))}
         </h1>
         <p className="absolute top-6 -left-10 text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  w-full">
-      {getTranslation("Data for 2022 Graduates and their Employment through December 2023", language)}
-    </p>
+          {getTranslation(
+            "Data for 2022 Graduates and their Employment through December 2023",
+            language
+          )}
+        </p>
         {/* Add a blur overlay at the bottom */}
         {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#24285E]/80 to-transparent backdrop-blur-sm"></div> */}
 
@@ -220,16 +231,12 @@ export default function HomePage() {
         </p> */}
 
           {/* Education Title */}
-          <div className="flex flex-col items-start gap-0 w-full sm:w-[300px] h-[45px] sm:h-[50px] justify-start mx-auto mb-1">
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2">
-                  <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0 transform transition-transform duration-300 hover:scale-110 " />
-                  <span className="text-white text-lg sm:text-xl  leading-tight tracking-wide text-left flex-1">
-                    {currentData.title}
-                  </span>
-                </div>
-              </div>
+          <div className="relative w-full sm:w-[300px] h-[100px] sm:h-[50px] justify-start mx-auto mb-8">
+            <div className="absolute inset-0 flex items-center gap-2">
+              <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0" />
+              <span className="text-white text-lg sm:text-xl leading-tight tracking-wide text-left flex-1">
+                {currentData.title}
+              </span>
             </div>
           </div>
 
@@ -247,7 +254,6 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="flex-1 " style={{ marginRight: -20 }}>
-                  
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Total Graduates", language)}
                   </span>
@@ -438,12 +444,11 @@ export default function HomePage() {
 
         {/* Stats Cards */}
         <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[500px] flex flex-col gap-2 p-2 sm:p-4 lg:p-0 lg:mt-8">
-        {/* <span className="text-[8px] sm:text-[10px] md:text-[12px]">
+          {/* <span className="text-[8px] sm:text-[10px] md:text-[12px]">
                 {getTranslation(" Data for 2022 Graduates and their Employment through December 2023", language)}
               </span> */}
-             
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {/* First row cards */}
             <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
               <div className="flex items-center gap-8 w-full">
@@ -654,7 +659,7 @@ export default function HomePage() {
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[115%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          389835
+                          195571
                         </span>
                       </div>
                       <div
@@ -676,7 +681,7 @@ export default function HomePage() {
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[45%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          25428
+                          12164
                         </span>
                       </div>
                       <div
@@ -698,7 +703,7 @@ export default function HomePage() {
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[80%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          39085
+                          20026
                         </span>
                       </div>
                       <div
@@ -720,7 +725,7 @@ export default function HomePage() {
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[10%] -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          8001
+                          4292
                         </span>
                       </div>
                       <div
@@ -742,7 +747,7 @@ export default function HomePage() {
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[25%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          11043
+                          6563
                         </span>
                       </div>
                       <div
@@ -764,7 +769,7 @@ export default function HomePage() {
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute top-[24%] left-0">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          590
+                          267
                         </span>
                       </div>
                       <div
@@ -786,7 +791,7 @@ export default function HomePage() {
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[1%] -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          2916
+                          1277
                         </span>
                       </div>
                       <div
@@ -842,13 +847,18 @@ export default function HomePage() {
             <p className="mb-1">
               <b>{getTranslation("Graduate data sources", language)}</b>
               <span className="text-[8px] sm:text-[10px] md:text-[12px]">
-                {": "}{getTranslation("Universities and educational institutions", language)}
+                {": "}
+                {getTranslation(
+                  "Universities and educational institutions",
+                  language
+                )}
               </span>
             </p>
             <p className="mb-1">
               <b>{getTranslation("Employment data sources", language)}</b>
               <span className="text-[8px] sm:text-[10px] md:text-[12px]">
-                {": "}{getTranslation(
+                {": "}
+                {getTranslation(
                   "Ministry of Human Resources and Social Development, General Organization for Social Insurance",
                   language
                 )}
@@ -857,7 +867,8 @@ export default function HomePage() {
             <p className="mb-1">
               <b>{getTranslation("Data sources for job seekers", language)}</b>
               <span className="text-[8px] sm:text-[10px] md:text-[12px]">
-                {": "}{getTranslation(
+                {": "}
+                {getTranslation(
                   "Jadarat Platform - Human Resources Development Fund (HRDF)",
                   language
                 )}

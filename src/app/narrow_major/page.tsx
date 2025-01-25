@@ -9,12 +9,6 @@ import { FaBusinessTime } from "react-icons/fa6";
 // import { GiGraduateCap } from "react-icons/gi";
 import { Row, Col } from "antd";
 import { ResponsiveSankey, SankeyNodeDatum } from "@nivo/sankey";
-import {
-  RadialBarChart,
-  RadialBar,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
 import { useLanguage } from '@/app/context/LanguageContext';
 import { getTranslation } from '@/app/utils/translations';
 import { useState, useEffect } from 'react';
@@ -410,7 +404,7 @@ export default function ThirdPage() {
           <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-2xl p-3 pt-4 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center ">
             <div className="flex items-center gap-7">
               <div
-                className="bg-[#2CCAD3]/10 p-2"
+                className="bg-[#2CCAD3]/10 p-1"
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -454,7 +448,7 @@ export default function ThirdPage() {
           <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-2xl p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center">
             <div className="flex items-center gap-6">
               <div
-                className="bg-[#2CCAD3]/10 p-2"
+                className="bg-[#2CCAD3]/10 p-4"
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -487,7 +481,7 @@ export default function ThirdPage() {
           <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-2xl p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center">
             <div className="flex items-center gap-6">
               <div
-                className="bg-[#2CCAD3]/10 p-2"
+                className="bg-[#2CCAD3]/10 p-4"
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -517,7 +511,7 @@ export default function ThirdPage() {
           <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-2xl p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center">
             <div className="flex items-center gap-6">
               <div
-                className="bg-[#2CCAD3]/10 p-2"
+                className="bg-[#2CCAD3]/10 p-4"
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -546,7 +540,7 @@ export default function ThirdPage() {
           <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-l-2xl p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center">
             <div className="flex items-center gap-6">
               <div
-                className="bg-[#2CCAD3]/10 p-2"
+                className="bg-[#2CCAD3]/10 p-4"
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -706,7 +700,7 @@ export default function ThirdPage() {
                           </div>
                           {/* horizontal line */}
                           <div
-                            className="absolute left-[28px] h-[2px] w-[92%] bg-gray-100 top-52 transform -translate-y-1/6"
+                            className="absolute left-[28px] h-[2px] w-[93%] bg-gray-100 top-52 transform -translate-y-1/6"
                             style={{ marginTop: "-10px" }}
                           />
 
@@ -1074,7 +1068,7 @@ export default function ThirdPage() {
                             },
                           ],
                         }}
-                        margin={{ top: 20, right: 115, bottom: 20, left: 135 }}
+                        margin={{ top: 20, right: 140, bottom: 20, left: 170 }}
                         align="justify"
                         colors={(node) => {
                           const timingNodes = [
