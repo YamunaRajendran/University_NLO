@@ -23,11 +23,15 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Job Seekers": {
     en: "Job Seekers",
-    ar: "الباحثين عن عمل"
+    ar: "باحثين عن عمل"
   },
-  "days": {
-    en: "days",
-    ar: "يوم"
+  "Total Job Seekers": {
+    en: "Total Job Seekers",
+    ar:"إجمالي الباحثين عن عمل"
+  },
+  "months": {
+    en: "months",
+    ar: "شهر"
   },
   "Total Student Enrollment": {
     en: "Total Student Enrollment",
@@ -49,9 +53,9 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Bachelor's",
     ar: "الليسانس"
   },
-  "Saudi Arabia Graduates Observation (Readings, Statistics)": {
-    en: "Saudi Arabia Graduates Observation (Readings, Statistics)",
-    ar: "مرصد خريجي المملكة العربية السعودية (قراءات وإحصائيات)"
+  "Saudi Arabia Graduates Observation": {
+    en: "Saudi Arabia Graduates Observation",
+    ar: "مرصد خريجي المملكة العربية السعودية"
   },
   "Master's": {
     en: "Master's",
@@ -185,6 +189,34 @@ const translations: Record<string, Record<Language, string>> = {
   "SAR": {
     en: "SAR",
     ar: "ريال"
+  },
+  "Graduate data sources": {
+    en: "Graduate data sources",
+    ar: "مصادر بيانات الخريجين"
+  },
+  "Employment data sources": {
+    en: "Employment data sources",
+    ar: "مصادر بيانات التوظيف"
+  },
+  "Data sources for job seekers": {
+    en: "Data sources for job seekers",
+    ar: "مصادر بيانات الباحثين عن عمل"
+  },
+  "Universities and educational institutions": {
+    en: "Universities and educational institutions",
+    ar: "الجامعات والمؤسسات التعليمية"
+  },
+  "Ministry of Human Resources and Social Development, General Organization for Social Insurance": {
+    en: "Ministry of Human Resources and Social Development, General Organization for Social Insurance",
+    ar: "وزارة الموارد البشرية والتنمية الاجتماعية، المؤسسة العامة للتأمينات الاجتماعية"
+  },
+  "Jadarat Platform - Human Resources Development Fund (HRDF)": {
+    en: "Jadarat Platform - Human Resources Development Fund (HRDF)",
+    ar: "منصة جدارات - صندوق تنمية الموارد البشرية"
+  },
+  "Data for 2022 Graduates and their Employment through December 2023": {
+    en: "Data for 2022 Graduates and their Employment through December 2023",
+    ar: "بيانات خريجي 2022 وتوظيفهم حتى ديسمبر 2023"
   },
 };
 

@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 /* Custom Font Face Declarations */
-/* @font-face {
+@font-face {
   font-family: 'Neo-Sans';
   src: url('/fonts/alfont_com_AlFont_com_Neo-Sans-W23-l-1.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-} */
+}
 
 /* Brand Colors */
 :root {
@@ -483,7 +483,7 @@
 
 .animate-glow-word {
   display: inline-block;
-  animation: glow-word 1s ease-in-out infinite;
+  animation: glow-word 4s ease-in-out infinite;
   opacity: 0.8;
 }
 
@@ -507,7 +507,7 @@
 
 .animate-glow-letter {
   display: inline-block;
-  animation: glow-letter 8s linear infinite;
+  animation: glow-letter 10s linear infinite;
   opacity: 0.8;
 }
 

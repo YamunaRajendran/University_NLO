@@ -19,7 +19,9 @@ import { useLanguage } from '@/app/context/LanguageContext';
 import { getTranslation } from '@/app/utils/translations';
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
-import mockDataMajorEn from "@/app/majors/final_data_15-01 (version2).json";
+// import mockDataMajorEn from "@/app/majors/final_data_15-01 (version2).json";
+// import mockDataMajorAr from "@/app/majors/major_insights_arabic.json";
+import mockDataMajorEn from "@/app/majors/mock_data_major.json";
 import mockDataMajorAr from "@/app/majors/major_insights_arabic.json";
 import React from 'react';
 import {
@@ -84,8 +86,8 @@ const majorNameMapping = {
     en: 'Communications and Information Technology',
     ar: 'تقنية الاتصالات والمعلومات'
   },
-  'Social Sciences, Journalism, Information': {
-    en: 'Social Sciences, Journalism, Information',
+  'Social Sciences, Journalism, Information and Media': {
+    en: 'Social Sciences, Journalism, Information and Media',
     ar: 'العلوم الاجتماعية والصحافة والإعلام'
   },
   'Services': {
@@ -275,7 +277,7 @@ export default function ThirdPage() {
     const mappedGeneralMajorName = majorNameMapping[generalMajorName]?.[language] || generalMajorName;
     console.log('Looking for general major:', mappedGeneralMajorName);
     
-    const foundGeneralMajor = currentData.majorsInsights.byGeneralMajor.generalMajors.find(
+    const foundGeneralMajor = currentData.byGeneralMajor.generalMajors.find(
       // (major) => major.generalMajor.toLowerCase() === mappedGeneralMajorName.toLowerCase()
       (major) => major.generalMajor === mappedGeneralMajorName
 
@@ -359,7 +361,7 @@ export default function ThirdPage() {
       'Natural Sciences, Mathematics and Statistics': FaFlask,
       'Engineering, manufacturing and construction': FaCogs,
       'Agriculture, Forestry, Fisheries and Veterinary': FaSeedling,
-      'Social Sciences, Journalism, Information': FaBook,
+      'Social Sciences, Journalism, Information and Media': FaBook,
       'Generic Programs and Qualifications': FaUserGraduate,
       'Services': FaCog,
     };
@@ -373,34 +375,40 @@ export default function ThirdPage() {
   };
 
   return (
-    <div className="min-h-screen bg-transparent backdrop-blur-sm px-2" style={{ marginTop: "-30px" }}>
+    <div
+      className="min-h-screen bg-transparent backdrop-blur-sm px-2"
+      style={{ marginTop: "-30px" }}
+    >
       {/* Content */}
       <div className="relative z-10 container mx-auto px-2 py-8 max-w-full w-[99%]">
         {/* Major Title */}
         <div className="mb-5">
           {/* General Major Title */}
           <div className="flex justify-center items-center gap-3 mb-3">
-            {generalMajorData?.generalMajor && getMajorIcon(generalMajorData.generalMajor) && (
-              <div className="text-3xl text-[#2CCAD3]">
-                {React.createElement(getMajorIcon(generalMajorData.generalMajor))}
-              </div>
-            )}
-            <h1 className="text-white font-['Roboto_Regular'] text-2xl text-center">
-            {displayNarrowMajor}
+            {generalMajorData?.generalMajor &&
+              getMajorIcon(generalMajorData.generalMajor) && (
+                <div className="text-3xl text-[#2CCAD3]">
+                  {React.createElement(
+                    getMajorIcon(generalMajorData.generalMajor)
+                  )}
+                </div>
+              )}
+            <h1 className="text-white text-2xl text-center">
+              {displayNarrowMajor}
               {/* {generalMajorData?.generalMajor} */}
             </h1>
           </div>
           {/* Narrow Major Title */}
-          {/* <h2 className="text-white/70 font-['Roboto_Regular'] text-xl text-center">
+          {/* <h2 className="text-white/70  text-xl text-center">
             {narrowMajorData?.narrowMajor}
           </h2> */}
         </div>
 
         {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-6 w-full px-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 w-full px-1">
           {/* Graduates */}
-          <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-2xl p-3 pt-4 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center">
-            <div className="flex items-center gap-6">
+          <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-2xl p-3 pt-4 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center ">
+            <div className="flex items-center gap-7">
               <div
                 className="bg-[#2CCAD3]/10 p-2"
                 style={{
@@ -414,25 +422,26 @@ export default function ThirdPage() {
                   alt={getTranslation("Total Graduates", language)}
                   width={52}
                   height={42}
+                  style={{ marginLeft: -10 }}
                 />
               </div>
-              <div>
-                <p className="text-sm font-['Roboto_Regular'] text-white">
+              <div style={{ marginLeft: -20 }}>
+                <p className="text-sm  text-white">
                   {getTranslation("Total Graduates", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.graduates.totalGraduates.toLocaleString()}
                 </p>
-                <div className="flex items-center gap-2 mt-1">
-                  <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-2 py-0.5">
+                <div className="flex items-center gap-1 mt-1">
+                  <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
                     <BiMale style={{ color: "#2CCAD3" }} />
-                    <span className="text-xs font-['Roboto_Regular'] text-white">
+                    <span className="text-xs text-white">
                       {overviewStats?.graduates.male.percentage}%
                     </span>
                   </div>
-                  <div className="bg-[#fe1672]/70 rounded-full flex items-center gap-1 px-2 py-0.5">
-                    <BiFemale style={{ color: "#2CCAD3" }} />
-                    <span className="text-xs font-['Roboto_Regular'] text-white">
+                  <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
+                    <BiFemale style={{ color: "#fe1672" }} />
+                    <span className="text-xs text-white">
                       {overviewStats?.graduates.female.percentage}%
                     </span>
                   </div>
@@ -453,11 +462,11 @@ export default function ThirdPage() {
                 }}
               >
                 <FaBusinessTime
-                  style={{ color: "#2CCAD3", width: 52, height: 42 }}
+                  style={{ color: "#2CCAD3", width: 42, height: 42, marginLeft:-10 }}
                 />
               </div>
-              <div>
-                <p className="text-sm font-['Roboto_Regular'] text-white">
+              <div style={{ marginLeft: -20 }}>
+                <p className="text-sm text-white">
                   {getTranslation("Time to Employment", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
@@ -486,11 +495,11 @@ export default function ThirdPage() {
                 }}
               >
                 <PiMoneyFill
-                  style={{ color: "#2CCAD3", width: 52, height: 42 }}
+                  style={{ color: "#2CCAD3", width: 42, height: 42, marginLeft:-15}}  
                 />
               </div>
-              <div>
-                <p className="text-sm font-['Roboto_Regular'] text-white">
+              <div style={{ marginLeft: -20 }}>
+                <p className="text-sm text-white">
                   {getTranslation("Average Salary", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
@@ -500,6 +509,35 @@ export default function ThirdPage() {
                     {getTranslation("SAR", language)}
                   </span>
                 </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Job Seekers */}
+          <div className="bg-gradient-to-r from-transparent to-[#2CCAD3]/20 rounded-2xl p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center">
+            <div className="flex items-center gap-6">
+              <div
+                className="bg-[#2CCAD3]/10 p-2"
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <FaUserGraduate
+                  style={{ color: "#2CCAD3", width: 40, height: 40 , marginLeft:-10 }}
+                />
+              </div>
+              <div style={{ marginLeft: -20 }}>
+                <p className="text-sm text-white">
+                  {getTranslation("Job Seekers", language)}
+                </p>
+                <p className="text-4xl font-bold text-white">
+                {
+                    narrowMajorData?.overall.totalMetrics.totalJobSeekers
+                  }
+                </p>
+                
               </div>
             </div>
           </div>
@@ -520,10 +558,11 @@ export default function ThirdPage() {
                   alt="Employment"
                   width={52}
                   height={42}
+                  style={{ marginLeft: -10 }}
                 />
               </div>
-              <div>
-                <p className="text-sm font-['Roboto_Regular'] text-white">
+              <div style={{ marginLeft: -30 }}>
+                <p className="text-sm text-white">
                   {getTranslation("Employment Rate", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
@@ -546,10 +585,10 @@ export default function ThirdPage() {
                         "linear-gradient(90deg, #176481 0%, #1E1F5E 100%)",
                     }}
                   >
-                    <span className="text-sm font-['Roboto_Regular'] text-white ml-1">
+                    <span className="text-sm text-white ml-1">
                       {getTranslation("Before Graduation", language)}
                     </span>
-                    <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
+                    <span className="text-lg font-bold text-white">
                       {
                         narrowMajorData?.overall.totalMetrics.timeToEmployment
                           .beforeGraduation.percentage
@@ -569,7 +608,7 @@ export default function ThirdPage() {
                     <span className="text-sm text-white ml-1">
                       {getTranslation("Within First Year", language)}
                     </span>
-                    <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
+                    <span className="text-lg font-bold text-white">
                       {
                         narrowMajorData?.overall.totalMetrics.timeToEmployment
                           .withinFirstYear.percentage
@@ -589,7 +628,7 @@ export default function ThirdPage() {
                     <span className="text-sm text-white ml-1">
                       {getTranslation("After First Year", language)}
                     </span>
-                    <span className="text-lg font-['Roboto_Regular'] font-bold text-white">
+                    <span className="text-lg font-bold text-white">
                       {
                         narrowMajorData?.overall.totalMetrics.timeToEmployment
                           .afterFirstYear.percentage
@@ -610,9 +649,9 @@ export default function ThirdPage() {
           style={{ padding: "0em 0em 0em 0em", marginTop: "2.5em" }}
         >
           {/* Top Popular Occupations */}
-          <Col xs={24} lg={7}>
+          <Col xs={24} lg={13}>
             <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
-              <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
+              <h2 className="text-xl mb-6 flex items-center gap-2">
                 <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
                   <Image
                     src="/icons/occupation.svg"
@@ -627,29 +666,29 @@ export default function ThirdPage() {
               </h2>
               <div
                 className="h-[254px] flex flex-col justify-end relative"
-                style={{ top: "70px" }}
+                style={{ top: "10px" , marginBottom: "15px", }}
               >
-                <div className="flex justify-between items-end h-[200px] px-1">
+                <div className="flex justify-between items-end h-[200px] px-4">
                   {narrowMajorData?.overall?.topOccupationsInsights?.mostPopular?.map(
                     (occupation, index) => {
                       // Fixed percentage scale for each bar
-                      const percentages = [100, 75, 50, 35, 25];
+                      const percentages = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10];
                       const height = percentages[index] || 12;
 
                       return (
                         <div
                           key={index}
-                          className="flex flex-col items-center group w-[50px]"
+                          className="flex flex-col items-center group w-[60px]"
                         >
                           {/* Value on top of bar */}
                           <div
-                            className="text-sm font-['Roboto_Regular'] text-white mb-1"
+                            className="text-sm text-white mb-1"
                             style={{ marginBottom: "15px" }}
                           >
                             {occupation.totalGraduates.toLocaleString()}
                           </div>
                           <div
-                            className="w-[35px] relative"
+                            className="w-[30px] relative"
                             style={{
                               height: `${height * 2}px`,
                               marginBottom: "2px",
@@ -667,18 +706,18 @@ export default function ThirdPage() {
                           </div>
                           {/* horizontal line */}
                           <div
-                            className="absolute left-[10px] h-[2px] w-[96%] bg-gray-100 top-52 transform -translate-y-1/6"
+                            className="absolute left-[28px] h-[2px] w-[92%] bg-gray-100 top-52 transform -translate-y-1/6"
                             style={{ marginTop: "-10px" }}
                           />
 
                           {/* {text} */}
-                          <div className="mt-4 text-center px-1 min-h-[27px] ">
+                          <div className="mt-4 text-center px-1 min-h-[27px]">
                             <span
-                              className="text-[10px] font-['Roboto_Regular'] text-white block break-words capitalize -rotate-45 transform origin-top-left translate-y-20 -translate-x-2 w-24"
+                              className="text-[10px] text-white block break-words capitalize -rotate-45 transform origin-top-left translate-y-20 -translate-x-2 w-24"
                               style={{
                                 wordBreak: "break-word",
                                 lineHeight: "1.2",
-                                marginTop: "-20px",
+                                marginTop: "-40px"
                               }}
                             >
                               {occupation.occupation.split(" ").join("\n")}
@@ -693,8 +732,84 @@ export default function ThirdPage() {
             </div>
           </Col>
 
+          {/* Degrees - Wider column */}
+          <Col xs={26} lg={11}>
+            <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
+              <h2 className="text-xl mb-6 flex items-center gap-2">
+                <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
+                  <Image
+                    src="/icons/degree.svg"
+                    alt="Degree"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <span className="text-white">
+                  {getTranslation("Degree", language)}
+                </span>
+              </h2>
+              <div className="space-y-4 relative pr-28" style={{ top: "10px" }}>
+                {/* Vertical line */}
+                <div className="absolute left-[160px] top-0 bottom-0 w-[1.5px] bg-gray-100" />
+
+                {narrowMajorData?.overall.totalMetrics.educationLevelInsights
+                  .slice(0, 5)
+                  .map((level, index) => {
+                    const percentages = [98, 75, 45, 30, 15];
+                    const percentage = percentages[index] || 12;
+                    const isSmallBar = percentage < 30;
+
+                    return (
+                      <div key={index} className="flex items-center group">
+                        <div className="w-[160px] relative">
+                          <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
+                          <span className="relative z-10 text-sm text-white px-3 py-1 block truncate">
+                            {level.educationLevel}
+                          </span>
+                        </div>
+                        <div className="relative flex-1 h-8 flex items-center">
+                          {/* Bar with total graduates */}
+                          <div
+                            className="absolute border-[1px] border-white left-0 top-1/2 -translate-y-1/2 h-7 rounded-r-full group-hover:opacity-90 transition-opacity"
+                            style={{
+                              width: `${percentage}%`,
+                              maxWidth: "100%",
+                              background:
+                                "linear-gradient(to right, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
+                            }}
+                          >
+                            {/* Total Graduates */}
+                            <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                              <span className="text-sm font-bold text-white whitespace-nowrap">
+                                {level.totalGraduates.toLocaleString()}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Employment Rate */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2"
+                            style={{
+                              left: `calc(${percentage}% + 16px)`,
+                            }}
+                          >
+                            <div className="bg-[#2CCAD3]/20 rounded-full px-3 py-1">
+                              <span className="text-white text-sm whitespace-nowrap">
+                                {level.employmentRate}%{" "}
+                                {getTranslation("employed", language)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          </Col>
+
           {/* Top 5 Occupation by Salary */}
-          <Col xs={24} lg={11}>
+          {/* <Col xs={24} lg={11}>
             <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
               <h2 className="text-xl font-[Roboto_Regular'] mb-6 flex items-center gap-2">
                 <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
@@ -709,9 +824,7 @@ export default function ThirdPage() {
                   {getTranslation("Top 5 Occupation by Salary", language)}
                 </span>
               </h2>
-              {/* Container for chart and legends */}
               <div className="flex flex-col items-center gap-4">
-                {/* Chart container */}
                 <div className="h-[300px] w-full mb-4">
                   <ResponsiveContainer width="100%" height="100%">
                     <RadialBarChart
@@ -753,7 +866,6 @@ export default function ThirdPage() {
                   </ResponsiveContainer>
                 </div>
               </div>
-              {/* Legends container */}
               <div className="grid grid-cols-3 gap-2 w-full">
                 {[...topOccupations]
                   .slice(0, 5)
@@ -773,14 +885,12 @@ export default function ThirdPage() {
 
                     return (
                       <div key={index} className="flex items-center gap-2">
-                        {/* Color box */}
                         <div
                           style={{
                             backgroundColor: colors[sortedIndex],
                           }}
                           className="w-4 h-4 rounded-sm"
                         ></div>
-                        {/* Legend text */}
                         <span className="text-white text-sm font-['Roboto']">
                           {occupation.occupation}
                         </span>
@@ -789,63 +899,84 @@ export default function ThirdPage() {
                   })}
               </div>
             </div>
-          </Col>
+          </Col> */}
 
-          {/* Employment Rate by Narrow Major */}
+          
+        </Row>
+
+        <Row
+          gutter={[12, 12]}
+          className="w-full"
+          style={{ padding: "0em 0em 0em 0em", marginTop: "1.5em" }}
+        >
+
+          {/* Top Majors by Gender */}
           <Col xs={24} lg={6}>
             <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
-              <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
+              <h2 className="text-xl mb-6 flex items-center gap-2">
                 <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
-                  <Image
-                    src="/icons/employmentrateicon.svg"
-                    alt="Employment Rate"
-                    width={24}
-                    height={24}
-                  />
+                  <div className="flex gap-1">
+                    <Image
+                      src="/icons/degree.svg"
+                      alt="Degree"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
                 </div>
                 <span className="text-white">
-                  {getTranslation("Employment Rate by Narrow Major", language)}
+                  {getTranslation("Top Narrow Majors by Gender", language)}
                 </span>
               </h2>
-              <div
-                className="space-y-4 relative"
-                style={{ top: "40px", left: "20px" }}
-              >
-                {/* Vertical line */}
-                <div className="absolute left-[180px] top-0 bottom-0 w-[1.5px] bg-gray-100" />
-                {narrowMajorData?.overall.topMajorsInsights.topByEmploymentRate?.map(
-                  (major, index) => {
-                    const width = major.employmentRate;
-                    return (
-                      <div key={index} className="flex items-center group">
-                        <div className="w-[180px] relative">
-                          <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
-                          <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white px-3 py-1 block break-words capitalize">
-                            {major.name}
-                          </span>
+              <div className="space-y-4">
+                {narrowMajorData?.overall.topMajorsInsights.topByGender
+                  ?.slice(0, 5)
+                  .map((major, index) => (
+                    <div key={index} className="relative">
+                      <div className="mb-1 flex justify-between items-center">
+                        <span className="text-sm text-white">
+                          {major.name}
+                        </span>
+                        <span className="text-xs text-white">
+                          {major.graduates}{" "}
+                          {getTranslation("graduates", language)}{" "}
+                        </span>
+                      </div>
+                      <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
+                        {/* Male percentage */}
+                        <div
+                          className="absolute h-full bg-gradient-to-r from-[#2cd7c4]/30 to-[#2cd7c4]/100 group-hover:opacity-90 transition-opacity"
+                          style={{
+                            width: `${major.genderDistribution.male.percentage}%`,
+                            left: 0,
+                          }}
+                        >
+                          <div className="absolute left-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                            <BiMale style={{ color: "#2CCAD3" }} />
+                            <span className="text-xs text-white">
+                              {major.genderDistribution.male.percentage}%
+                            </span>
+                          </div>
                         </div>
-                        <div className="relative flex-1 h-8">
-                          <div
-                            className="absolute border-[1px] border-white left-0 top-1/2 -translate-y-1/2 h-7 rounded-r-full group-hover:opacity-90 transition-opacity"
-                            style={{
-                              width: `${width + 5}%`,
-                              maxWidth: "100%",
-                              background:
-                                "linear-gradient(to right, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
-                            }}
-                          >
-                            <div className="absolute top-1/2 -translate-y-1/2 flex items-center gap-1">
-                              <span className="text-base font-['Roboto_Regular'] font-bold text-white">
-                                {width}%
-                              </span>
-                            </div>
+                        {/* Female percentage */}
+                        <div
+                          className="absolute h-full bg-gradient-to-r from-[#fe1684]/100 to-[#fe1684]/30 group-hover:opacity-90 transition-opacity"
+                          style={{
+                            width: `${major.genderDistribution.female.percentage}%`,
+                            right: 0,
+                          }}
+                        >
+                          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                            <span className="text-xs text-white">
+                              {major.genderDistribution.female.percentage}%
+                            </span>
+                            <BiFemale style={{ color: "#fe1672" }} />
                           </div>
                         </div>
                       </div>
-                    );
-                  }
-                )}
-                {!narrowMajorData?.overall.topMajorsInsights.topByEmploymentRate
+                    </div>
+                  ))}
+                {!narrowMajorData?.overall.topMajorsInsights.topByGender
                   ?.length && (
                   <div className="flex items-center justify-center h-[200px] text-white">
                     {getTranslation("No data available", language)}
@@ -854,94 +985,12 @@ export default function ThirdPage() {
               </div>
             </div>
           </Col>
-        </Row>
-
-        <Row
-          gutter={[12, 12]}
-          className="w-full"
-          style={{ padding: "0em 0em 0em 0em", marginTop: "1.5em" }}
-        >
-          {/* Degrees - Wider column */}
-          <Col xs={26} lg={10}>
-            <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
-              <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
-                <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
-                  <Image
-                    src="/icons/degree.svg"
-                    alt="Degree"
-                    width={24}
-                    height={24}
-                  />
-                </div>
-                <span className="text-white">
-                  {getTranslation("Degree", language)}
-                </span>
-              </h2>
-              <div className="space-y-4 relative pr-28" style={{ top: "10px" }}>
-                {/* Vertical line */}
-                <div className="absolute left-[160px] top-0 bottom-0 w-[1.5px] bg-gray-100" />
-
-                {narrowMajorData?.overall.totalMetrics.educationLevelInsights
-                  .slice(0, 5)
-                  .map((level, index) => {
-                    const percentages = [98, 75, 45, 30, 15];
-                    const percentage = percentages[index] || 12;
-                    const isSmallBar = percentage < 30;
-
-                    return (
-                      <div key={index} className="flex items-center group">
-                        <div className="w-[160px] relative">
-                          <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
-                          <span className="relative z-10 text-sm font-['Roboto_Regular'] text-white px-3 py-1 block truncate">
-                            {level.educationLevel}
-                          </span>
-                        </div>
-                        <div className="relative flex-1 h-8 flex items-center">
-                          {/* Bar with total graduates */}
-                          <div
-                            className="absolute border-[1px] border-white left-0 top-1/2 -translate-y-1/2 h-7 rounded-r-full group-hover:opacity-90 transition-opacity"
-                            style={{
-                              width: `${percentage}%`,
-                              maxWidth: "100%",
-                              background:
-                                "linear-gradient(to right, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
-                            }}
-                          >
-                            {/* Total Graduates */}
-                            <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                              <span className="text-sm font-['Roboto_Regular'] font-bold text-white whitespace-nowrap">
-                                {level.totalGraduates.toLocaleString()}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Employment Rate */}
-                          <div
-                            className="absolute top-1/2 -translate-y-1/2"
-                            style={{
-                              left: `calc(${percentage}% + 16px)`,
-                            }}
-                          >
-                            <div className="bg-[#2CCAD3]/20 rounded-full px-3 py-1">
-                              <span className="text-white text-sm font-['Roboto_Regular'] whitespace-nowrap">
-                                {level.employmentRate}%{" "}
-                                {getTranslation("employed", language)}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
-          </Col>
-
+          
           {/* Sankey Chart */}
-          <Col xs={10} lg={8}>
+          <Col xs={10} lg={12}>
             <div className="">
               <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
-                <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
+                <h2 className="text-xl mb-6 flex items-center gap-2">
                   <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg flex justify-center items-center">
                     <Image
                       src="/icons/employment.svg"
@@ -959,7 +1008,7 @@ export default function ThirdPage() {
                 </h2>
 
                 <div className="flex justify-center">
-                  <div className="h-[400px] w-full max-w-[600px]">
+                  <div className="h-[400px] w-full max-w-[700px]">
                     {narrowMajorData?.overall.totalMetrics.timeToEmployment && (
                       <ResponsiveSankey
                         data={{
@@ -1025,7 +1074,7 @@ export default function ThirdPage() {
                             },
                           ],
                         }}
-                        margin={{ top: 20, right: 115, bottom: 20, left: 130 }}
+                        margin={{ top: 20, right: 115, bottom: 20, left: 135 }}
                         align="justify"
                         colors={(node) => {
                           const timingNodes = [
@@ -1095,8 +1144,7 @@ export default function ThirdPage() {
                           labels: {
                             text: {
                               fontSize: 15,
-                              fill: "#fff",
-                              fontFamily: "Roboto_Regular",
+                              fill: "#fff"
                             },
                           },
                           tooltip: {
@@ -1123,73 +1171,62 @@ export default function ThirdPage() {
             </div>
           </Col>
 
-          {/* Top Majors by Gender */}
+          
+          {/* Employment Rate by Narrow Major */}
           <Col xs={24} lg={6}>
             <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border hover:border-white transition-colors h-full">
-              <h2 className="text-xl font-['Roboto_Regular'] mb-6 flex items-center gap-2">
+              <h2 className="text-xl mb-6 flex items-center gap-2">
                 <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
-                  <div className="flex gap-1">
-                    <Image
-                      src="/icons/degree.svg"
-                      alt="Degree"
-                      width={24}
-                      height={24}
-                    />
-                  </div>
+                  <Image
+                    src="/icons/employmentrateicon.svg"
+                    alt="Employment Rate"
+                    width={24}
+                    height={24}
+                  />
                 </div>
                 <span className="text-white">
-                  {getTranslation("Top Narrow Majors by Gender", language)}
+                  {getTranslation("Employment Rate by Narrow Major", language)}
                 </span>
               </h2>
-              <div className="space-y-4">
-                {narrowMajorData?.overall.topMajorsInsights.topByGender
-                  ?.slice(0, 5)
-                  .map((major, index) => (
-                    <div key={index} className="relative">
-                      <div className="mb-1 flex justify-between items-center">
-                        <span className="text-sm font-['Roboto_Regular'] text-white">
-                          {major.name}
-                        </span>
-                        <span className="text-xs font-['Roboto_Regular'] text-white">
-                          {major.graduates}{" "}
-                          {getTranslation("graduates", language)}{" "}
-                        </span>
-                      </div>
-                      <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
-                        {/* Male percentage */}
-                        <div
-                          className="absolute h-full bg-gradient-to-r from-[#2cd7c4]/30 to-[#2cd7c4]/100 group-hover:opacity-90 transition-opacity"
-                          style={{
-                            width: `${major.genderDistribution.male.percentage}%`,
-                            left: 0,
-                          }}
-                        >
-                          <div className="absolute left-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                            <BiMale style={{ color: "#2CCAD3" }} />
-                            <span className="text-xs font-['Roboto_Regular'] text-white">
-                              {major.genderDistribution.male.percentage}%
-                            </span>
-                          </div>
+              <div
+                className="space-y-4 relative"
+                style={{ top: "40px", left: "20px" }}
+              >
+                {/* Vertical line */}
+                <div className="absolute left-[180px] top-0 bottom-0 w-[1.5px] bg-gray-100" />
+                {narrowMajorData?.overall.topMajorsInsights.topByEmploymentRate?.map(
+                  (major, index) => {
+                    const width = major.employmentRate;
+                    return (
+                      <div key={index} className="flex items-center group">
+                        <div className="w-[180px] relative">
+                          <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
+                          <span className="relative z-10 text-sm text-white px-3 py-1 block break-words capitalize">
+                            {major.name}
+                          </span>
                         </div>
-                        {/* Female percentage */}
-                        <div
-                          className="absolute h-full bg-gradient-to-r from-[#fe1684]/30 to-[#fe1684]/100 group-hover:opacity-90 transition-opacity"
-                          style={{
-                            width: `${major.genderDistribution.female.percentage}%`,
-                            right: 0,
-                          }}
-                        >
-                          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                            <span className="text-xs font-['Roboto_Regular'] text-white">
-                              {major.genderDistribution.female.percentage}%
-                            </span>
-                            <BiFemale style={{ color: "#2CCAD3" }} />
+                        <div className="relative flex-1 h-8">
+                          <div
+                            className="absolute border-[1px] border-white left-0 top-1/2 -translate-y-1/2 h-7 rounded-r-full group-hover:opacity-90 transition-opacity"
+                            style={{
+                              width: `${width + 5}%`,
+                              maxWidth: "100%",
+                              background:
+                                "linear-gradient(to right, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
+                            }}
+                          >
+                            <div className="absolute top-1/2 -translate-y-1/2 flex items-center gap-1">
+                              <span className="text-base font-bold text-white">
+                                {width}%
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                {!narrowMajorData?.overall.topMajorsInsights.topByGender
+                    );
+                  }
+                )}
+                {!narrowMajorData?.overall.topMajorsInsights.topByEmploymentRate
                   ?.length && (
                   <div className="flex items-center justify-center h-[200px] text-white">
                     {getTranslation("No data available", language)}
