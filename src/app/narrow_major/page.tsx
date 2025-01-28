@@ -995,11 +995,13 @@ export default function ThirdPage() {
         </div>
 
         {/* Overview Stats */}
-        <div
+        <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 w-full px-1 ${language === "ar" ? "dir-rtl" : ""}`} style={{ direction: language === "ar" ? "rtl" : "ltr" }}>
+
+        {/* <div
           className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 w-full px-1 ${
             language === "ar" ? "flex-row-reverse" : ""
           }`}
-        >
+        > */}
           {/* Graduates */}
           <div
             className={`bg-gradient-to-r ${

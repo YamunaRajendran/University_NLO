@@ -209,13 +209,13 @@ export default function HomePage() {
   return (
     <>
       <div className={`relative flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden ${language === 'ar' ? 'rtl' : 'ltr'}`}>
-        <h1 className={`absolute -top-1.5 px-[490px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl w-full ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+        <h1 className={`absolute -top-1.5 px-[520px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl  ${language === 'ar' ? 'text-right' : 'text-left'}`}>
           {language === 'ar' ? (
             // For Arabic, reverse the array to maintain proper character order
             getTranslation("Saudi Arabia Graduates Observation", language)
-              .split("")
+              .split(" ")
               .reverse()
-              .map((char, index, array) => (
+              .map((word, index, array) => (
                 <span
                   key={index}
                   className="animate-glow-letter"
@@ -224,10 +224,12 @@ export default function HomePage() {
                     animationDelay: language === "ar"
                     ? `${(array.length - 1 - index) * 0.05}s`
                     : `${index * 0.05}s`,
+                    marginLeft:"4px"
                 
                   }}
                 >
-                  {char === " " ? "\u00A0" : char}
+                  {word}
+                  {/* {char === " " ? "\u00A0" : char} */}
                 </span>
               ))
           ) : (
