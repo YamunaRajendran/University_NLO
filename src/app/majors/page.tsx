@@ -1688,9 +1688,9 @@ export default function SecondPage() {
                     labelOrientation="horizontal"
                     sort={(a, b) => {
                       const order = {
-                        [getTranslation("Before Graduation", language)]: 0,
-                        [getTranslation("Within First Year", language)]: 1,
-                        [getTranslation("After First Year", language)]: 2,
+                        [getTranslation("Before Graduation", language)]: 1,
+                        [getTranslation("Within First Year", language)]: 2,
+                        [getTranslation("After First Year", language)]: 3,
                       };
                       return (order[a.id] ?? -1) - (order[b.id] ?? -1);
                     }}
@@ -1749,11 +1749,6 @@ export default function SecondPage() {
                           {line}
                         </tspan>
                       ));
-                    }}
-                    sort={(a, b) => {
-                      const labelLengthA = a.id.length;
-                      const labelLengthB = b.id.length;
-                      return labelLengthA - labelLengthB;
                     }}
                     theme={{
                       labels: {
