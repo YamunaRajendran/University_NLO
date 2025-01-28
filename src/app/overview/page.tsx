@@ -216,7 +216,7 @@ export default function HomePage() {
         }`}
       >
         <h1
-          className={`absolute -top-1.5 px-[520px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl w-full${
+          className={`absolute -top-1.5 px-[520px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl w-full ${
             language === "ar" ? "text-right" : "text-left"
           }`}
         >
