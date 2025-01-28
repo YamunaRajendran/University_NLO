@@ -11,6 +11,80 @@
   font-display: swap;
 }
 
+/* Apply font globally */
+:root {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
+/* Ensure font is applied to all text elements including SVG */
+*, *::before, *::after {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
+/* Force font on SVG text elements */
+text, tspan {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
+/* Target specific chart components with higher specificity */
+.recharts-wrapper *,
+.recharts-surface *,
+.recharts-layer *,
+.recharts-text,
+.recharts-label,
+.recharts-cartesian-axis-tick-value,
+.recharts-tooltip-label,
+.recharts-tooltip-item-name,
+.recharts-tooltip-item-value,
+.recharts-legend-item-text,
+.recharts-radial-bar-label,
+.recharts-radial-bar-background,
+.recharts-responsive-container text,
+.recharts-default-tooltip,
+[class*="recharts-"] text,
+[class*="recharts-"] tspan {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
+/* Target Nivo chart components */
+.nivo-wrapper *,
+.nivo-legend-item text,
+.nivo-axis-tick text,
+.nivo-slice-label text,
+.nivo-sankey-node text,
+.nivo-sankey-node-label text,
+[class*="nivo-"] text,
+[class*="nivo-"] tspan {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
+/* Override any Roboto or other font declarations */
+[style*="font-family"],
+[style*="Roboto"],
+div[style*="font-family"],
+span[style*="font-family"],
+text[style*="font-family"],
+tspan[style*="font-family"] {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
+/* Target custom chart elements */
+.chart-label,
+.chart-title,
+.chart-tooltip,
+.chart-legend,
+[class*="chart-"] {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
+/* Target SVG text elements more aggressively */
+svg text,
+svg tspan,
+g text,
+g tspan {
+  font-family: 'Neo-Sans', sans-serif !important;
+}
+
 /* Brand Colors */
 :root {
   /* Primary Colors */
@@ -31,7 +105,6 @@
   --card-foreground: #ffffff;
   --muted: #1f2937;
   --muted-foreground: #9ca3af;
-
 
   .certificate-icon {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Crect x='3' y='2' width='14' height='18' rx='2' fill='%2340CDB5'/%3E%3Cpath d='M6 6h8M6 10h8M6 14h6' stroke='%23193366' stroke-width='1.5' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%2340CDB5' stroke='%23193366' stroke-width='1.5'/%3E%3C/svg%3E");
@@ -298,7 +371,7 @@
   transform: translateY(-50%);
   /* border-left-color: rgba(0, 0, 255, 0.8);  */
   border-right-color: #477495;
-  opacity: 50;
+  opacity: 1.2;
   border-right-width: 15px;
 }
 
@@ -507,7 +580,7 @@
 
 .animate-glow-letter {
   display: inline-block;
-  animation: glow-letter 10s linear infinite;
+  animation: glow-letter 4s linear infinite;
   opacity: 0.8;
 }
 

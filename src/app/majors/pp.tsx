@@ -553,6 +553,25 @@ export default function SecondPage() {
       return { nodes: [], links: [] };
     }
 
+    // Get all majors and their colors first to ensure consistency
+    const majorNodes =
+      majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.map(
+        (major) => {
+          return {
+            name: major.narrowMajor, // Keep original name since we're in page.tsx
+            color: getNarrowMajorColor(major.narrowMajor), // Use the color mapping directly
+            originalName: major.narrowMajor,
+          };
+        }
+      );
+
+    // Define timing node colors
+    const timingColors = {
+      "Before Graduation": "#c6c630",
+      "Within First Year": "#19ce91",
+      "After First Year": "#25b0ba",
+    };
+
     const data = {
       nodes:
         language === "ar"
@@ -560,143 +579,102 @@ export default function SecondPage() {
               // Right side nodes (timing nodes) for Arabic
               {
                 id: getTranslation("Before Graduation", language),
-                nodeColor: getTimingNodeColor(
-                  getTranslation("Before Graduation", language)
-                ),
+                nodeColor: timingColors["Before Graduation"],
               },
               {
                 id: getTranslation("Within First Year", language),
-                nodeColor: getTimingNodeColor(
-                  getTranslation("Within First Year", language)
-                ),
+                nodeColor: timingColors["Within First Year"],
               },
               {
                 id: getTranslation("After First Year", language),
-                nodeColor: getTimingNodeColor(
-                  getTranslation("After First Year", language)
-                ),
+                nodeColor: timingColors["After First Year"],
               },
               // Left side nodes (majors) for Arabic
-              ...majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.map(
-                (major) => ({
-                  id: major.narrowMajor,
-                  nodeColor: getNarrowMajorColor(major.narrowMajor),
-                })
-              ),
+              ...majorNodes.map((node) => ({
+                id: node.name,
+                nodeColor: node.color,
+              })),
             ]
           : [
               // Left side nodes (majors) for English
-              ...majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.map(
-                (major) => ({
-                  id: major.narrowMajor,
-                  nodeColor: getNarrowMajorColor(major.narrowMajor),
-                })
-              ),
-              // Right side nodes (timing) for English
+              ...majorNodes.map((node) => ({
+                id: node.name,
+                nodeColor: node.color,
+              })),
+              // Right side nodes (timing nodes) for English
               {
                 id: getTranslation("Before Graduation", language),
-                nodeColor: getTimingNodeColor(
-                  getTranslation("Before Graduation", language)
-                ),
+                nodeColor: timingColors["Before Graduation"],
               },
               {
                 id: getTranslation("Within First Year", language),
-                nodeColor: getTimingNodeColor(
-                  getTranslation("Within First Year", language)
-                ),
+                nodeColor: timingColors["Within First Year"],
               },
               {
                 id: getTranslation("After First Year", language),
-                nodeColor: getTimingNodeColor(
-                  getTranslation("After First Year", language)
-                ),
+                nodeColor: timingColors["After First Year"],
               },
             ],
-      links:
-        majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.flatMap(
-          (major) => {
-            const links = [];
-
-            // Before Graduation
-            if (major.employmentTiming?.beforeGraduation?.percentage > 0) {
-              links.push({
-                source:
-                  language === "ar"
-                    ? getTranslation("Before Graduation", language)
-                    : major.narrowMajor,
-                target:
-                  language === "ar"
-                    ? major.narrowMajor
-                    : getTranslation("Before Graduation", language),
-                value: major.employmentTiming.beforeGraduation.percentage,
-              });
-            }
-
-            // Within First Year
-            if (major.employmentTiming?.withinFirstYear?.percentage > 0) {
-              links.push({
-                source:
-                  language === "ar"
-                    ? getTranslation("Within First Year", language)
-                    : major.narrowMajor,
-                target:
-                  language === "ar"
-                    ? major.narrowMajor
-                    : getTranslation("Within First Year", language),
-                value: major.employmentTiming.withinFirstYear.percentage,
-              });
-            }
-
-            // After First Year
-            if (major.employmentTiming?.afterFirstYear?.percentage > 0) {
-              links.push({
-                source:
-                  language === "ar"
-                    ? getTranslation("After First Year", language)
-                    : major.narrowMajor,
-                target:
-                  language === "ar"
-                    ? major.narrowMajor
-                    : getTranslation("After First Year", language),
-                value: major.employmentTiming.afterFirstYear.percentage,
-              });
-            }
-
-            return links;
-          }
-        ),
+      links: [],
     };
+
+    // Add links for each major
+    majorNodes.forEach((node) => {
+      const major =
+        majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.find(
+          (m) => m.narrowMajor === node.originalName
+        );
+
+      if (!major) return;
+
+      // Before Graduation
+      if (major.employmentTiming?.beforeGraduation?.percentage > 0) {
+        data.links.push({
+          source:
+            language === "ar"
+              ? getTranslation("Before Graduation", language)
+              : node.name,
+          target:
+            language === "ar"
+              ? node.name
+              : getTranslation("Before Graduation", language),
+          value: major.employmentTiming.beforeGraduation.percentage,
+        });
+      }
+
+      // Within First Year
+      if (major.employmentTiming?.withinFirstYear?.percentage > 0) {
+        data.links.push({
+          source:
+            language === "ar"
+              ? getTranslation("Within First Year", language)
+              : node.name,
+          target:
+            language === "ar"
+              ? node.name
+              : getTranslation("Within First Year", language),
+          value: major.employmentTiming.withinFirstYear.percentage,
+        });
+      }
+
+      // After First Year
+      if (major.employmentTiming?.afterFirstYear?.percentage > 0) {
+        data.links.push({
+          source:
+            language === "ar"
+              ? getTranslation("After First Year", language)
+              : node.name,
+          target:
+            language === "ar"
+              ? node.name
+              : getTranslation("After First Year", language),
+          value: major.employmentTiming.afterFirstYear.percentage,
+        });
+      }
+    });
 
     return data;
   }, [majorData, language]);
-
-  const handleSankeyNodeClick = (nodeId: string) => {
-    const timingNodes = {
-      [getTranslation("Before Graduation", language)]: "beforeGraduation",
-      [getTranslation("Within First Year", language)]: "withinFirstYear",
-      [getTranslation("After First Year", language)]: "afterFirstYear",
-    };
-
-    const isTimingNode = Object.keys(timingNodes).includes(nodeId);
-    
-    if (isTimingNode) {
-      // Find majors that have graduates in this timing
-      const majorsWithTiming = majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming
-        .filter(major => {
-          const timing = timingNodes[nodeId];
-          return major.employmentTiming?.[timing]?.percentage > 0;
-        })
-        .map(major => major.narrowMajor);
-
-      if (majorsWithTiming?.length > 0) {
-        // Navigate to the first major with this timing
-        handleNarrowMajorSelect(majorsWithTiming[0]);
-      }
-    } else {
-      // Handle narrow major node click
-      handleNarrowMajorSelect(nodeId);
-    }
-  };
 
   // Get icon based on major name
   const getMajorIcon = (majorName: string) => {
@@ -743,7 +721,7 @@ export default function SecondPage() {
         </div>
 
         {/* Overview Stats */}
-        <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 w-full px-1 ${language === "ar" ? "dir-rtl" : ""}`} style={{ direction: language === "ar" ? "rtl" : "ltr" }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 w-full px-1">
           {/* Graduates */}
           <div
             className={`bg-gradient-to-r ${
@@ -1474,90 +1452,83 @@ export default function SecondPage() {
                 {sankeyData.nodes.length > 0 && (
                   <ResponsiveSankey
                     data={sankeyData}
-                    margin={{ top: 40, right: 200, bottom: 40, left: 200 }}
-                    align={language === "ar" ? "end" : "start"}
-                    
-                    colors={(node) => node.nodeColor || "#000000"}
+                    margin={{ top: 20, right: 150, bottom: 20, left: 150 }}
+                    align="justify"
+                    sort={(a, b) => {
+                      const order = {
+                        [getTranslation("Before Graduation", language)]: 0,
+                        [getTranslation("Within First Year", language)]: 1,
+                        [getTranslation("After First Year", language)]: 2,
+                      };
+                      return (order[a.id] ?? -1) - (order[b.id] ?? -1);
+                    }}
+                    colors={(node) => node.nodeColor || "#6366f1"}
                     nodeOpacity={1}
-                    nodeHoverOthersOpacity={0.35}
                     nodeThickness={18}
-                    nodeInnerPadding={3}
-                    nodeSpacing={14}
-                    nodePaddingX={language === "ar" ? 120 : 120}
+                    nodeInnerPadding={1}
+                    nodeSpacing={16}
                     nodeBorderWidth={0}
                     nodeBorderRadius={3}
-                    linkOpacity={0.2}
-                    linkHoverOthersOpacity={0.1}
-                    linkContract={3}
+                    linkOpacity={0.3}
+                    linkHoverOpacity={0.7}
+                    linkContract={2}
                     enableLinkGradient={true}
                     labelPosition="outside"
-                    labelPadding={16}
-                    labelOffset={20}
                     labelOrientation="horizontal"
-                    onClick={(node) => {
-                      handleSankeyNodeClick(node.id);
+                    labelPadding={6}
+                    labelTextColor={{
+                      from: "color",
+                      modifiers: [["darker", 1]],
                     }}
-                    nodeTooltip={({ node }) => {
+                    animate={true}
+                    label={(node) => {
+                      const text = node.id;
+                      const maxLineWidth = 25;
+                      const words = text.split(" ");
+                      let lines = [];
+                      let currentLine = words[0];
+
+                      for (let i = 1; i < words.length; i++) {
+                        const word = words[i];
+                        if ((currentLine + " " + word).length <= maxLineWidth) {
+                          currentLine += " " + word;
+                        } else {
+                          lines.push(currentLine);
+                          currentLine = word;
+                        }
+                      }
+                      lines.push(currentLine);
+
                       const isTimingNode = [
                         getTranslation("Before Graduation", language),
                         getTranslation("Within First Year", language),
                         getTranslation("After First Year", language),
                       ].includes(node.id);
 
-                      return (
-                        <div style={{ padding: "8px 12px" }}>
-                          <strong>{node.id}</strong>
-                          <div style={{ fontSize: "12px", marginTop: "4px" }}>
-                            {isTimingNode 
-                              // ? getTranslation("Click to view majors in this timing", language)
-                              // : getTranslation("Click to view details", language)
-                            }
-                          </div>
-                        </div>
-                      );
-                    }}
-                    sort={(a, b) => {
-                      // Define order for timing nodes
-                      const timingOrder = {
-                        [getTranslation("Before Graduation", language)]: 1,
-                        [getTranslation("Within First Year", language)]: 2,
-                        [getTranslation("After First Year", language)]: 3,
-                      };
+                      return lines.map((line, index) => (
+                        <tspan
+                          key={index}
+                          x={isTimingNode ? 5 : -5}
+                          dy={index === 0 ? 0 : 14}
+                          textAnchor={isTimingNode ? "start" : "end"}
+                          dominantBaseline="middle"
+                        >
+                          {line}
+                        </tspan>
+                      ));
 
-                      // If both are timing nodes, sort by predefined order
-                      if (timingOrder[a.id] && timingOrder[b.id]) {
-                        return timingOrder[a.id] - timingOrder[b.id];
+                      // For timing nodes, don't add word breaks
+                      if (isTimingNode) {
+                        return language === "ar"
+                          ? `${node.id} ←`
+                          : `→ ${node.id}`;
                       }
 
-                      // If only one is a timing node, it should go to the right/left based on language
-                      if (timingOrder[a.id]) {
-                        return language === "ar" ? -1 : 1;
-                      }
-                      if (timingOrder[b.id]) {
-                        return language === "ar" ? 1 : -1;
-                      }
-
-                      // For major nodes, sort by their employment percentage (descending)
-                      const majorA = majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.find(
-                        (m) => m.narrowMajor === a.id
-                      );
-                      const majorB = majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.find(
-                        (m) => m.narrowMajor === b.id
-                      );
-
-                      if (majorA && majorB) {
-                        const totalA =
-                          (majorA.employmentTiming?.beforeGraduation?.percentage || 0) +
-                          (majorA.employmentTiming?.withinFirstYear?.percentage || 0) +
-                          (majorA.employmentTiming?.afterFirstYear?.percentage || 0);
-                        const totalB =
-                          (majorB.employmentTiming?.beforeGraduation?.percentage || 0) +
-                          (majorB.employmentTiming?.withinFirstYear?.percentage || 0) +
-                          (majorB.employmentTiming?.afterFirstYear?.percentage || 0);
-                        return totalB - totalA;
-                      }
-
-                      return 0;
+                      // For major nodes, add word breaks
+                      const breakText = addWordBreaks(node.id, 20);
+                      return language === "ar"
+                        ? `→ ${breakText}`
+                        : `${breakText} ←`;
                     }}
                     theme={{
                       labels: {

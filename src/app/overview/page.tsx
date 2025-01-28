@@ -6,14 +6,13 @@ import mockData from "./major_insights_english.json";
 import arabicData from "./major_insights_arabic 3.json";
 import { useEffect, useState } from "react";
 import SmallCircles from "@/app/overview/component/Small";
-import { PiMoneyFill } from "react-icons/pi";
-import { PiStudentFill } from "react-icons/pi";
+import { PiMoneyFill, PiTrophy, PiChartBar, PiStudentFill } from "react-icons/pi";
 import { PiGraduationCapFill } from "react-icons/pi";
+import { PiCertificate } from "react-icons/pi";
 import { FaUniversity } from "react-icons/fa";
 import { FaBusinessTime } from "react-icons/fa";
 import { BiFemale } from "react-icons/bi";
 import { BiMale } from "react-icons/bi";
-import { PiCertificate } from "react-icons/pi";
 
 import {
   FaGraduationCap,
@@ -32,6 +31,7 @@ import {
 
 import { useLanguage } from "@/app/context/LanguageContext";
 import { getTranslation } from "@/app/utils/translations";
+import { cn } from "../utils/cn";
 
 const CircularText = ({
   text,
@@ -81,6 +81,12 @@ export default function HomePage() {
   const { totalMetrics, overall } = data.majorsInsights;
   const [animate, setAnimate] = useState(false);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
+
+  const formatNumber = (number: number | undefined | null) => {
+    if (number === undefined || number === null) return '0';
+    // Always use en-US locale to keep numbers in Western digits
+    return Number(number).toLocaleString('en-US');
+  };
 
   useEffect(() => {
     setAnimate(true);
@@ -197,25 +203,51 @@ export default function HomePage() {
     },
   ];
 
+
+  
+
   return (
     <>
-      <div className="relative flex-1 p-2 sm:p-4 lg:p-6 xl:p-8 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between xl:items-start 2xl:items-center lg:items-start md:items-start min-h-screen overflow-hidden">
-        <h1 className="absolute -top-1.5 px-[490px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl  w-full">
-          {getTranslation("Saudi Arabia Graduates Observation", language)
-            .split("")
-            .map((char, index, array) => (
-              <span
-                key={index}
-                className="animate-glow-letter"
-                style={{
-                  animationDelay: `${index * 0.05}s`,
-                }}
-              >
-                {char === " " ? "\u00A0" : char}
-              </span>
-            ))}
+      <div className={`relative flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden ${language === 'ar' ? 'rtl' : 'ltr'}`}>
+        <h1 className={`absolute -top-1.5 px-[490px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl w-full ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          {language === 'ar' ? (
+            // For Arabic, reverse the array to maintain proper character order
+            getTranslation("Saudi Arabia Graduates Observation", language)
+              .split("")
+              .reverse()
+              .map((char, index, array) => (
+                <span
+                  key={index}
+                  className="animate-glow-letter"
+                  style={{
+                    // animationDelay: `${index * 0.05}s`,
+                    animationDelay: language === "ar"
+                    ? `${(array.length - 1 - index) * 0.05}s`
+                    : `${index * 0.05}s`,
+                
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))
+          ) : (
+            // For English, keep the original order
+            getTranslation("Saudi Arabia Graduates Observation", language)
+              .split("")
+              .map((char, index, array) => (
+                <span
+                  key={index}
+                  className="animate-glow-letter"
+                  style={{
+                    animationDelay: `${index * 0.05}s`,
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))
+          )}
         </h1>
-        <p className="absolute top-6 -left-10 text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  w-full">
+        <p className={cn("absolute top-6 text-white px-[430px] 2xl:px-0 2xl:text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  w-full", language === 'ar'&& "px-[550px]")}>
           {getTranslation(
             "Data for 2022 Graduates and their Employment through December 2023",
             language
@@ -225,16 +257,16 @@ export default function HomePage() {
         {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#24285E]/80 to-transparent backdrop-blur-sm"></div> */}
 
         {/* Left Side Education Stats */}
-        <div className="w-full h-[500px] sm:w-[90%] md:w- [80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-14">
+        <div className="w-full h-[500px] sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-14">
           {/* <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  ">
           {getTranslation("The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors", language)}
         </p> */}
 
           {/* Education Title */}
-          <div className="relative w-full sm:w-[300px] h-[100px] sm:h-[50px] justify-start mx-auto mb-8">
-            <div className="absolute inset-0 flex items-center gap-2">
+          <div className={cn( "relative w-full sm:w-[280px] h-[100px] sm:h-[50px] justify-start mx-auto mb-8")}>
+            <div className={`absolute inset-0 flex items-center gap-2 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
               <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0" />
-              <span className="text-white text-lg sm:text-xl leading-tight tracking-wide text-left flex-1">
+              <span className={`text-white text-lg sm:text-xl leading-tight tracking-wide flex-1 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                 {currentData.title}
               </span>
             </div>
@@ -244,21 +276,21 @@ export default function HomePage() {
           <div className="flex flex-col gap-2 p-2 sm:p-4 bg-[#1C3862]/50 rounded-[15px] ">
             {/* Total Graduates Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className="flex items-center gap-4 mb-1">
+              <div className={`flex items-center gap-4 mb-1 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className="w-12">
                   <Image
                     src="/icons/graduateicon.svg"
                     alt="Employment"
-                    width={62}
-                    height={62}
+                    width={32}
+                    height={32}
                   />
                 </div>
-                <div className="flex-1 " style={{ marginRight: -20 }}>
+                <div className={cn( "flex-1 ", language === 'ar' && 'text-right pr-6' )} style={{ marginRight: -20 }}>
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Total Graduates", language)}
                   </span>
                   <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
-                    {currentData.graduates.totalGraduates.toLocaleString()}
+                    {formatNumber(currentData.graduates.totalGraduates)}
                   </div>
 
                   <div className="flex gap-4 mt-0">
@@ -305,7 +337,7 @@ export default function HomePage() {
 
             {/* Employment Rate Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className="flex items-center gap-4">
+              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className="w-12">
                   <Image
                     src="/icons/employmentrateicon.svg"
@@ -314,7 +346,7 @@ export default function HomePage() {
                     height={32}
                   />
                 </div>
-                <div className="flex-1">
+                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Employment Rate", language)}
                   </span>
@@ -327,18 +359,19 @@ export default function HomePage() {
 
             {/* Average Salary Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className="flex items-center gap-4">
+              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className="w-12">
                   <PiMoneyFill
                     style={{ color: "#2CCAD3", width: 32, height: 32 }}
                   />
                 </div>
-                <div className="flex-1">
+                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
+                {/* <div className="flex-1"> */}
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Average Salary", language)}
                   </span>
                   <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
-                    {currentData.averageSalary.toLocaleString()}{" "}
+                    {formatNumber(currentData.averageSalary)}{" "}
                     <span
                       style={{
                         // fontFamily: "Roboto regular",
@@ -355,13 +388,14 @@ export default function HomePage() {
 
             {/* Time to Employment Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className="flex items-center gap-4">
+              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className="w-12">
                   <FaBusinessTime
                     style={{ color: "#2CCAD3", width: 32, height: 32 }}
                   />
                 </div>
-                <div className="flex-1">
+                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
+                {/* <div className="flex-1"> */}
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Time to Employment", language)}
                   </span>
@@ -383,18 +417,19 @@ export default function HomePage() {
 
             {/* Job Seekers Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className="flex items-center gap-4">
+              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className="w-12">
                   <PiStudentFill
                     style={{ color: "#2CCAD3", width: 32, height: 32 }}
                   />
                 </div>
-                <div className="flex-1">
+                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
+                {/* <div className="flex-1"> */}
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Job Seekers", language)}
                   </span>
                   <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
-                    {currentData.totalJobSeekers}
+                    {formatNumber(currentData.totalJobSeekers)}
                   </div>
 
                   <div className="flex gap-2 mt-1">
@@ -443,101 +478,56 @@ export default function HomePage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[500px] flex flex-col gap-2 p-2 sm:p-4 lg:p-0 lg:mt-8">
-          {/* <span className="text-[8px] sm:text-[10px] md:text-[12px]">
-                {getTranslation(" Data for 2022 Graduates and their Employment through December 2023", language)}
-              </span> */}
+        <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[500px] flex flex-col gap-2 p-2 sm:p-4 lg:p-0 lg:mt-10">
+          <div className={`flex items-center justify-center gap-2 mb-4 ${language === 'ar' ? 'flex-row-reverse justify-end' : 'flex-row justify-start'}`}>
+            <PiChartBar style={{ color: "#2CCAD3", width: 38, height: 38 }} />
+            <span className="text-[#ffff] text-lg">
+              {getTranslation("Total Metrics", language)}
+            </span>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {/* First row cards */}
-            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className="flex items-center gap-8 w-full">
+            {/* <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
+              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div>
-                  <PiStudentFill
-                    style={{ color: "#2CCAD3", width: 38, height: 38 }}
-                  />
-                  {/* <PiGraduationCapFill
-                    style={{ color: "#2CCAD3", width: 38, height: 38 }}
-                  /> */}
-                </div>
-                <div className="flex-1">
-                  <span className="text-xs sm:text-sm  text-[#ffff] whitespace-nowrap">
-                    {getTranslation("Total Job Seekers", language)}
-                  </span>
-                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  mt-1 font-bold">
-                    {totalMetrics.totalJobSeekers.toLocaleString()}{" "}
-                    <span
-                      style={{
-                        // fontFamily: "Roboto regular",
-                        fontSize: "1.2rem",
-                        fontWeight: 200,
-                      }}
-                    ></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-0 sm:p-0 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px]">
-              <div className="grid grid-cols-[auto_1fr] gap-4">
-                <div className="mt-6 ml-2">
                   <FaUniversity
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
                   />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs sm:text-sm  text-[#ffff]">
+                <div className="flex-1">
+                  <span className="text-xs sm:text-sm text-[#ffff]">
                     {getTranslation(
                       "Number of Universities and Educational Institutions",
                       language
                     )}
                   </span>
                   <div className="flex flex-col gap-1 mt-1">
-                    <div className="flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px]">
-                      <span className="text-white text-sm pl-2">
+                    <div className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                      <span className={`text-white text-sm ${language === 'ar' ? 'pr-2' : 'pl-2'}`}>
                         {getTranslation("Public Universities", language)}
                       </span>
-                      <div className="absolute left-0 h-full w-[2px] bg-[#2CCAD3]/100"></div>
-                      <span className="text-white text-2xl  ml-auto pr-2 font-bold">
-                        29
+                      <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
+                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                        {formatNumber(29)}
                       </span>
                     </div>
-                    <div className="flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px]">
-                      <span className="text-white text-sm pl-2">
+                    <div className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                      <span className={`text-white text-sm ${language === 'ar' ? 'pr-2' : 'pl-2'}`}>
                         {getTranslation("Private Universities", language)}
                       </span>
-                      <div className="absolute left-0 h-full w-[2px] bg-[#2CCAD3]/100"></div>
-                      <span className="text-white text-2xl  ml-auto pr-2 font-bold">
-                        26
+                      <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
+                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                        {formatNumber(26)}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className="flex items-center gap-8 w-full">
-                <div>
-                  <Image
-                    src="/icons/employmentrateicon.svg"
-                    alt="Employment"
-                    width={38}
-                    height={38}
-                  />
-                </div>
-                <div className="flex-1">
-                  <span className="text-xs sm:text-sm  text-[#ffff]">
-                    {getTranslation("Employment Rate", language)}
-                  </span>
-                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  mt-1 font-bold">
-                    {totalMetrics.employmentRate}%
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className="flex items-center gap-8 w-full">
+              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div>
                   <Image
                     src="/icons/graduateicon.svg"
@@ -550,8 +540,8 @@ export default function HomePage() {
                   <span className="text-xs sm:text-sm  text-[#ffff]">
                     {getTranslation("Total Graduates", language)}
                   </span>
-                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold mt-1">
-                    {totalMetrics.graduates.totalGraduates.toLocaleString()}
+                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
+                    {formatNumber(totalMetrics.graduates.totalGraduates)}
                     <div className="flex gap-2 mt-1 text-xs ">
                       <div className="bg-[#15234A]/50 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
                         <span className="flex items-center gap-0">
@@ -570,12 +560,67 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Second row - Money and Business Time */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className="flex items-center gap-8 w-full">
+              <div className={`flex items-center gap-5 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div>
+                  <FaUniversity
+                    style={{ color: "#2CCAD3", width: 38, height: 38 }}
+                  />
+                </div>
+                <div className="flex-1">
+                  <span className="text-xs sm:text-sm text-[#ffff]">
+                    {getTranslation(
+                      "Number of Universities and Educational Institutions",
+                      language
+                    )}
+                  </span>
+                  <div className="flex flex-col gap-1 mt-1">
+                    <div className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                      <span className={`text-white text-sm ${language === 'ar' ? 'pr-2' : 'pl-2'}`}>
+                        {getTranslation("Public Universities", language)}
+                      </span>
+                      <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
+                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                        {formatNumber(29)}
+                      </span>
+                    </div>
+                    <div className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                      <span className={`text-white text-sm ${language === 'ar' ? 'pr-2' : 'pl-2'}`}>
+                        {getTranslation("Private Universities", language)}
+                      </span>
+                      <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
+                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                        {formatNumber(26)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
+              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div>
+                  <Image
+                    src="/icons/employmentrateicon.svg"
+                    alt="Employment"
+                    width={38}
+                    height={38}
+                  />
+                </div>
+                <div className="flex-1">
+                  <span className="text-xs sm:text-sm  text-[#ffff]">
+                    {getTranslation("Employment Rate", language)}
+                  </span>
+                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
+                    {totalMetrics.employmentRate}%
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
+              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div>
                   <PiMoneyFill
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
@@ -585,11 +630,10 @@ export default function HomePage() {
                   <span className="text-xs sm:text-sm  text-[#ffff]">
                     {getTranslation("Average Salary", language)}
                   </span>
-                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  mt-1 font-bold">
-                    {totalMetrics.averageSalary.toLocaleString()}{" "}
+                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
+                    {formatNumber(totalMetrics.averageSalary)}{" "}
                     <span
                       style={{
-                        // fontFamily: "Roboto regular",
                         fontSize: "1.4rem",
                         fontWeight: 300,
                       }}
@@ -600,8 +644,12 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Second row - Money and Business Time */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className="flex items-center gap-8 w-full">
+              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div>
                   <FaBusinessTime
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
@@ -615,7 +663,6 @@ export default function HomePage() {
                     {totalMetrics.timeToEmployment.overall.days}{" "}
                     <span
                       style={{
-                        // fontFamily: "Roboto regular",
                         fontSize: "1.2rem",
                         fontWeight: 200,
                       }}
@@ -626,13 +673,30 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
+              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div>
+                  <PiStudentFill
+                    style={{ color: "#2CCAD3", width: 38, height: 38 }}
+                  />
+                </div>
+                <div className="flex-1">
+                  <span className="text-xs sm:text-sm  text-[#ffff]">
+                    {getTranslation("Total Job Seekers", language)}
+                  </span>
+                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  mt-1 font-bold">
+                    {formatNumber(totalMetrics.totalJobSeekers)}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Education Degree Overview Card */}
           <div className="w-full sm:w-[500px] h-[300px] p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90">
             <div className="flex flex-col gap-2">
               {/* Title Section */}
-              <div className="flex items-center gap-8">
+              <div className={`flex items-center gap-8 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div>
                   <PiCertificate
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
@@ -641,195 +705,160 @@ export default function HomePage() {
                 {/* <div className="certificate-icon"></div> */}
                 <div className="flex gap-1">
                   <span className="text-sm sm:text-base  text-[#ffff]">
-                    {getTranslation("Education", language)}
+                    {getTranslation("Education Degree Overview", language)}
                   </span>
-                  <span className="text-sm sm:text-base  text-[#ffff]">
+                  {/* <span className="text-sm sm:text-base  text-[#ffff]">
                     {getTranslation("Degree", language)}
                   </span>
                   <span className="text-sm sm:text-base  text-[#ffff]">
                     {getTranslation("Overview", language)}
-                  </span>
+                  </span> */}
                 </div>
               </div>
 
               {/* Bar Chart Section */}
               <div className="flex flex-col px-4 h-60 bg-gradient-to-br from-[#15234A]/50 via-[#15234A]/50 to-[#15234A]/50 border rounded-[20px] border-[#2E3153]/10">
-                <div className="flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1">
+                <div className={`flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                  {/* Bachelor's - 195571 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[115%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          195571
+                          {formatNumber(195571)}
                         </span>
                       </div>
                       <div
-                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
+                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60 rounded-t-2xl"
                         style={{
-                          height: "195%",
+                          height: "190%",
                         }}
-                      >
-                        {/* <div className="absolute bottom-5 -left-2">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          389835
-                        </span>
-                      </div> */}
-                      </div>
+                      ></div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center">
-                    <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                      <div className="absolute -top-[45%] -left-1.5">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          12164
-                        </span>
-                      </div>
-                      <div
-                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
-                        style={{
-                          height: "125%",
-                        }}
-                      >
-                        {/* <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          25428
-                        </span>
-                      </div> */}
-                      </div>
-                    </div>
-                  </div>
-
+                  {/* Associate Diploma - 20026 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[80%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          20026
+                          {formatNumber(20026)}
                         </span>
                       </div>
                       <div
-                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
+                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60 rounded-t-2xl"
                         style={{
-                          height: "160%",
+                          height: "155%",
                         }}
-                      >
-                        {/* <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          39085
-                        </span>
-                      </div> */}
-                      </div>
+                      ></div>
                     </div>
                   </div>
 
+                  {/* Master's - 12164 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                      <div className="absolute -top-[10%] -left-1">
+                      <div className="absolute -top-[45%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          4292
+                          {formatNumber(12164)}
                         </span>
                       </div>
                       <div
-                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
+                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60 rounded-t-2xl"
                         style={{
-                          height: "90%",
+                          height: "120%",
                         }}
-                      >
-                        {/* <div className="absolute bottom-5 -left-1">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          8001
-                        </span>
-                      </div> */}
-                      </div>
+                      ></div>
                     </div>
                   </div>
 
+                  {/* Higher Diploma - 6563 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[25%] -left-1.5">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          6563
+                          {formatNumber(6563)}
                         </span>
                       </div>
                       <div
-                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
+                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60 rounded-t-2xl"
                         style={{
-                          height: "105%",
+                          height: "100%",
                         }}
-                      >
-                        {/* <div className="absolute bottom-5 -left-1.5">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          11043
-                        </span>
-                      </div> */}
-                      </div>
+                      ></div>
                     </div>
                   </div>
 
+                  {/* Intermediate Diploma - 4292 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                      <div className="absolute top-[24%] left-0">
+                      <div className="absolute -top-[10%] -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          267
+                          {formatNumber(4292)}
                         </span>
                       </div>
                       <div
-                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
+                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60 rounded-t-2xl"
                         style={{
-                          height: "55%",
+                          height: "85%",
                         }}
-                      >
-                        {/* <div className="absolute bottom-5 left-0">
-                        <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          590
-                        </span>
-                      </div> */}
-                      </div>
+                      ></div>
                     </div>
                   </div>
 
+                  {/* PhD - 1277 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
                       <div className="absolute -top-[1%] -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          1277
+                          {formatNumber(1277)}
                         </span>
                       </div>
                       <div
-                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60  rounded-t-2xl"
+                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60 rounded-t-2xl"
                         style={{
-                          height: "80%",
+                          height: "75%",
                         }}
-                      >
-                        {/* <div className="absolute bottom-5 -left-1">
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Fellowship - 267 */}
+                  <div className="flex flex-col items-center">
+                    <div className="h-24 w-6 sm:w-8 flex items-end relative">
+                      <div className="absolute top-[24%] left-0">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
-                          2916
+                          {formatNumber(267)}
                         </span>
-                      </div> */}
                       </div>
+                      <div
+                        className="w-full bg-gradient-to-t from-[#2CD7C4] via-[#2CD7C4]/60 to-[#2CD7C4]/60 rounded-t-2xl"
+                        style={{
+                          height: "50%",
+                        }}
+                      ></div>
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-x-6 px-0 text-[9px] sm:text-[11px]">
+                <div className={`flex gap-x-6 px-0 text-[9px] sm:text-[11px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
                   <div className="text-white text-center w-6 sm:w-10">
                     {getTranslation("Bachelor's", language)}
-                  </div>
-                  <div className="text-white text-center w-6 sm:w-10">
-                    {getTranslation("Master's", language)}
-                  </div>
-                  <div className="text-white text-center w-6 sm:w-12">
-                    {getTranslation("Associate Diploma", language)}
                   </div>
                   <div className="text-white text-center w-6 sm:w-12">
                     {getTranslation("Intermediate Diploma", language)}
                   </div>
                   <div className="text-white text-center w-6 sm:w-10">
+                    {getTranslation("Master's", language)}
+                  </div>
+                  <div className="text-white text-center w-6 sm:w-10">
                     {getTranslation("Higher Diploma", language)}
                   </div>
                   <div className="text-white text-center w-6 sm:w-12">
-                    {getTranslation("Fellowship", language)}
+                    {getTranslation("Associate Diploma", language)}
                   </div>
-                  <div className="text-white text-center w-6 sm:w-0">
+                  <div className="text-white text-center w-6 sm:w-10">
                     {getTranslation("PhD", language)}
+                  </div>
+                  <div className="text-white text-center w-6 sm:w-10">
+                    {getTranslation("Fellowship", language)}
                   </div>
                 </div>
               </div>
@@ -837,7 +866,7 @@ export default function HomePage() {
           </div>
 
           {/* Data Source Note */}
-          <div className="left-0 text-left text-white text-[10px] sm:text-xs md:text-sm mt-2">
+          <div className={`text-white text-[10px] sm:text-xs md:text-sm mt-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
             {/* <p className="mb-1">
               {getTranslation(
                 "Data for 2022 Graduates and their Employment through December 2023",

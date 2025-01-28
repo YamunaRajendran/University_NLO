@@ -5,29 +5,37 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Education",
     ar: "التعليم"
   },
+  "Education Degree Overview": {
+    en: "Education Degree Overview",  
+    ar: "توزيع الخريجين حسب المؤهلات العلمية"
+  },
+  "Total Metrics": {
+    en: "Total Metrics",
+    ar: "إجمالي المقاييس"
+  },
   "Total Graduates": {
     en: "Total Graduates",
     ar: "إجمالي الخريجين"
   },
   "Average Salary": {
     en: "Average Salary",
-    ar: "متوسط الراتب"
+    ar: "متوسط الأجور"
   },
   "Employment Rate": {
     en: "Employment Rate",
-    ar: "معدل التوظيف"
+    ar: "نسبة التوظيف"
   },
   "Time to Employment": {
     en: "Time to Employment",
-    ar: "الوقت اللازم للتوظيف"
+    ar: "متوسط مدة الانتظار للتوظيف"
   },
   "Job Seekers": {
     en: "Job Seekers",
-    ar: "باحثين عن عمل"
+    ar:"عدد الباحثين عن العمل"  
   },
   "Total Job Seekers": {
     en: "Total Job Seekers",
-    ar:"إجمالي الباحثين عن عمل"
+    ar:"عدد الباحثين عن العمل"
   },
   "months": {
     en: "months",
@@ -51,11 +59,14 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Bachelor's": {
     en: "Bachelor's",
-    ar: "الليسانس"
+    ar: "بكالوريوس"
   },
   "Saudi Arabia Graduates Observation": {
     en: "Saudi Arabia Graduates Observation",
-    ar: "مرصد خريجي المملكة العربية السعودية"
+    ar: " رصد الخريجين في المملكة العربية السعودية"  },
+  "Saudi Arabia Graduates Observation (Readings, Statistics)": {
+    en: "Saudi Arabia Graduates Observation (Readings, Statistics)",
+    ar: "مرصد خريجي المملكة العربية السعودية (قراءات وإحصائيات)"
   },
   "Master's": {
     en: "Master's",
@@ -108,7 +119,7 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Business and Law": {
     en: "Business and Law",
-    ar: "القانون والأعمال"
+    ar: "الأعمال والقانون"
   },
   "Arts and Humanities": {
     en: "Arts and Humanities",
@@ -116,7 +127,7 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Health and Welfare": {
     en: "Health and Welfare",
-    ar: "الصحة والرفاهية"
+    ar: "الصحة والرفاه"
   },
   "Sciences and Mathematics": {
     en: "Sciences and Mathematics",
@@ -216,7 +227,15 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Data for 2022 Graduates and their Employment through December 2023": {
     en: "Data for 2022 Graduates and their Employment through December 2023",
-    ar: "بيانات خريجي 2022 وتوظيفهم حتى ديسمبر 2023"
+    ar: "بيانات الخريجين لعام 2022 وتوظيفهم حتى ديسمبر 2023"
+  },
+  "Male": {
+    en: "Male",
+    ar: "ذكر"
+  },
+  "Female": {
+    en: "Female",
+    ar: "أنثى"
   },
 };
 

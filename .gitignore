@@ -49,3 +49,8 @@ next-env.d.ts
 
 #requirements file
 requirements.txt
+public/data_generation/__pycache__/compare_insights.cpython-311.pyc
+public/data_generation/__pycache__/education_insights.cpython-311.pyc
+public/data_generation/__pycache__/major_insights_arabic.cpython-311.pyc
+public/data_generation/__pycache__/major_insights.cpython-311.pyc
+public/data_generation/__pycache__/overview_insights.cpython-311.pyc

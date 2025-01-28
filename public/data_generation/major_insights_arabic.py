@@ -5,15 +5,15 @@ import json
 
 GRADUATE_INDICATORS = [
     'Number of Graduates',
-    'Number of graduates who are employed before graduation',
-    'Number of graduates who are employed after graduation',
-    'Number of graduates with salary who are employed after graduation'
+    # 'Number of graduates who are employed before graduation',
+    # 'Number of graduates who are employed after graduation',
+    # 'Number of graduates with salary who are employed after graduation'
 ]
 
 EMPLOYMENT_INDICATORS = [
     'Number of graduates who are employed before graduation',
     'Number of graduates who are employed after graduation',
-    'Number of graduates with salary who are employed after graduation'
+    # 'Number of graduates with salary who are employed after graduation'
 ]
 
 class MajorInsights:
@@ -55,7 +55,7 @@ class MajorInsights:
         
         # Employment rate
         total_employed = df[df['IndicatorDescription'].isin(EMPLOYMENT_INDICATORS)]['IndicatorValue'].sum()
-        employment_rate = round((total_employed / total_graduates * 100), 1) if total_graduates > 0 else 0
+        employment_rate = round((total_employed / total_graduates * 100), 2) if total_graduates > 0 else 0
         
         # Average salary
         total_salary = df[df['IndicatorDescription'] == 'Total salaries of employees after graduation']['IndicatorValue'].astype(float).sum()
@@ -72,7 +72,8 @@ class MajorInsights:
         
         # Overall time to employment
         total_days = df[df['IndicatorDescription'] == 'Total number of days until the first job']['IndicatorValue'].sum()
-        employment_timing["overall"]["days"] = round(total_days / total_employed) if total_employed > 0 else 0
+        employed_after_grad = df[df['IndicatorDescription'] == 'Number of graduates who are employed after graduation']['IndicatorValue'].sum()
+        employment_timing["overall"]["days"] = round(total_days / employed_after_grad) if employed_after_grad > 0 else 0
         employment_timing["overall"]["percentage"] = round((total_employed / total_graduates * 100), 2) if total_graduates > 0 else 0
         
         # Time by period

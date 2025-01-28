@@ -1,5 +1,4 @@
 {
-  "majorsInsights": {
   "totalMetrics": {
     "graduates": {
       "totalGraduates": 241057,
@@ -134,7 +133,7 @@
             "employmentRate": 60.6
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 13703,
             "malePercentage": 24.3,
             "femalePercentage": 75.7,
@@ -155,7 +154,7 @@
             "employmentRate": 46.9
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 2585,
             "malePercentage": 35.0,
             "femalePercentage": 65.0,
@@ -232,14 +231,14 @@
             "employmentRate": 81.3
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 448,
             "malePercentage": 3.3,
             "femalePercentage": 96.7,
             "employmentRate": 54.5
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 238,
             "malePercentage": 20.2,
             "femalePercentage": 79.8,
@@ -323,7 +322,7 @@
             "employmentRate": 81.6
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 165,
             "malePercentage": 55.2,
             "femalePercentage": 44.8,
@@ -337,7 +336,7 @@
             "employmentRate": 73.4
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 22,
             "malePercentage": 0.0,
             "femalePercentage": 100.0,
@@ -400,7 +399,7 @@
             "employmentRate": 66.8
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 99,
             "malePercentage": 41.4,
             "femalePercentage": 58.6,
@@ -414,7 +413,7 @@
             "employmentRate": 63.2
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 67,
             "malePercentage": 100.0,
             "femalePercentage": 0.0,
@@ -484,14 +483,14 @@
             "employmentRate": 55.5
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 2979,
             "malePercentage": 38.8,
             "femalePercentage": 61.2,
             "employmentRate": 50.8
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 933,
             "malePercentage": 29.5,
             "femalePercentage": 70.5,
@@ -582,7 +581,7 @@
             "employmentRate": 43.0
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 420,
             "malePercentage": 11.2,
             "femalePercentage": 88.8,
@@ -596,7 +595,7 @@
             "employmentRate": 78.7
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 2,
             "malePercentage": 50.0,
             "femalePercentage": 50.0,
@@ -652,7 +651,7 @@
             "employmentRate": 81.9
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 1872,
             "malePercentage": 93.8,
             "femalePercentage": 6.2,
@@ -666,7 +665,7 @@
             "employmentRate": 85.8
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 55,
             "malePercentage": 92.7,
             "femalePercentage": 7.3,
@@ -688,7 +687,7 @@
         "totalJobSeekers": 1293
       },
       {
-        "generalMajor": " Social Sciences, Journalism, Information",
+        "generalMajor": "Social Sciences, Journalism, Information and Media",
         "graduates": {
           "totalGraduates": 11915,
           "male": {
@@ -750,7 +749,7 @@
             "employmentRate": 71.6
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 5,
             "malePercentage": 0.0,
             "femalePercentage": 100.0,
@@ -806,14 +805,14 @@
             "employmentRate": 61.7
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 497,
             "malePercentage": 55.3,
             "femalePercentage": 44.7,
             "employmentRate": 60.2
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 143,
             "malePercentage": 32.9,
             "femalePercentage": 67.1,
@@ -890,14 +889,14 @@
             "employmentRate": 79.3
           },
           {
-            "educationLevel": "Intermediate Diploma",
+            "educationLevel": "Associate Diploma",
             "totalGraduates": 67,
             "malePercentage": 29.9,
             "femalePercentage": 70.1,
             "employmentRate": 47.8
           },
           {
-            "educationLevel": "Associate Diploma",
+            "educationLevel": "Intermediate Diploma",
             "totalGraduates": 18,
             "malePercentage": 83.3,
             "femalePercentage": 16.7,
@@ -1036,7 +1035,7 @@
                 "employmentRate": 60.6
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 13703,
                 "malePercentage": 24.3,
                 "femalePercentage": 75.7,
@@ -1057,7 +1056,7 @@
                 "employmentRate": 46.9
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 2585,
                 "malePercentage": 35.0,
                 "femalePercentage": 65.0,
@@ -1388,7 +1387,7 @@
                       "employmentRate": 61.3
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 12986,
                       "malePercentage": 24.2,
                       "femalePercentage": 75.8,
@@ -1409,7 +1408,7 @@
                       "employmentRate": 44.7
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 2526,
                       "malePercentage": 34.9,
                       "femalePercentage": 65.1,
@@ -1842,7 +1841,7 @@
                       "employmentRate": 74.2
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 717,
                       "malePercentage": 25.9,
                       "femalePercentage": 74.1,
@@ -1863,7 +1862,7 @@
                       "employmentRate": 83.3
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 59,
                       "malePercentage": 39.0,
                       "femalePercentage": 61.0,
@@ -2512,14 +2511,14 @@
                 "employmentRate": 79.3
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 67,
                 "malePercentage": 29.9,
                 "femalePercentage": 70.1,
                 "employmentRate": 47.8
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 18,
                 "malePercentage": 83.3,
                 "femalePercentage": 16.7,
@@ -2802,14 +2801,14 @@
                       "employmentRate": 33.1
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 67,
                       "malePercentage": 29.9,
                       "femalePercentage": 70.1,
                       "employmentRate": 47.8
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 3,
                       "malePercentage": 0.0,
                       "femalePercentage": 100.0,
@@ -3139,7 +3138,7 @@
                       "employmentRate": 79.3
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 15,
                       "malePercentage": 100.0,
                       "femalePercentage": 0.0,
@@ -3383,7 +3382,7 @@
                 "employmentRate": 43.0
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 420,
                 "malePercentage": 11.2,
                 "femalePercentage": 88.8,
@@ -3397,7 +3396,7 @@
                 "employmentRate": 78.7
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 2,
                 "malePercentage": 50.0,
                 "femalePercentage": 50.0,
@@ -3639,7 +3638,7 @@
                       "employmentRate": 43.0
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 420,
                       "malePercentage": 11.2,
                       "femalePercentage": 88.8,
@@ -3653,7 +3652,7 @@
                       "employmentRate": 78.7
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 2,
                       "malePercentage": 50.0,
                       "femalePercentage": 50.0,
@@ -4075,14 +4074,14 @@
                 "employmentRate": 61.7
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 497,
                 "malePercentage": 55.3,
                 "femalePercentage": 44.7,
                 "employmentRate": 60.2
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 143,
                 "malePercentage": 32.9,
                 "femalePercentage": 67.1,
@@ -4468,7 +4467,7 @@
                       "employmentRate": 60.5
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 262,
                       "malePercentage": 36.3,
                       "femalePercentage": 63.7,
@@ -4489,7 +4488,7 @@
                       "employmentRate": 65.6
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 6,
                       "malePercentage": 50.0,
                       "femalePercentage": 50.0,
@@ -4901,14 +4900,14 @@
                   },
                   "educationLevelInsights": [
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 211,
                       "malePercentage": 73.9,
                       "femalePercentage": 26.1,
                       "employmentRate": 64.5
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 137,
                       "malePercentage": 32.1,
                       "femalePercentage": 67.9,
@@ -5403,7 +5402,7 @@
                   },
                   "educationLevelInsights": [
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 24,
                       "malePercentage": 100.0,
                       "femalePercentage": 0.0,
@@ -5729,7 +5728,7 @@
                 "employmentRate": 81.6
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 165,
                 "malePercentage": 55.2,
                 "femalePercentage": 44.8,
@@ -5743,7 +5742,7 @@
                 "employmentRate": 73.4
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 22,
                 "malePercentage": 0.0,
                 "femalePercentage": 100.0,
@@ -6370,7 +6369,7 @@
                       "employmentRate": 81.6
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 165,
                       "malePercentage": 55.2,
                       "femalePercentage": 44.8,
@@ -6391,7 +6390,7 @@
                       "employmentRate": 76.1
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 22,
                       "malePercentage": 0.0,
                       "femalePercentage": 100.0,
@@ -7061,7 +7060,7 @@
                 "employmentRate": 71.6
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 5,
                 "malePercentage": 0.0,
                 "femalePercentage": 100.0,
@@ -7791,7 +7790,7 @@
                       "employmentRate": 71.4
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 5,
                       "malePercentage": 0.0,
                       "femalePercentage": 100.0,
@@ -8220,7 +8219,7 @@
                 "employmentRate": 66.8
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 99,
                 "malePercentage": 41.4,
                 "femalePercentage": 58.6,
@@ -8234,7 +8233,7 @@
                 "employmentRate": 63.2
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 67,
                 "malePercentage": 100.0,
                 "femalePercentage": 0.0,
@@ -9005,7 +9004,7 @@
                       "employmentRate": 61.9
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 33,
                       "malePercentage": 51.5,
                       "femalePercentage": 48.5,
@@ -9390,7 +9389,7 @@
                       "employmentRate": 68.5
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 43,
                       "malePercentage": 37.2,
                       "femalePercentage": 62.8,
@@ -9830,14 +9829,14 @@
                       "employmentRate": 65.2
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 67,
                       "malePercentage": 100.0,
                       "femalePercentage": 0.0,
                       "employmentRate": 86.6
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 23,
                       "malePercentage": 34.8,
                       "femalePercentage": 65.2,
@@ -10538,14 +10537,14 @@
                 "employmentRate": 81.3
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 448,
                 "malePercentage": 3.3,
                 "femalePercentage": 96.7,
                 "employmentRate": 54.5
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 238,
                 "malePercentage": 20.2,
                 "femalePercentage": 79.8,
@@ -10897,7 +10896,7 @@
                       "employmentRate": 36.2
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 18,
                       "malePercentage": 0.0,
                       "femalePercentage": 100.0,
@@ -11316,14 +11315,14 @@
                       "employmentRate": 57.7
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 137,
                       "malePercentage": 3.6,
                       "femalePercentage": 96.4,
                       "employmentRate": 51.1
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 74,
                       "malePercentage": 29.7,
                       "femalePercentage": 70.3,
@@ -11770,7 +11769,7 @@
                       "employmentRate": 65.9
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 293,
                       "malePercentage": 3.4,
                       "femalePercentage": 96.6,
@@ -11784,7 +11783,7 @@
                       "employmentRate": 82.2
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 164,
                       "malePercentage": 15.9,
                       "femalePercentage": 84.1,
@@ -12213,7 +12212,7 @@
                 "employmentRate": 81.9
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 1872,
                 "malePercentage": 93.8,
                 "femalePercentage": 6.2,
@@ -12227,7 +12226,7 @@
                 "employmentRate": 85.8
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 55,
                 "malePercentage": 92.7,
                 "femalePercentage": 7.3,
@@ -12620,7 +12619,7 @@
                       "employmentRate": 87.5
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 7,
                       "malePercentage": 100.0,
                       "femalePercentage": 0.0,
@@ -13465,7 +13464,7 @@
                       "employmentRate": 86.4
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 1830,
                       "malePercentage": 93.6,
                       "femalePercentage": 6.4,
@@ -13479,7 +13478,7 @@
                       "employmentRate": 89.5
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 55,
                       "malePercentage": 92.7,
                       "femalePercentage": 7.3,
@@ -13905,7 +13904,7 @@
                       "employmentRate": 96.0
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 35,
                       "malePercentage": 100.0,
                       "femalePercentage": 0.0,
@@ -14238,14 +14237,14 @@
                 "employmentRate": 55.5
               },
               {
-                "educationLevel": "Associate Diploma",
+                "educationLevel": "Intermediate Diploma",
                 "totalGraduates": 2979,
                 "malePercentage": 38.8,
                 "femalePercentage": 61.2,
                 "employmentRate": 50.8
               },
               {
-                "educationLevel": "Intermediate Diploma",
+                "educationLevel": "Associate Diploma",
                 "totalGraduates": 933,
                 "malePercentage": 29.5,
                 "femalePercentage": 70.5,
@@ -14769,14 +14768,14 @@
                       "employmentRate": 55.8
                     },
                     {
-                      "educationLevel": "Associate Diploma",
+                      "educationLevel": "Intermediate Diploma",
                       "totalGraduates": 2979,
                       "malePercentage": 38.8,
                       "femalePercentage": 61.2,
                       "employmentRate": 50.8
                     },
                     {
-                      "educationLevel": "Intermediate Diploma",
+                      "educationLevel": "Associate Diploma",
                       "totalGraduates": 933,
                       "malePercentage": 29.5,
                       "femalePercentage": 70.5,
@@ -16342,4 +16341,4 @@
       }
     ]
   }
-}}
+}

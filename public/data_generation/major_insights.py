@@ -1,51 +1,63 @@
 import pandas as pd
 import numpy as np
 from typing import Dict, List, Any
-import json
 
-GRADUATE_INDICATORS = [
-    'Number of Graduates',
-    'Number of graduates who are employed before graduation',
-    'Number of graduates who are employed after graduation',
-    'Number of graduates with salary who are employed after graduation'
-]
+GRADUATE_INDICATORS = ['Number of Graduates']
 
 EMPLOYMENT_INDICATORS = [
     'Number of graduates who are employed before graduation',
     'Number of graduates who are employed after graduation',
-    'Number of graduates with salary who are employed after graduation'
+]
+
+IGNORE_VALUES = [
+    'Unclassified',
+    'Unknown programs',
+    'Unclassified programs',
+    'Unknown Specializations',
+    '0',
+    "غير محدد",
+    "غير معرف",
+    "برامج غير محددة",
+    "برامج غير معروفة",
+    "برامج غير معروفة",
+    "تخصصات غير معروفة"
 ]
 
 class MajorInsights:
-    def __init__(self, df: pd.DataFrame):
+    def __init__(self, df: pd.DataFrame, language: str = 'english', job_seekers: Dict = None):
         self.df = df
         self.original_df = df.copy()
+        self.language = language.lower()
+        self.job_seekers = job_seekers
         
-        # Only create masks if DataFrame is not empty
         if not df.empty and 'IndicatorDescription' in df.columns:
-            # Pre-calculate common filters
             self.GRADUATE_INDICATORS = GRADUATE_INDICATORS
             self.EMPLOYMENT_INDICATORS = EMPLOYMENT_INDICATORS
-            
-            # Cache common groupby operations if needed
             self.major_groups = self.df.groupby('GeneralMajorName')
             self.gender_groups = self.df.groupby(['GeneralMajorName', 'Gender'])
+            self.gender_labels = {
+                'male': 'Male' if self.language == 'english' else 'ذكر',
+                'female': 'Female' if self.language == 'english' else 'أنثى'
+            }
+            self.period_labels = {
+                'beforeGraduation': 'Before graduation' if self.language == 'english' else 'قبل التخرج',
+                'withinFirstYear': 'Within a year' if self.language == 'english' else 'خلال سنة',
+                'afterFirstYear': 'More than a year' if self.language == 'english' else 'أكثر من سنة'
+            }
         else:
             self.major_groups = None
             self.gender_groups = None
         
-    def get_total_metrics(self, df: pd.DataFrame = None) -> Dict:
+    def get_total_metrics(self, df: pd.DataFrame = None, job_seekers_data: Dict = None) -> Dict:
         df = df if df is not None else self.df
+        job_seekers_data = job_seekers_data if job_seekers_data is not None else self.job_seekers
         
-        # Total graduates
         total_graduates = df[df['IndicatorDescription'].isin(GRADUATE_INDICATORS)]['IndicatorValue'].sum()
-
-        # Gender distribution
-        male_count = df[(df['Gender'] == 'Male') & (df['IndicatorDescription'].isin(GRADUATE_INDICATORS))]['IndicatorValue'].sum()
-        female_count = df[(df['Gender'] == 'Female') & (df['IndicatorDescription'].isin(GRADUATE_INDICATORS))]['IndicatorValue'].sum()
+        male_count = df[(df['Gender'] == self.gender_labels['male']) & (df['IndicatorDescription'].isin(GRADUATE_INDICATORS))]['IndicatorValue'].sum()
+        female_count = df[(df['Gender'] == self.gender_labels['female']) & (df['IndicatorDescription'].isin(GRADUATE_INDICATORS))]['IndicatorValue'].sum()
         
-        male_percentage = round((male_count / total_graduates * 100), 1) if total_graduates > 0 else 0
-        female_percentage = round((female_count / total_graduates * 100), 1) if total_graduates > 0 else 0
+        male_percentage = round((male_count / total_graduates * 100), 2) if total_graduates > 0 else 0
+        female_percentage = round((female_count / total_graduates * 100), 2) if total_graduates > 0 else 0
 
         total_graduates_data = {
             "totalGraduates": int(total_graduates),
@@ -55,7 +67,7 @@ class MajorInsights:
         
         # Employment rate
         total_employed = df[df['IndicatorDescription'].isin(EMPLOYMENT_INDICATORS)]['IndicatorValue'].sum()
-        employment_rate = round((total_employed / total_graduates * 100), 1) if total_graduates > 0 else 0
+        employment_rate = round((total_employed / total_graduates * 100), 2) if total_graduates > 0 else 0
         
         # Average salary
         total_salary = df[df['IndicatorDescription'] == 'Total salaries of employees after graduation']['IndicatorValue'].astype(float).sum()
@@ -72,42 +84,35 @@ class MajorInsights:
         
         # Overall time to employment
         total_days = df[df['IndicatorDescription'] == 'Total number of days until the first job']['IndicatorValue'].sum()
-        employment_timing["overall"]["days"] = round(total_days / total_employed) if total_employed > 0 else 0
+        employed_after_grad = df[df['IndicatorDescription'] == 'Number of graduates who are employed after graduation']['IndicatorValue'].sum()
+        # employment_timing["overall"]["days"] = round(total_days / employed_after_grad) if employed_after_grad > 0 else 0
+        employment_timing["overall"]["days"] = round((total_days / employed_after_grad) / 30, 1) if employed_after_grad > 0 else 0
         employment_timing["overall"]["percentage"] = round((total_employed / total_graduates * 100), 2) if total_graduates > 0 else 0
         
-        # Time by period
-        total_period_employed = 0
-        period_employments = {}
-        
-        for period, period_name in [
-            ("Before graduation", "beforeGraduation"),
-            ("Within a year", "withinFirstYear"),
-            ("More than a year", "afterFirstYear")
+        for period_name, period_label in [
+            ("beforeGraduation", self.period_labels['beforeGraduation']),
+            ("withinFirstYear", self.period_labels['withinFirstYear']),
+            ("afterFirstYear", self.period_labels['afterFirstYear'])
         ]:
-            period_df = df[df['PeriodToEmployment'] == period]
+            period_df = df[df['PeriodToEmployment'] == period_label]
             period_days = period_df[period_df['IndicatorDescription'] == 'Total number of days until the first job']['IndicatorValue'].sum()
             period_employed = period_df[period_df['IndicatorDescription'].isin(EMPLOYMENT_INDICATORS)]['IndicatorValue'].sum()
-            employment_timing[period_name]["days"] = round(period_days / period_employed) if period_employed > 0 else 0
-        #     period_employments[period_name] = period_employed
-        #     total_period_employed += period_employed
-        
-        # # Calculate percentages based on total employed across periods
-        # for period_name in ["beforeGraduation", "withinFirstYear", "afterFirstYear"]:
-        #     employment_timing[period_name]["percentage"] = round((period_employments[period_name] / total_period_employed * 100), 2) if total_period_employed > 0 else 0
+            # period_employed = period_df[period_df['IndicatorDescription'] == 'Number of graduates who are employed after graduation']['IndicatorValue'].sum()
+            # employment_timing[period_name]["days"] = round(period_days / period_employed) if period_employed > 0 else 0
+            employment_timing[period_name]["days"] = round((period_days / period_employed) / 30, 1) if period_employed > 0 else 0
+            # employment_timing[period_name]["percentage"] = round((period_employed / total_graduates * 100), 2) if total_graduates > 0 else 0
             employment_timing[period_name]["percentage"] = round((period_employed / total_graduates * 100), 2) if total_graduates > 0 else 0
         
-        # Get education level insights
         education_insights = self.get_education_level_insights(df)
         
         # University information
         university_data = {
-            "total": 51,
-            "public": 27,
-            "private": 24
+            "total": 55,
+            "public": 29,
+            "private": 26
         }
 
-        # Total student enrollment
-        total_students_enrolled = int(600000)
+        total_job_seekers = job_seekers_data.get('totalJobSeekers', 0) if job_seekers_data else 0
         
         return {
             "graduates": total_graduates_data,
@@ -116,7 +121,7 @@ class MajorInsights:
             "timeToEmployment": employment_timing,
             "educationLevelInsights": education_insights,
             "universities": university_data,
-            "totalStudentsEnrolled": total_students_enrolled
+            "totalJobSeekers": total_job_seekers
         }
 
     def get_basic_metrics(self, df: pd.DataFrame = None, level: str = 'general', limit: int = None) -> List[Dict]:
@@ -133,13 +138,18 @@ class MajorInsights:
         
         # Process metrics for each major in the provided DataFrame
         for major_name in df[group_by_col].unique():
-            if pd.isna(major_name):
+            if pd.isna(major_name) or any(ignore in str(major_name) for ignore in IGNORE_VALUES):
                 continue
                 
             major_df = df[df[group_by_col] == major_name]
+
+            general_major_job_seekers = next(
+                (item for item in self.job_seekers.get('byGeneralMajor', []) if item['generalMajor'] == major_name),
+                {'totalJobSeekers': 0, 'byNarrowMajor': []}
+            )
             
             # Get metrics using get_total_metrics
-            major_metrics = self.get_total_metrics(major_df)
+            major_metrics = self.get_total_metrics(major_df, general_major_job_seekers)
             
             # Create metrics dictionary with appropriate key based on level
             metrics_dict = {}
@@ -165,7 +175,7 @@ class MajorInsights:
         # Get occupation data
         occupation_data = []
         for occupation in df['ISCOOccupationDescription'].unique():
-            if pd.isna(occupation):
+            if pd.isna(occupation) or any(ignore in str(occupation) for ignore in IGNORE_VALUES):
                 continue
                 
             occupation_df = df[df['ISCOOccupationDescription'] == occupation]
@@ -200,7 +210,7 @@ class MajorInsights:
         # Get occupation data
         occupation_data = []
         for occupation in df['ISCOOccupationDescription'].unique():
-            if pd.isna(occupation):
+            if pd.isna(occupation) or any(ignore in str(occupation) for ignore in IGNORE_VALUES):
                 continue
                 
             occupation_df = df[df['ISCOOccupationDescription'] == occupation]
@@ -242,7 +252,7 @@ class MajorInsights:
         
         # Sort by total graduates for most popular
         # by_popularity = sorted(occupation_data, key=lambda x: x['employedCount'], reverse=True)[:5]
-        by_popularity = sorted(occupation_data, key=lambda x: x['totalGraduates'], reverse=True)[:5]
+        by_popularity = sorted(occupation_data, key=lambda x: x['totalGraduates'], reverse=True)[:10]
         
         # Sort by average salary for highest paying
         by_salary = sorted(occupation_data, key=lambda x: x['averageSalary'], reverse=True)[:5]
@@ -259,7 +269,7 @@ class MajorInsights:
         entire_total_graduates = df[df['IndicatorDescription'].isin(GRADUATE_INDICATORS)]['IndicatorValue'].sum()
         education_insights = []
         for education_level in df['EducationLevel'].unique():
-            if pd.isna(education_level) or education_level == 'Unclassified':
+            if pd.isna(education_level) or any(ignore in str(education_level) for ignore in IGNORE_VALUES):
                 continue
                 
             # Filter data for this education level
@@ -273,12 +283,12 @@ class MajorInsights:
             
             # Calculate gender distribution
             male_count = education_data[
-                (education_data['Gender'] == 'Male') & 
+                (education_data['Gender'] == self.gender_labels['male']) & 
                 (education_data['IndicatorDescription'].isin(GRADUATE_INDICATORS))
             ]['IndicatorValue'].sum()
             
             female_count = education_data[
-                (education_data['Gender'] == 'Female') & 
+                (education_data['Gender'] == self.gender_labels['female']) & 
                 (education_data['IndicatorDescription'].isin(GRADUATE_INDICATORS))
             ]['IndicatorValue'].sum()
             
@@ -318,6 +328,9 @@ class MajorInsights:
             'major': 'MajorNameByClassification'
         }.get(level, 'GeneralMajorName')
 
+        # Filter out ignored values before grouping
+        df = df[~df[major_col].isin(IGNORE_VALUES) & ~df[major_col].isna()]
+
         # Calculate employment rate for each major
         total_graduates = df[df['IndicatorDescription'].isin(GRADUATE_INDICATORS)]['IndicatorValue'].groupby(df[major_col]).sum()
         total_employed = df[df['IndicatorDescription'].isin(EMPLOYMENT_INDICATORS)]['IndicatorValue'].groupby(df[major_col]).sum()
@@ -325,12 +338,12 @@ class MajorInsights:
         # Get gender distribution
         male_graduates = df[
             (df['IndicatorDescription'].isin(GRADUATE_INDICATORS)) &
-            (df['Gender'] == 'Male')
+            (df['Gender'] == self.gender_labels['male'])
         ]['IndicatorValue'].groupby(df[major_col]).sum()
 
         female_graduates = df[
             (df['IndicatorDescription'].isin(GRADUATE_INDICATORS)) &
-            (df['Gender'] == 'Female')
+            (df['Gender'] == self.gender_labels['female'])
         ]['IndicatorValue'].groupby(df[major_col]).sum()
 
         # Prepare results
@@ -403,17 +416,17 @@ class MajorInsights:
         # Get employment timing data based on PeriodToEmployment
         employed_before = df[
             (df['IndicatorDescription'].isin(EMPLOYMENT_INDICATORS)) &
-            (df['PeriodToEmployment'] == 'Before graduation')
+            (df['PeriodToEmployment'] == self.period_labels['beforeGraduation'])
         ]['IndicatorValue'].groupby(df[major_col]).sum()
 
         employed_within_year = df[
             (df['IndicatorDescription'].isin(EMPLOYMENT_INDICATORS)) &
-            (df['PeriodToEmployment'] == 'Within a year')
+            (df['PeriodToEmployment'] == self.period_labels['withinFirstYear'])
         ]['IndicatorValue'].groupby(df[major_col]).sum()
 
         employed_after_year = df[
             (df['IndicatorDescription'].isin(EMPLOYMENT_INDICATORS)) &
-            (df['PeriodToEmployment'] == 'More than a year')
+            (df['PeriodToEmployment'] == self.period_labels['afterFirstYear'])
         ]['IndicatorValue'].groupby(df[major_col]).sum()
 
         # Prepare results
@@ -469,7 +482,8 @@ class MajorInsights:
         general_majors = []
         
         for general_major in self.df['GeneralMajorName'].unique():
-            if pd.isna(general_major):
+            # if pd.isna(general_major) or any(ignore in str(general_major) for ignore in IGNORE_VALUES):
+            if pd.isna(general_major) or (str(general_major) in IGNORE_VALUES):
                 continue
                 
             # Filter data for this general major
@@ -477,8 +491,17 @@ class MajorInsights:
             print(f"Processing general major: {general_major}, rows: {len(general_major_data)}")
             
             # Get overall metrics for general major using filtered data
+            
+            general_major_job_seekers = next(
+                (item for item in self.job_seekers.get('byGeneralMajor', []) if item['generalMajor'] == general_major),
+                {'totalJobSeekers': 0, 'byNarrowMajor': []}
+            )
+            # if general_major_job_seekers:
+            #     print("general_major_job_seekers", general_major_job_seekers)
+            #     print("general_major name is ", general_major)
+            
             general_major_overall = {
-                "totalMetrics": self.get_total_metrics(general_major_data),
+                "totalMetrics": self.get_total_metrics(general_major_data, general_major_job_seekers),
                 "topNarrowMajorsInsights": self.get_employment_timing_insights(general_major_data, level='narrow'),
                 "topOccupationsInsights": self.get_top_occupations_insights(general_major_data, level='narrow')
             }
@@ -486,7 +509,9 @@ class MajorInsights:
             # Process narrow majors
             narrow_majors = []
             for narrow_major in general_major_data['NarrowMajorName'].unique():
-                if pd.isna(narrow_major):
+                # print("narrow_major is ",narrow_major)
+                # if pd.isna(narrow_major) or any(ignore in str(narrow_major) for ignore in IGNORE_VALUES):
+                if pd.isna(narrow_major) or (str(narrow_major) in IGNORE_VALUES):
                     continue
                     
                 # Filter data for this narrow major
@@ -494,8 +519,17 @@ class MajorInsights:
                 print(f"  Processing narrow major: {narrow_major}, rows: {len(narrow_major_data)}")
                 
                 # Get overall metrics for narrow major using filtered data
+                narrow_major_job_seekers = next(
+                    (item for item in general_major_job_seekers.get('byNarrowMajor', []) if item['narrowMajor'] == narrow_major),
+                    {'totalJobSeekers': 0}
+                )
+
+                # if narrow_major_job_seekers:
+                #     print("general_major_job_seekers", narrow_major_job_seekers)
+                #     print("general_major name is ", narrow_major)
+                
                 narrow_major_overall = {
-                    "totalMetrics": self.get_total_metrics(narrow_major_data),
+                    "totalMetrics": self.get_total_metrics(narrow_major_data, narrow_major_job_seekers),
                     "topMajorsInsights": self.get_employment_timing_insights(narrow_major_data, level='major'),
                     "topOccupationsInsights": self.get_top_occupations_insights(narrow_major_data, level='major')
                 }
@@ -512,6 +546,7 @@ class MajorInsights:
                     "narrowMajors": narrow_majors
                 }
             })
+            # break
         
         return {"generalMajors": general_majors}
 
