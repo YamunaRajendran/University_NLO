@@ -7,7 +7,7 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Education Degree Overview": {
     en: "Education Degree Overview",  
-    ar: "توزيع الخريجين حسب المؤهلات العلمية"
+    ar:"نظرة عامة على الدرجات العلمية"
   },
   "Total Metrics": {
     en: "Total Metrics",
@@ -94,7 +94,7 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Degree": {
     en: "Degree",
-    ar: "الدرجة"
+    ar: "الدرجة العلمية"
   },
   "Overview": {
     en: "Overview",
@@ -163,15 +163,15 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "Before Graduation": {
     en: "Before Graduation",
-    ar: "قبل التخرج"
+    ar: "موظف أثناء الدراسة "
   },
   "Within First Year": {
     en: "Within First Year",
-    ar: "خلال السنة الأولى"
+    ar: "توظف خلال سنة بعد التخرج"
   },
   "After First Year": {
     en: "After First Year",
-    ar: "بعد السنة الأولى"
+    ar: "توظف بعد سنة من التخرج"
   },
   "No data available": {
     en: "No data available",
@@ -185,22 +185,27 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Top 5 Occupation by Salary",
     ar: "أعلى 5 وظائف من حيث الراتب"
   },
-  "Employment Rate by Narrow Major": {
-    en: "Employment Rate by Narrow Major",
-    ar: "معدل التوظيف حسب التخصص الدقيق"
+  "Employment Rate by Specialization": {
+    en: "Employment Rate by Specialization",
+    ar: "نسبة التوظيف حسب التخصصات التفصيلية"
   },
   "Narrow Majors By Time of Employment": {
     en: "Narrow Majors By Time of Employment",
     ar: "التخصصات الدقيقة حسب وقت التوظيف"
   },
-  "Top Narrow Majors by Gender": {
-    en: "Top Narrow Majors by Gender",
-    ar: "أعلى التخصصات الدقيقة حسب الجنس"
+  "Top Specialization by Gender": {
+    en: "Top Specialization by Gender",
+    ar: "توزيع أعلى التخصصات التفصيلية حسب الجنس"
+  },
+  "Specialization By Time of Employment": {
+    en: "Specialization By Time of Employment",
+    ar: "توزيع التخصصات حسب وقت التوظيف"
   },
   "SAR": {
     en: "SAR",
     ar: "ريال"
   },
+  
   "Graduate data sources": {
     en: "Graduate data sources",
     ar: "مصادر بيانات الخريجين"

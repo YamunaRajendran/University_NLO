@@ -11,6 +11,7 @@ import { Row, Col } from "antd";
 import { ResponsiveSankey, SankeyNodeDatum } from "@nivo/sankey";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { getTranslation } from "@/app/utils/translations";
+import { cn } from "../utils/cn";
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 // import mockDataMajorEn from "@/app/majors/final_data_15-01 (version2).json";
@@ -502,7 +503,7 @@ const getTimingNodeColor = (nodeId: string) => {
     "Before Graduation": "#c6c630",
     "Within First Year": "#19ce91",
     "After First Year": "#25b0ba",
-    "موظف أثناء الدراسة ": "#c6c630",
+    "موظف أثناء الدراسة": "#c6c630",
     "توظف خلال سنة بعد التخرج ": "#19ce91",
     "توظف بعد سنة من التخرج": "#25b0ba"
   };
@@ -861,51 +862,11 @@ export default function ThirdPage() {
       "After First Year": "#25b0ba",
     };
 
-    // Create nodes array based on language
-    const nodes = language === 'ar' ? [
-      // Right side nodes (timing nodes) for Arabic
-      {
-        id: getTranslation("Before Graduation", language),
-        nodeColor: timingColors["Before Graduation"],
-      },
-      {
-        id: getTranslation("Within First Year", language),
-        nodeColor: timingColors["Within First Year"],
-      },
-      {
-        id: getTranslation("After First Year", language),
-        nodeColor: timingColors["After First Year"],
-      },
-      // Left side nodes (majors) for Arabic - using English name for color lookup
-      ...majorNodes.map(node => ({
-        id: node.id,
-        nodeColor: majorColorMap[node.englishName] || "#666666",
-      })),
-    ] : [
-      // Left side nodes (majors) for English
-      ...majorNodes.map(node => ({
-        id: node.id,
-        nodeColor: majorColorMap[node.englishName] || "#666666",
-      })),
-      // Right side nodes (timing nodes) for English
-      {
-        id: getTranslation("Before Graduation", language),
-        nodeColor: timingColors["Before Graduation"],
-      },
-      {
-        id: getTranslation("Within First Year", language),
-        nodeColor: timingColors["Within First Year"],
-      },
-      {
-        id: getTranslation("After First Year", language),
-        nodeColor: timingColors["After First Year"],
-      },
-    ];
+    // Create links array first to determine which timing nodes are actually used
+    const links: SankeyCustomLinkData[] = [];
+    const usedTimingNodes = new Set<string>();
 
-    // Create links array
-    const links = [];
-
-    // Add links for each major
+    // Add links for each major and track which timing nodes are used
     majorNodes.forEach((node) => {
       const major = narrowMajorData.overall.topMajorsInsights.topByEmploymentTiming.find(
         m => {
@@ -919,43 +880,63 @@ export default function ThirdPage() {
 
       // Before Graduation
       if (major.employmentTiming?.beforeGraduation?.percentage > 0) {
+        const timingNode = getTranslation("Before Graduation", language);
+        usedTimingNodes.add(timingNode);
         links.push({
-          source: language === 'ar' 
-            ? getTranslation("Before Graduation", language)
-            : node.id,
-          target: language === 'ar'
-            ? node.id
-            : getTranslation("Before Graduation", language),
+          source: language === 'ar' ? timingNode : node.id,
+          target: language === 'ar' ? node.id : timingNode,
           value: major.employmentTiming.beforeGraduation.percentage,
         });
       }
 
       // Within First Year
       if (major.employmentTiming?.withinFirstYear?.percentage > 0) {
+        const timingNode = getTranslation("Within First Year", language);
+        usedTimingNodes.add(timingNode);
         links.push({
-          source: language === 'ar'
-            ? getTranslation("Within First Year", language)
-            : node.id,
-          target: language === 'ar'
-            ? node.id
-            : getTranslation("Within First Year", language),
+          source: language === 'ar' ? timingNode : node.id,
+          target: language === 'ar' ? node.id : timingNode,
           value: major.employmentTiming.withinFirstYear.percentage,
         });
       }
 
       // After First Year
       if (major.employmentTiming?.afterFirstYear?.percentage > 0) {
+        const timingNode = getTranslation("After First Year", language);
+        usedTimingNodes.add(timingNode);
         links.push({
-          source: language === 'ar'
-            ? getTranslation("After First Year", language)
-            : node.id,
-          target: language === 'ar'
-            ? node.id
-            : getTranslation("After First Year", language),
+          source: language === 'ar' ? timingNode : node.id,
+          target: language === 'ar' ? node.id : timingNode,
           value: major.employmentTiming.afterFirstYear.percentage,
         });
       }
     });
+
+    // Create timing nodes array based on which ones are actually used
+    const timingNodes = [
+      { id: getTranslation("Before Graduation", language), nodeColor: timingColors["Before Graduation"] },
+      { id: getTranslation("Within First Year", language), nodeColor: timingColors["Within First Year"] },
+      { id: getTranslation("After First Year", language), nodeColor: timingColors["After First Year"] },
+    ].filter(node => usedTimingNodes.has(node.id));
+
+    // Create nodes array based on language, only including used timing nodes
+    const nodes = language === 'ar' ? [
+      // Right side nodes (timing nodes) for Arabic - only used ones
+      ...timingNodes,
+      // Left side nodes (majors) for Arabic - using English name for color lookup
+      ...majorNodes.map(node => ({
+        id: node.id,
+        nodeColor: majorColorMap[node.englishName] || "#666666",
+      })),
+    ] : [
+      // Left side nodes (majors) for English
+      ...majorNodes.map(node => ({
+        id: node.id,
+        nodeColor: majorColorMap[node.englishName] || "#666666",
+      })),
+      // Right side nodes (timing nodes) for English - only used ones
+      ...timingNodes,
+    ];
 
     return { nodes, links };
   }, [narrowMajorData, language]);
@@ -974,7 +955,7 @@ export default function ThirdPage() {
         {/* Major Title */}
         <div className="mb-5">
           {/* General Major Title */}
-          <div className="flex justify-center items-center gap-3 mb-3">
+          <div className={cn("flex justify-center items-center gap-3 mb-3",language==="ar"?"flex-row-reverse text-right":"text-left")}>
             {generalMajorData?.generalMajor &&
               getMajorIcon(generalMajorData.generalMajor) && (
                 <div className="text-3xl text-[#2CCAD3]">
@@ -1011,47 +992,161 @@ export default function ThirdPage() {
             } p-3 pt-4 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-7 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center ${
+                language === "ar" ? "flex-row-reverse justify-end gap-4" : "justify-center gap-6"
+              }`}
+            >
+              {language === "ar" ? (
+                <div style={{ marginLeft: -20 }}>
+                  <p className="text-sm  text-white">
+                    {getTranslation("Total Graduates", language)}
+                  </p>
+                  <p className="text-4xl font-bold text-white">
+                    {overviewStats?.graduates.totalGraduates.toLocaleString()}
+                  </p>
+                  <div className="flex items-center gap-1 mt-1">
+                    <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
+                      <BiMale style={{ color: "#2CCAD3" }} />
+                      <span className="text-xs text-white">
+                        {overviewStats?.graduates.male.percentage}%
+                      </span>
+                    </div>
+                    <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
+                      <BiFemale style={{ color: "#fe1672" }} />
+                      <span className="text-xs text-white">
+                        {overviewStats?.graduates.female.percentage}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className="bg-[#2CCAD3]/10 p-1"
+                  style={{
+                    backgroundColor: "transparent",
+                    borderRadius: 0,
+                  }}
+                >
+                  <Image
+                    src="/icons/graduateicon.svg"
+                    alt={getTranslation("Total Graduates", language)}
+                    width={52}
+                    height={42}
+                    style={{ marginLeft: -10 , marginTop:15}}
+                  />
+                </div>
+              )}
+              {language === "ar" ? (
+                <div
+                  className="bg-[#2CCAD3]/10 p-1"
+                  style={{
+                    backgroundColor: "transparent",
+                    borderRadius: 0,
+                  }}
+                >
+                  <Image
+                    src="/icons/graduateicon.svg"
+                    alt={getTranslation("Total Graduates", language)}
+                    width={42}
+                    height={42}
+                  />
+                </div>
+              ) : (
+                <div style={{ marginLeft: -20 }}>
+                  <p className="text-sm  text-white">
+                    {getTranslation("Total Graduates", language)}
+                  </p>
+                  <p className="text-4xl font-bold text-white">
+                    {overviewStats?.graduates.totalGraduates.toLocaleString()}
+                  </p>
+                  <div className="flex items-center gap-1 mt-1">
+                    <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
+                      <BiMale style={{ color: "#2CCAD3" }} />
+                      <span className="text-xs text-white">
+                        {overviewStats?.graduates.male.percentage}%
+                      </span>
+                    </div>
+                    <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
+                      <BiFemale style={{ color: "#fe1672" }} />
+                      <span className="text-xs text-white">
+                        {overviewStats?.graduates.female.percentage}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Average Salary */}
+          <div
+            className={`bg-gradient-to-r ${
+              language === "ar"
+                ? "from-[#2CCAD3]/20 to-transparent rounded-2xl"
+                : "from-transparent to-[#2CCAD3]/20 rounded-2xl"
+            } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
+          >
+            <div
+              className={`flex items-center gap-6  ${
+                language === "ar" ? "flex-row-reverse justify-end pr-3" : "justify-center"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-1"
-                style={{
-                  backgroundColor: "transparent",
-                  borderRadius: 0,
-                  marginLeft: 8,
-                }}
+               className={cn(
+                "bg-[#2CCAD3]/10 p-4",
+                {
+                  "hidden" : language === "ar",
+                }
+              )}
+              style={{
+                backgroundColor: "transparent",
+                borderRadius: 0,
+                marginLeft: 8,
+              }}
               >
-                <Image
-                  src="/icons/graduateicon.svg"
-                  alt={getTranslation("Total Graduates", language)}
-                  width={52}
-                  height={42}
-                  style={{ marginLeft: -10 }}
+                <PiMoneyFill
+                  style={{
+                    color: "#2CCAD3",
+                    width: 42,
+                    height: 42,
+                    marginLeft: -15,
+                  }}
                 />
               </div>
+             
               <div style={{ marginLeft: -20 }}>
-                <p className="text-sm  text-white">
-                  {getTranslation("Total Graduates", language)}
+                <p className="text-sm text-white">
+                  {getTranslation("Average Salary", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
-                  {overviewStats?.graduates.totalGraduates.toLocaleString()}
+                  {narrowMajorData?.overall.totalMetrics.averageSalary.toLocaleString()}
+                  <span className="font-normal text-lg">
+                    {" "}
+                    {getTranslation("SAR", language)}
+                  </span>
                 </p>
-                <div className="flex items-center gap-1 mt-1">
-                  <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
-                    <BiMale style={{ color: "#2CCAD3" }} />
-                    <span className="text-xs text-white">
-                      {overviewStats?.graduates.male.percentage}%
-                    </span>
-                  </div>
-                  <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
-                    <BiFemale style={{ color: "#fe1672" }} />
-                    <span className="text-xs text-white">
-                      {overviewStats?.graduates.female.percentage}%
-                    </span>
-                  </div>
-                </div>
+              </div>
+              <div
+               className={cn(
+                "bg-[#2CCAD3]/10",
+                {
+                  "hidden" : language === "en",
+                }
+              )}
+              style={{
+                backgroundColor: "transparent",
+                borderRadius: 0,
+                marginLeft: 8,
+              }}
+              >
+                <PiMoneyFill
+                  style={{
+                    color: "#2CCAD3",
+                    width: 42,
+                    height: 42,
+                    marginLeft: -15,
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -1065,18 +1160,24 @@ export default function ThirdPage() {
             } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center gap-4 ${
+                language === "ar" ? "flex-row-reverse justify-end" : ""
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-4"
+               className={cn(
+                "bg-[#2CCAD3]/10 p-4",
+                {
+                  "hidden" : language === "ar",
+                }
+              )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
                   marginLeft: 8,
                 }}
               >
+                
                 <FaBusinessTime
                   style={{
                     color: "#2CCAD3",
@@ -1087,7 +1188,7 @@ export default function ThirdPage() {
                 />
               </div>
               <div style={{ marginLeft: -20 }}>
-                <p className="text-sm text-white">
+                <p className="text-sm text-white text-nowrap">
                   {getTranslation("Time to Employment", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
@@ -1101,50 +1202,28 @@ export default function ThirdPage() {
                   </span>
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* Average Salary */}
-          <div
-            className={`bg-gradient-to-r ${
-              language === "ar"
-                ? "from-[#2CCAD3]/20 to-transparent rounded-2xl"
-                : "from-transparent to-[#2CCAD3]/20 rounded-2xl"
-            } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
-          >
-            <div
-              className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
-              }`}
-            >
               <div
-                className="bg-[#2CCAD3]/10 p-4"
+                className={cn(
+                  "bg-[#2CCAD3]/10 p-0",
+                  {
+                    "hidden" : language === "en",
+                  }
+                )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
                   marginLeft: 8,
                 }}
               >
-                <PiMoneyFill
+                
+                <FaBusinessTime
                   style={{
                     color: "#2CCAD3",
                     width: 42,
                     height: 42,
-                    marginLeft: -15,
+                    marginLeft: -10,
                   }}
                 />
-              </div>
-              <div style={{ marginLeft: -20 }}>
-                <p className="text-sm text-white">
-                  {getTranslation("Average Salary", language)}
-                </p>
-                <p className="text-4xl font-bold text-white">
-                  {narrowMajorData?.overall.totalMetrics.averageSalary.toLocaleString()}
-                  <span className="font-normal text-lg">
-                    {" "}
-                    {getTranslation("SAR", language)}
-                  </span>
-                </p>
               </div>
             </div>
           </div>
@@ -1159,11 +1238,11 @@ export default function ThirdPage() {
           >
             <div
               className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
+                language === "ar" ? "flex-row-reverse justify-end" : "justify-start"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-4"
+                className={cn("bg-[#2CCAD3]/10 p-4", language === "ar" && "hidden")}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -1187,6 +1266,23 @@ export default function ThirdPage() {
                   {narrowMajorData?.overall.totalMetrics.totalJobSeekers}
                 </p>
               </div>
+              <div
+                className={cn("bg-[#2CCAD3]/10", language === "en" && "hidden")}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <FaUserGraduate
+                  style={{
+                    color: "#2CCAD3",
+                    width: 40,
+                    height: 40,
+                    marginLeft: -10,
+                  }}
+                />
+              </div>
             </div>
           </div>
 
@@ -1194,17 +1290,17 @@ export default function ThirdPage() {
           <div
             className={`bg-gradient-to-r ${
               language === "ar"
-                ? "from-[#2CCAD3]/20 to-transparent rounded-l-2xl"
-                : "from-transparent to-[#2CCAD3]/20 rounded-2xl"
+                ? "from-[#2CCAD3]/20 to-transparent rounded-r-2xl"
+                : "from-transparent to-[#2CCAD3]/20 rounded-l-2xl"
             } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center ${
+                language === "ar" ? "flex-row-reverse justify-end gap-2" : "justify-start gap-6"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-4"
+                className={cn( "bg-[#2CCAD3]/10 p-2", language === 'ar' && 'hidden' )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -1214,8 +1310,8 @@ export default function ThirdPage() {
                 <Image
                   src="/icons/employmentrateicon.svg"
                   alt="Employment"
-                  width={52}
-                  height={42}
+                  width={62}
+                  height={62}
                   style={{ marginLeft: -10 }}
                 />
               </div>
@@ -1226,6 +1322,23 @@ export default function ThirdPage() {
                 <p className="text-4xl font-bold text-white">
                   {overviewStats?.employmentRate}%
                 </p>
+              </div>
+              <div
+                className={cn( "bg-[#2CCAD3]/10", language === 'en' && 'hidden' )}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <Image
+                  src="/icons/employmentrateicon.svg"
+                  alt="Employment"
+                  width={62}
+                  height={62}
+                  style={{ marginLeft: -10 }}
+                  // sizes="102px"
+                />
               </div>
             </div>
           </div>
@@ -1458,7 +1571,7 @@ export default function ThirdPage() {
                 />
 
                 {narrowMajorData?.overall.totalMetrics.educationLevelInsights
-                  .slice(0, 5)
+                  ?.slice(0, 5)
                   .map((level, index) => {
                     const percentages = [98, 75, 45, 30, 15];
                     const percentage = percentages[index] || 12;
@@ -1671,7 +1784,7 @@ export default function ThirdPage() {
                   />
                 </div>
                 <span className="text-white">
-                  {getTranslation("Top Narrow Majors by Gender", language)}
+                  {getTranslation("Top Specialization by Gender", language)}
                 </span>
               </h2>
               <div className="space-y-4">
@@ -1726,7 +1839,7 @@ export default function ThirdPage() {
                             language === "ar"
                               ? "left-0 bg-gradient-to-r"
                               : "right-0 bg-gradient-to-l"
-                          }  from-[#fe1684]/100 to-[#fe1684]/30 group-hover:opacity-90 transition-opacity`}
+                          }  from-[#fe1684]/30 to-[#fe1684]/100 group-hover:opacity-90 transition-opacity`}
                           style={{
                             width: `${major.genderDistribution.female.percentage}%`,
                           }}
@@ -1741,7 +1854,7 @@ export default function ThirdPage() {
                             <span className="text-xs text-white">
                               {major.genderDistribution.female.percentage}%
                             </span>
-                            <BiFemale style={{ color: "#2CCAD3" }} />
+                            <BiFemale style={{ color: "#fe1672" }} />
                           </div>
                         </div>
                       </div>
@@ -1780,7 +1893,7 @@ export default function ThirdPage() {
                   </div>
                   <span className="text-white">
                     {getTranslation(
-                      "Narrow Majors By Time of Employment",
+                      "Specialization By Time of Employment",
                       language
                     )}
                   </span>
@@ -1904,7 +2017,7 @@ export default function ThirdPage() {
                   />
                 </div>
                 <span className="text-white">
-                  {getTranslation("Employment Rate by Narrow Major", language)}
+                  {getTranslation("Employment Rate by Specialization", language)}
                 </span>
               </h2>
               <div className="space-y-4 relative" style={{ top: "30px" }}>

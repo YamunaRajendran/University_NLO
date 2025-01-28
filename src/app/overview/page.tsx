@@ -6,7 +6,12 @@ import mockData from "./major_insights_english.json";
 import arabicData from "./major_insights_arabic 3.json";
 import { useEffect, useState } from "react";
 import SmallCircles from "@/app/overview/component/Small";
-import { PiMoneyFill, PiTrophy, PiChartBar, PiStudentFill } from "react-icons/pi";
+import {
+  PiMoneyFill,
+  PiTrophy,
+  PiChartBar,
+  PiStudentFill,
+} from "react-icons/pi";
 import { PiGraduationCapFill } from "react-icons/pi";
 import { PiCertificate } from "react-icons/pi";
 import { FaUniversity } from "react-icons/fa";
@@ -83,9 +88,9 @@ export default function HomePage() {
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
 
   const formatNumber = (number: number | undefined | null) => {
-    if (number === undefined || number === null) return '0';
+    if (number === undefined || number === null) return "0";
     // Always use en-US locale to keep numbers in Western digits
-    return Number(number).toLocaleString('en-US');
+    return Number(number).toLocaleString("en-US");
   };
 
   useEffect(() => {
@@ -203,53 +208,59 @@ export default function HomePage() {
     },
   ];
 
-
-  
-
   return (
     <>
-      <div className={`relative flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden ${language === 'ar' ? 'rtl' : 'ltr'}`}>
-        <h1 className={`absolute -top-1.5 px-[520px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl  ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-          {language === 'ar' ? (
-            // For Arabic, reverse the array to maintain proper character order
-            getTranslation("Saudi Arabia Graduates Observation", language)
-              .split(" ")
-              .reverse()
-              .map((word, index, array) => (
-                <span
-                  key={index}
-                  className="animate-glow-letter"
-                  style={{
-                    // animationDelay: `${index * 0.05}s`,
-                    animationDelay: language === "ar"
-                    ? `${(array.length - 1 - index) * 0.05}s`
-                    : `${index * 0.05}s`,
-                    marginLeft:"4px"
-                
-                  }}
-                >
-                  {word}
-                  {/* {char === " " ? "\u00A0" : char} */}
-                </span>
-              ))
-          ) : (
-            // For English, keep the original order
-            getTranslation("Saudi Arabia Graduates Observation", language)
-              .split("")
-              .map((char, index, array) => (
-                <span
-                  key={index}
-                  className="animate-glow-letter"
-                  style={{
-                    animationDelay: `${index * 0.05}s`,
-                  }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))
-          )}
+      <div
+        className={`relative flex-1 p-2 sm:p-4 lg:p-6 bg-transparent backdrop-blur-sm flex flex-col lg:flex-row items-start justify-between relative min-h-screen overflow-hidden ${
+          language === "ar" ? "rtl" : "ltr"
+        }`}
+      >
+        <h1
+          className={`absolute -top-1.5 px-[520px] 2xl:px-0 2xl:text-center text-[#2ab1bb] mb-2 sm:mb-3 text-xs sm:text-sm lg:text-2xl w-full${
+            language === "ar" ? "text-right" : "text-left"
+          }`}
+        >
+          {language === "ar"
+            ? // For Arabic, split by words to maintain letter connections
+              getTranslation("Saudi Arabia Graduates Observation", language)
+                .split(" ")
+                .reverse()
+                .map((word, index, array) => (
+                  <span
+                    key={index}
+                    className="animate-glow-letter"
+                    style={{
+                      animationDelay:
+                        language === "ar"
+                          ? `${(array.length - 1 - index) * 0.05}s`
+                          : `${index * 0.05}s`,
+                      marginLeft: "4px",
+                    }}
+                  >
+                    {word}
+                  </span>
+                ))
+            : // For English, keep the original letter-by-letter animation
+              getTranslation("Saudi Arabia Graduates Observation", language)
+                .split("")
+                .map((char, index, array) => (
+                  <span
+                    key={index}
+                    className="animate-glow-letter"
+                    style={{
+                      animationDelay: `${index * 0.05}s`,
+                    }}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                ))}
         </h1>
-        <p className={cn("absolute top-6 text-white px-[430px] 2xl:px-0 2xl:text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  w-full", language === 'ar'&& "px-[550px]")}>
+        <p
+          className={cn(
+            "absolute top-6 text-white px-[430px] 2xl:px-0 2xl:text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  w-full",
+            language === "ar" && "px-[550px]"
+          )}
+        >
           {getTranslation(
             "Data for 2022 Graduates and their Employment through December 2023",
             language
@@ -265,10 +276,22 @@ export default function HomePage() {
         </p> */}
 
           {/* Education Title */}
-          <div className={cn( "relative w-full sm:w-[280px] h-[100px] sm:h-[50px] justify-start mx-auto mb-8")}>
-            <div className={`absolute inset-0 flex items-center gap-2 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+          <div
+            className={cn(
+              "relative w-full sm:w-[280px] h-[100px] sm:h-[50px] justify-start mx-auto mb-8"
+            )}
+          >
+            <div
+              className={`absolute inset-0 flex items-center gap-2 ${
+                language === "ar" ? "flex-row-reverse" : "flex-row"
+              }`}
+            >
               <currentData.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#2cd7c4] flex-shrink-0" />
-              <span className={`text-white text-lg sm:text-xl leading-tight tracking-wide flex-1 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+              <span
+                className={`text-white text-lg sm:text-xl leading-tight tracking-wide flex-1 ${
+                  language === "ar" ? "text-right" : "text-left"
+                }`}
+              >
                 {currentData.title}
               </span>
             </div>
@@ -278,7 +301,11 @@ export default function HomePage() {
           <div className="flex flex-col gap-2 p-2 sm:p-4 bg-[#1C3862]/50 rounded-[15px] ">
             {/* Total Graduates Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className={`flex items-center gap-4 mb-1 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-4 mb-1 ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div className="w-12">
                   <Image
                     src="/icons/graduateicon.svg"
@@ -287,48 +314,42 @@ export default function HomePage() {
                     height={32}
                   />
                 </div>
-                <div className={cn( "flex-1 ", language === 'ar' && 'text-right pr-6' )} style={{ marginRight: -20 }}>
+                <div
+                  className={cn(
+                    "flex-1 ",
+                    language === "ar" && "text-right pr-6"
+                  )}
+                  style={{ marginRight: -20 }}
+                >
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Total Graduates", language)}
                   </span>
-                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
+                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
                     {formatNumber(currentData.graduates.totalGraduates)}
                   </div>
 
-                  <div className="flex gap-4 mt-0">
-                    <div className="bg-[#1d3862]/80 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
-                      <span className="flex items-center gap-0 text-[#ffff] text-sm ">
+                  <div
+                    className={`flex gap-4 mt-0 ${
+                      language === "ar" ? "flex-row-reverse" : ""
+                    }`}
+                  >
+                    <div className="bg-[#1d3862]/80 rounded-[7px] flex items-center gap-0 px-1 py-0.5 ">
+                      <span
+                        className={`flex items-center gap-0 text-[#ffff] text-sm ${
+                          language === "ar" ? "flex-row-reverse" : ""
+                        }`}
+                      >
                         <BiMale style={{ color: "#2CCAD3" }} size={18} />
-                        {/* <span className="text-[#ffff] flex items-center gap-1 text-lg">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 text-[#2a6dee]"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <circle cx="12" cy="7" r="4" strokeWidth="2" />
-                      <path strokeWidth="2" d="M15 14h-6l-2 8h10z" />
-                      <line x1="12" y1="14" x2="12" y2="22" strokeWidth="2" />
-                    </svg> */}
                         <span>{currentData.graduates.male.percentage}%</span>
                       </span>
                     </div>
-                    <div className="bg-[#1d3862]/80 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
-                      <span className="flex items-center gap-0 text-[#ffff] text-sm ">
+                    <div className="bg-[#1d3862]/80 rounded-[7px] flex items-center gap-0 px-1 py-0.5 ">
+                      <span
+                        className={`flex items-center gap-0 text-[#ffff] text-sm ${
+                          language === "ar" ? "flex-row-reverse" : ""
+                        }`}
+                      >
                         <BiFemale style={{ color: "#fe1684" }} size={18} />
-                        {/* <span className="text-[#ffff] flex items-center gap-1 text-lg">
-                    <svg female-pink-#fe1684
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 text-[#ff69b4]"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <circle cx="12" cy="7" r="4" strokeWidth="2" />
-                      <path strokeWidth="2" d="M8 14h8l2 4h-12z" />
-                      <path strokeWidth="2" d="M15 18l-3 4l-3-4" />
-                    </svg> */}
                         <span>{currentData.graduates.female.percentage}%</span>
                       </span>
                     </div>
@@ -339,16 +360,26 @@ export default function HomePage() {
 
             {/* Employment Rate Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-4 ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div className="w-12">
                   <Image
                     src="/icons/employmentrateicon.svg"
                     alt="Employment"
                     width={32}
                     height={32}
+                    // marginLeft={-5}
                   />
                 </div>
-                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
+                <div
+                  className={cn(
+                    "flex-1",
+                    language === "ar" && "text-right pr-1"
+                  )}
+                >
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Employment Rate", language)}
                   </span>
@@ -361,28 +392,44 @@ export default function HomePage() {
 
             {/* Average Salary Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-4 ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div className="w-12">
                   <PiMoneyFill
                     style={{ color: "#2CCAD3", width: 32, height: 32 }}
                   />
                 </div>
-                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
-                {/* <div className="flex-1"> */}
+                <div
+                  className={cn(
+                    "flex-1",
+                    language === "ar" && "text-right pr-1"
+                  )}
+                >
+                  {/* <div className="flex-1"> */}
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Average Salary", language)}
                   </span>
                   <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
-                    {formatNumber(currentData.averageSalary)}{" "}
-                    <span
-                      style={{
-                        // fontFamily: "Roboto regular",
-                        fontSize: "1.4rem",
-                        fontWeight: 300,
-                      }}
+                    <div
+                      className={`flex  ${
+                        language === "ar" ? "flex-row-reverse " : "flex-row"
+                      }`}
                     >
-                      {getTranslation("SAR", language)}
-                    </span>
+                      <span> {formatNumber(currentData.averageSalary)}</span>
+                      <span
+                        style={{
+                          fontSize: "1.5rem",
+                          fontWeight: 400,
+                          marginRight: language === "ar" ? "0.5rem" : "0",
+                          marginLeft: language === "ar" ? "0" : "0.5rem",
+                        }}
+                      >
+                        {getTranslation("SAR", language)}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -390,28 +437,43 @@ export default function HomePage() {
 
             {/* Time to Employment Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-4 ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div className="w-12">
                   <FaBusinessTime
                     style={{ color: "#2CCAD3", width: 32, height: 32 }}
                   />
                 </div>
-                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
-                {/* <div className="flex-1"> */}
+                <div
+                  className={cn(
+                    "flex-1",
+                    language === "ar" && "text-right pr-1"
+                  )}
+                >
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Time to Employment", language)}
                   </span>
                   <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
-                    {currentData.timeToEmployment.overall.days}{" "}
-                    <span
-                      style={{
-                        // fontFamily: "Roboto regular",
-                        fontSize: "1.5rem",
-                        fontWeight: 400,
-                      }}
+                    <div
+                      className={`flex  ${
+                        language === "ar" ? "flex-row-reverse " : "flex-row"
+                      }`}
                     >
-                      {getTranslation("months", language)}
-                    </span>
+                      <span>{currentData.timeToEmployment.overall.days}</span>
+                      <span
+                        style={{
+                          fontSize: "1.5rem",
+                          fontWeight: 400,
+                          marginRight: language === "ar" ? "0.5rem" : "0",
+                          marginLeft: language === "ar" ? "0" : "0.5rem",
+                        }}
+                      >
+                        {getTranslation("months", language)}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -419,27 +481,48 @@ export default function HomePage() {
 
             {/* Job Seekers Card */}
             <div className="bg-[#15234A]/50 p-2 rounded-[15px] shadow-lg">
-              <div className={`flex items-center gap-4 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-4 ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div className="w-12">
                   <PiStudentFill
                     style={{ color: "#2CCAD3", width: 32, height: 32 }}
                   />
                 </div>
-                <div className={cn("flex-1", language === 'ar' && 'text-right pr-1')}>
-                {/* <div className="flex-1"> */}
+                <div
+                  className={cn(
+                    "flex-1",
+                    language === "ar" && "text-right pr-1"
+                  )}
+                >
+                  {/* <div className="flex-1"> */}
                   <span className="text-xs sm:text-sm  text-[#ffff] ">
                     {getTranslation("Job Seekers", language)}
                   </span>
-                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
+                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
                     {formatNumber(currentData.totalJobSeekers)}
                   </div>
 
-                  <div className="flex gap-2 mt-1">
-                    <div className="bg-[#1d3862]/80 rounded-[7px] flex items-center gap-1 px-2 py-0.5">
-                      {/* <span className="text-[#2cd7c4] text-sm">Active</span>
-                    <span className="text-white/70 text-sm">78%</span> */}
+                  {/* <div className={`flex gap-2 mt-1 text-xs ${language === "ar" ? "flex-row-reverse" : ""}`}>
+                    <div className="bg-[#15234A]/50 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
+                      <span className={`flex items-center gap-0 text-[#ffff] text-sm ${
+                        language === "ar" ? "flex-row-reverse" : ""
+                      }`}>
+                        <BiMale style={{ color: "#2CCAD3" }} size={20} />
+                        {totalMetrics.graduates.male.percentage}%
+                      </span>
                     </div>
-                  </div>
+                    <div className="bg-[#15234A]/50 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
+                      <span className={`flex items-center gap-0 text-[#ffff] text-sm ${
+                        language === "ar" ? "flex-row-reverse" : ""
+                      }`}>
+                        <BiFemale style={{ color: "#fe1672" }} size={20} />
+                        {totalMetrics.graduates.female.percentage}%
+                      </span>
+                    </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -481,7 +564,13 @@ export default function HomePage() {
 
         {/* Stats Cards */}
         <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[500px] flex flex-col gap-2 p-2 sm:p-4 lg:p-0 lg:mt-10">
-          <div className={`flex items-center justify-center gap-2 mb-4 ${language === 'ar' ? 'flex-row-reverse justify-end' : 'flex-row justify-start'}`}>
+          <div
+            className={`flex items-center justify-center gap-2 mb-4 ${
+              language === "ar"
+                ? "flex-row-reverse justify-end"
+                : "flex-row justify-start"
+            }`}
+          >
             <PiChartBar style={{ color: "#2CCAD3", width: 38, height: 38 }} />
             <span className="text-[#ffff] text-lg">
               {getTranslation("Total Metrics", language)}
@@ -510,7 +599,9 @@ export default function HomePage() {
                         {getTranslation("Public Universities", language)}
                       </span>
                       <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
-                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                      <span className={`text-white text-2xl font-bold ${
+                        language === "ar" ? "mr-auto pl-2" : "ml-auto pr-2"
+                      }`}>
                         {formatNumber(29)}
                       </span>
                     </div>
@@ -519,7 +610,9 @@ export default function HomePage() {
                         {getTranslation("Private Universities", language)}
                       </span>
                       <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
-                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                      <span className={`text-white text-2xl font-bold ${
+                        language === "ar" ? "mr-auto pl-2" : "ml-auto pr-2"
+                      }`}>
                         {formatNumber(26)}
                       </span>
                     </div>
@@ -529,7 +622,11 @@ export default function HomePage() {
             </div> */}
 
             <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-8 w-full ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div>
                   <Image
                     src="/icons/graduateicon.svg"
@@ -538,21 +635,37 @@ export default function HomePage() {
                     height={38}
                   />
                 </div>
-                <div className="flex-1">
+                <div
+                  className={cn("flex-1 ", language === "ar" && "text-right")}
+                >
                   <span className="text-xs sm:text-sm  text-[#ffff]">
                     {getTranslation("Total Graduates", language)}
                   </span>
-                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
-                    {formatNumber(totalMetrics.graduates.totalGraduates)}
-                    <div className="flex gap-2 mt-1 text-xs ">
+                  <div className="text-white text-2xl sm:text-3xl lg:text-4xl ">
+                    <span className="font-bold">
+                      {formatNumber(totalMetrics.graduates.totalGraduates)}
+                    </span>
+                    <div
+                      className={`flex gap-2 mt-1 text-xs ${
+                        language === "ar" ? "flex-row-reverse" : ""
+                      }`}
+                    >
                       <div className="bg-[#15234A]/50 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
-                        <span className="flex items-center gap-0">
+                        <span
+                          className={`flex items-center gap-0 text-[#ffff] text-sm ${
+                            language === "ar" ? "flex-row-reverse" : ""
+                          }`}
+                        >
                           <BiMale style={{ color: "#2CCAD3" }} size={20} />
                           {totalMetrics.graduates.male.percentage}%
                         </span>
                       </div>
                       <div className="bg-[#15234A]/50 rounded-[7px] flex items-center gap-0 px-1 py-0.5">
-                        <span className="flex items-center gap-0">
+                        <span
+                          className={`flex items-center gap-0 text-[#ffff] text-sm ${
+                            language === "ar" ? "flex-row-reverse" : ""
+                          }`}
+                        >
                           <BiFemale style={{ color: "#fe1672" }} size={20} />
                           {totalMetrics.graduates.female.percentage}%
                         </span>
@@ -563,14 +676,20 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className={`flex items-center gap-5 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+            <div className="overflow-hidden p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
+              <div
+                className={`flex items-center gap-5 w-full ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div>
                   <FaUniversity
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
                   />
                 </div>
-                <div className="flex-1">
+                <div
+                  className={cn("flex-1", language === "ar" && "text-right")}
+                >
                   <span className="text-xs sm:text-sm text-[#ffff]">
                     {getTranslation(
                       "Number of Universities and Educational Institutions",
@@ -578,21 +697,53 @@ export default function HomePage() {
                     )}
                   </span>
                   <div className="flex flex-col gap-1 mt-1">
-                    <div className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
-                      <span className={`text-white text-sm ${language === 'ar' ? 'pr-2' : 'pl-2'}`}>
+                    <div
+                      className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${
+                        language === "ar" ? "flex-row-reverse" : "flex-row"
+                      }`}
+                    >
+                      <span
+                        className={`text-white text-sm ${
+                          language === "ar" ? "pr-2" : "pl-2"
+                        }`}
+                      >
                         {getTranslation("Public Universities", language)}
                       </span>
-                      <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
-                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                      <div
+                        className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${
+                          language === "ar" ? "right-0" : "left-0"
+                        }`}
+                      ></div>
+                      <span
+                        className={`text-white text-2xl font-bold ${
+                          language === "ar" ? "ml-4 pr-2" : "ml-auto pr-2"
+                        }`}
+                      >
                         {formatNumber(29)}
                       </span>
                     </div>
-                    <div className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
-                      <span className={`text-white text-sm ${language === 'ar' ? 'pr-2' : 'pl-2'}`}>
+                    <div
+                      className={`flex h-5 items-center bg-[#15234A]/50 rounded-sm relative w-[175px] ${
+                        language === "ar" ? "flex-row-reverse" : "flex-row"
+                      }`}
+                    >
+                      <span
+                        className={`text-white text-sm ${
+                          language === "ar" ? "pr-2" : "pl-2"
+                        }`}
+                      >
                         {getTranslation("Private Universities", language)}
                       </span>
-                      <div className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${language === 'ar' ? 'right-0' : 'left-0'}`}></div>
-                      <span className={`text-white text-2xl font-bold ${language === 'ar' ? 'ml-2' : 'ml-auto pr-2'}`}>
+                      <div
+                        className={`absolute h-full w-[2px] bg-[#2CCAD3]/100 ${
+                          language === "ar" ? "right-0" : "left-0"
+                        }`}
+                      ></div>
+                      <span
+                        className={`text-white text-2xl font-bold ${
+                          language === "ar" ? "ml-6 pr-6" : "ml-auto pr-2"
+                        }`}
+                      >
                         {formatNumber(26)}
                       </span>
                     </div>
@@ -601,8 +752,17 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+            <div
+              className={cn(
+                "p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center",
+                language === "ar" && "text-right"
+              )}
+            >
+              <div
+                className={`flex items-center gap-8 w-full ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div>
                   <Image
                     src="/icons/employmentrateicon.svg"
@@ -621,27 +781,44 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+            <div
+              className={cn(
+                "p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center",
+                language === "ar" && "text-right"
+              )}
+            >
+              <div
+                className={`flex items-center gap-8 w-full ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div>
                   <PiMoneyFill
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
                   />
                 </div>
-                <div className="flex-1">
+                <div className=" flex-1">
                   <span className="text-xs sm:text-sm  text-[#ffff]">
                     {getTranslation("Average Salary", language)}
                   </span>
                   <div className="text-white text-2xl sm:text-3xl lg:text-4xl  font-bold">
-                    {formatNumber(totalMetrics.averageSalary)}{" "}
-                    <span
-                      style={{
-                        fontSize: "1.4rem",
-                        fontWeight: 300,
-                      }}
+                    <div
+                      className={`flex  ${
+                        language === "ar" ? "flex-row-reverse " : "flex-row"
+                      }`}
                     >
-                      {getTranslation("SAR", language)}
-                    </span>
+                      <span>{formatNumber(totalMetrics.averageSalary)}</span>
+                      <span
+                        style={{
+                          fontSize: "1.5rem",
+                          fontWeight: 400,
+                          marginRight: language === "ar" ? "0.5rem" : "0",
+                          marginLeft: language === "ar" ? "0" : "0.5rem",
+                        }}
+                      >
+                        {getTranslation("SAR", language)}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -651,38 +828,58 @@ export default function HomePage() {
           {/* Second row - Money and Business Time */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-8 w-full ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div>
                   <FaBusinessTime
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
                   />
                 </div>
-                <div className="flex-1">
+                <div
+                  className={cn("flex-1", language === "ar" && "text-right")}
+                >
                   <span className="text-xs sm:text-sm  text-[#ffff]">
                     {getTranslation("Time to Employment", language)}
                   </span>
                   <div className="text-white text-2xl sm:text-3xl lg:text-4xl  mt-1 font-bold">
-                    {totalMetrics.timeToEmployment.overall.days}{" "}
-                    <span
-                      style={{
-                        fontSize: "1.2rem",
-                        fontWeight: 200,
-                      }}
+                    <div
+                      className={`flex  ${
+                        language === "ar" ? "flex-row-reverse" : "flex-row"
+                      }`}
                     >
-                      {getTranslation("months", language)}
-                    </span>
+                      <span>{totalMetrics.timeToEmployment.overall.days}</span>
+                      <span
+                        style={{
+                          fontSize: "1.2rem",
+                          fontWeight: 200,
+                          marginRight: language === "ar" ? "0.5rem" : "0",
+                          marginLeft: language === "ar" ? "0" : "0.5rem",
+                        }}
+                      >
+                        {getTranslation("months", language)}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90 w-full h-[100px] sm:w-[245px] flex items-center">
-              <div className={`flex items-center gap-8 w-full ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-8 w-full ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div>
                   <PiStudentFill
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
                   />
                 </div>
-                <div className="flex-1">
+                <div
+                  className={cn("flex-1", language === "ar" && "text-right")}
+                >
                   <span className="text-xs sm:text-sm  text-[#ffff]">
                     {getTranslation("Total Job Seekers", language)}
                   </span>
@@ -698,7 +895,11 @@ export default function HomePage() {
           <div className="w-full sm:w-[500px] h-[300px] p-2 sm:p-3 rounded-[20px] shadow-lg border border-[#2ab1bb]/30 bg-gradient-to-r from-[#24285E]/20 via-[#24285E]/10 to-[#244975]/90">
             <div className="flex flex-col gap-2">
               {/* Title Section */}
-              <div className={`flex items-center gap-8 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div
+                className={`flex items-center gap-8 ${
+                  language === "ar" ? "flex-row-reverse" : "flex-row"
+                }`}
+              >
                 <div>
                   <PiCertificate
                     style={{ color: "#2CCAD3", width: 38, height: 38 }}
@@ -720,7 +921,11 @@ export default function HomePage() {
 
               {/* Bar Chart Section */}
               <div className="flex flex-col px-4 h-60 bg-gradient-to-br from-[#15234A]/50 via-[#15234A]/50 to-[#15234A]/50 border rounded-[20px] border-[#2E3153]/10">
-                <div className={`flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div
+                  className={`flex h-full items-end justify-between px-0 gap-2 sm:gap-8 mb-1 ${
+                    language === "ar" ? "flex-row-reverse" : "flex-row"
+                  }`}
+                >
                   {/* Bachelor's - 195571 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
@@ -840,7 +1045,11 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-                <div className={`flex gap-x-6 px-0 text-[9px] sm:text-[11px] ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div
+                  className={`flex gap-x-6 px-0 text-[9px] sm:text-[11px] ${
+                    language === "ar" ? "flex-row-reverse" : "flex-row"
+                  }`}
+                >
                   <div className="text-white text-center w-6 sm:w-10">
                     {getTranslation("Bachelor's", language)}
                   </div>
@@ -868,7 +1077,11 @@ export default function HomePage() {
           </div>
 
           {/* Data Source Note */}
-          <div className={`text-white text-[10px] sm:text-xs md:text-sm mt-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <div
+            className={`text-white text-[10px] sm:text-xs md:text-sm mt-2 ${
+              language === "ar" ? "text-right" : "text-left"
+            }`}
+          >
             {/* <p className="mb-1">
               {getTranslation(
                 "Data for 2022 Graduates and their Employment through December 2023",

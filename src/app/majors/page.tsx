@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { BiFemale } from "react-icons/bi";
 import { BiMale } from "react-icons/bi";
 import { PiMoneyFill } from "react-icons/pi";
+import { cn } from "../utils/cn";
 import { FaBusinessTime } from "react-icons/fa6";
 import {
   FaGraduationCap,
@@ -671,30 +672,24 @@ export default function SecondPage() {
   }, [majorData, language]);
 
   const handleSankeyNodeClick = (nodeId: string) => {
-    const timingNodes = {
-      [getTranslation("Before Graduation", language)]: "beforeGraduation",
-      [getTranslation("Within First Year", language)]: "withinFirstYear",
-      [getTranslation("After First Year", language)]: "afterFirstYear",
-    };
-
-    const isTimingNode = Object.keys(timingNodes).includes(nodeId);
+    const timingNodes = [
+      getTranslation("Before Graduation", language),
+      getTranslation("Within First Year", language),
+      getTranslation("After First Year", language),
+    ];
     
-    if (isTimingNode) {
-      // Find majors that have graduates in this timing
-      const majorsWithTiming = majorData?.overall.topNarrowMajorsInsights.topByEmploymentTiming
-        .filter(major => {
-          const timing = timingNodes[nodeId];
-          return major.employmentTiming?.[timing]?.percentage > 0;
-        })
-        .map(major => major.narrowMajor);
-
-      if (majorsWithTiming?.length > 0) {
-        // Navigate to the first major with this timing
-        handleNarrowMajorSelect(majorsWithTiming[0]);
+    // For Arabic version, the timing nodes are source and majors are target
+    // For English version, the majors are source and timing nodes are target
+    if (language === "ar") {
+      // If it's not a timing node, it's a major node
+      if (!timingNodes.includes(nodeId)) {
+        handleNarrowMajorSelect(nodeId);
       }
     } else {
-      // Handle narrow major node click
-      handleNarrowMajorSelect(nodeId);
+      // For English version
+      if (!timingNodes.includes(nodeId)) {
+        handleNarrowMajorSelect(nodeId);
+      }
     }
   };
 
@@ -733,7 +728,9 @@ export default function SecondPage() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-2 py-8 max-w-full w-[99%]">
         {/* Major Title */}
-        <div className="mb-5 flex justify-center items-center gap-3">
+        <div className={cn("flex justify-center items-center gap-3 mb-3",language==="ar"?"flex-row-reverse text-right":"text-left")}>
+
+        {/* <div className="mb-5 flex justify-center items-center gap-3"> */}
           {selectedMajor && getMajorIcon(selectedMajor) && (
             <div className="text-3xl text-[#2CCAD3]">
               {React.createElement(getMajorIcon(selectedMajor))}
@@ -743,7 +740,12 @@ export default function SecondPage() {
         </div>
 
         {/* Overview Stats */}
-        <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 w-full px-1 ${language === "ar" ? "dir-rtl" : ""}`} style={{ direction: language === "ar" ? "rtl" : "ltr" }}>
+        <div
+          className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 w-full px-1 ${
+            language === "ar" ? "dir-rtl" : ""
+          }`}
+          style={{ direction: language === "ar" ? "rtl" : "ltr" }}
+        >
           {/* Graduates */}
           <div
             className={`bg-gradient-to-r ${
@@ -753,12 +755,17 @@ export default function SecondPage() {
             } p-3 pt-4 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-7 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center  ${
+                language === "ar" ? "flex-row-reverse justify-end gap-2" : "justify-center gap-6"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-2"
+                className={cn(
+                  "bg-[#2CCAD3]/10",
+                  {
+                    hidden: language === "ar",
+                  }
+                )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -767,13 +774,18 @@ export default function SecondPage() {
               >
                 <Image
                   src="/icons/graduateicon.svg"
-                  alt={getTranslation("Total Graduates", language)}
-                  width={52}
-                  height={42}
-                  style={{ marginLeft: -10 }}
+                  alt="Employment"
+                  width={62}
+                  height={52}
+                  style={{ marginLeft: -15, marginTop: 15 }}
                 />
               </div>
-              <div style={{ marginLeft: -20 }}>
+              {/* Updated Block */}
+              <div
+                style={{
+                  marginLeft: language === "ar" ? -30 : -25, // Ensures the margin is applied for both 'ar' and 'en'
+                }}
+              >
                 <p className="text-sm text-white">
                   {getTranslation("Total Graduates", language)}
                 </p>
@@ -783,28 +795,57 @@ export default function SecondPage() {
                 <div className="flex items-center gap-1 mt-1">
                   <div
                     className={`flex items-center gap-1 ${
-                      language === "ar" ? "flex-row-reverse" : ""
+                      language === "ar" ? "flex-row-reverse " : ""
                     }`}
                   >
+             <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
+
                     <BiMale className="text-[#2CCAD3]" size={20} />
-                    <span className="text-white text-sm">
-                      {getTranslation("Male", language)}
+                    <span className="text-white text-xs">
+                      {overviewStats?.graduates.male.percentage}%
                     </span>
+                  </div>
                   </div>
                   <div
                     className={`flex items-center gap-1 ${
                       language === "ar" ? "flex-row-reverse" : ""
                     }`}
                   >
+                    
+              <div className="bg-[#2CCAD3]/20 rounded-full flex items-center gap-1 px-1 py-0.5">
+
                     <BiFemale className="text-[#fe1672]" size={20} />
-                    <span className="text-white text-sm">
-                      {getTranslation("Female", language)}
+                    <span className="text-white text-xs">
+                      {overviewStats?.graduates.female.percentage}%
                     </span>
+                  </div>
                   </div>
                 </div>
               </div>
+              <div
+                className={cn(
+                  "bg-[#2CCAD3]/10",
+                  {
+                    hidden: language === "en",
+                  }
+                )}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <Image
+                  src="/icons/graduateicon.svg"
+                  alt="Employment"
+                  width={62}
+                  height={52}
+                  style={{ marginLeft: -10 }}
+                />
+              </div>
             </div>
           </div>
+
 
           {/* Average Salary */}
           <div
@@ -815,12 +856,17 @@ export default function SecondPage() {
             } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center   ${
+                language === "ar" ? "flex-row-reverse justify-end gap-4" : "gap-6"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-3"
+                className={cn(
+                  "bg-[#2CCAD3]/10 p-4",
+                  {
+                    "hidden": language === "ar",
+                  }
+                )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -830,13 +876,13 @@ export default function SecondPage() {
                 <PiMoneyFill
                   style={{
                     color: "#2CCAD3",
-                    width: 42,
-                    height: 42,
-                    marginLeft: -10,
+                    width: 50,
+                    height: 45,
+                    marginLeft: -15,
                   }}
                 />
               </div>
-              <div style={{ marginLeft: -10 }}>
+              <div style={{ marginLeft: -20 }}>
                 <p className="text-sm text-white">
                   {getTranslation("Average Salary", language)}
                 </p>
@@ -848,6 +894,29 @@ export default function SecondPage() {
                   </span>
                 </p>
               </div>
+              <div
+                className={cn(
+                  "bg-[#2CCAD3]/10",
+                  {
+                    "hidden": language === "en",
+                  }
+                )}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <PiMoneyFill
+                  style={{
+                    color: "#2CCAD3",
+                    width: 50,
+                    height: 45,
+                    marginLeft: 5,
+                  }}
+                />
+              </div>
+              
             </div>
           </div>
 
@@ -860,12 +929,17 @@ export default function SecondPage() {
             } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center ${
+                language === "ar" ? "flex-row-reverse justify-end gap-6" : "gap-4"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-4"
+                className={cn(
+                  "bg-[#2CCAD3]/10 p-4",
+                  {
+                    "hidden": language === "ar",
+                  }
+                )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -877,7 +951,7 @@ export default function SecondPage() {
                     color: "#2CCAD3",
                     width: 42,
                     height: 42,
-                    marginLeft: -10,
+                    marginLeft: -15,
                   }}
                 />
               </div>
@@ -893,6 +967,28 @@ export default function SecondPage() {
                   </span>
                 </p>
               </div>
+              <div
+                className={cn(
+                  "bg-[#2CCAD3]/10",
+                  {
+                    "hidden": language === "en",
+                  }
+                )}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <FaBusinessTime
+                  style={{
+                    color: "#2CCAD3",
+                    width: 42,
+                    height: 42,
+                    marginLeft: -15,
+                  }}
+                />
+              </div>
             </div>
           </div>
 
@@ -902,15 +998,20 @@ export default function SecondPage() {
               language === "ar"
                 ? "from-[#2CCAD3]/20 to-transparent rounded-2xl"
                 : "from-transparent to-[#2CCAD3]/20 rounded-2xl"
-            } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
+            } p-4 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center ${
+                language === "ar" ? "flex-row-reverse justify-end gap-2" : "justify-start gap-6 px-4"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-4"
+                className={cn(
+                  "bg-[#2CCAD3]/10 p-4",
+                  {
+                    "hidden": language === "ar",
+                  }
+                )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -922,17 +1023,39 @@ export default function SecondPage() {
                     color: "#2CCAD3",
                     width: 40,
                     height: 40,
-                    marginLeft: -10,
+                    marginLeft: -30,
                   }}
                 />
               </div>
-              <div style={{ marginLeft: -10 }}>
+              <div style={{ marginLeft: -20 }}>
                 <p className="text-sm text-white">
                   {getTranslation("Job Seekers", language)}
                 </p>
                 <p className="text-4xl font-bold text-white">
-                  {overviewStats?.totalJobSeekers}
+                  {majorData?.overall?.totalMetrics?.totalJobSeekers?.toLocaleString()}
                 </p>
+              </div>
+              <div
+                className={cn(
+                  "bg-[#2CCAD3]/10",
+                  {
+                    "hidden": language === "en",
+                  }
+                )}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <FaUserGraduate
+                  style={{
+                    color: "#2CCAD3",
+                    width: 40,
+                    height: 40,
+                    marginLeft: 10,
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -946,12 +1069,17 @@ export default function SecondPage() {
             } p-3 pt-7 backdrop-blur-sm border border-white hover:border-[#2CCAD3]/30 transition-colors justify-center items-center`}
           >
             <div
-              className={`flex items-center gap-6 ${
-                language === "ar" ? "flex-row-reverse" : ""
+              className={`flex items-center ${
+                language === "ar" ? "flex-row-reverse justify-end gap-4" : "justify-start gap-4"
               }`}
             >
               <div
-                className="bg-[#2CCAD3]/10 p-4"
+                className={cn(
+                  "bg-[#2CCAD3]/10 p-2",
+                  {
+                    "hidden": language === "ar",
+                  }
+                )}
                 style={{
                   backgroundColor: "transparent",
                   borderRadius: 0,
@@ -961,8 +1089,8 @@ export default function SecondPage() {
                 <Image
                   src="/icons/employmentrateicon.svg"
                   alt="Employment"
-                  width={52}
-                  height={42}
+                  width={62}
+                  height={62}
                   style={{ marginLeft: -10 }}
                 />
               </div>
@@ -974,6 +1102,27 @@ export default function SecondPage() {
                   {overviewStats?.employmentRate}%
                 </p>
               </div>
+              <div
+                className={cn(
+                  "bg-[#2CCAD3]/10 ",
+                  {
+                    "hidden": language === "en",
+                  }
+                )}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  marginLeft: 8,
+                }}
+              >
+                <Image
+                  src="/icons/employmentrateicon.svg"
+                  alt="Employment"
+                  width={62}
+                  height={62}
+                  style={{ marginLeft: -10 }}
+                />
+              </div>
             </div>
           </div>
 
@@ -984,9 +1133,7 @@ export default function SecondPage() {
                 <div className="space-y-1.5">
                   {/* Before Graduate */}
                   <div
-                    className={`p-0.5 flex justify-between items-center ${
-                      language === "ar" ? "flex-row-reverse" : ""
-                    }`}
+                    className={`p-0.5 flex justify-between items-center`}
                     style={{
                       background:
                         "linear-gradient(90deg, #176481 0%, #1E1F5E 100%)",
@@ -1009,9 +1156,7 @@ export default function SecondPage() {
 
                   {/* Within First Year */}
                   <div
-                    className={`p-0.5 flex justify-between items-center ${
-                      language === "ar" ? "flex-row-reverse" : ""
-                    }`}
+                    className={`p-0.5 flex justify-between items-center`}
                     style={{
                       background:
                         "linear-gradient(90deg, #176481 0%, #1E1F5E 100%)",
@@ -1034,9 +1179,7 @@ export default function SecondPage() {
 
                   {/* After First Year */}
                   <div
-                    className={`p-0.5 flex justify-between items-center ${
-                      language === "ar" ? "flex-row-reverse" : ""
-                    }`}
+                    className={`p-0.5 flex justify-between items-center`}
                     style={{
                       background:
                         "linear-gradient(90deg, #176481 0%, #1E1F5E 100%)",
@@ -1163,24 +1306,28 @@ export default function SecondPage() {
                         />
 
                         {/* {text} */}
-                        <div
-                          className={`mt-4 text-center px-1 min-h-[27px] ${
-                            language === "ar" ? "text-right" : ""
-                          }`}
-                        >
+                        <div className="mt-4 text-center px-1 min-h-[27px]">
                           <span
-                            className="text-[10px] text-white block break-words capitalize transform translate-y-8 w-24"
-                            style={{
-                              transform:
-                                language === "ar"
-                                  ? "rotate(45deg) translateY(8px) translateX(2px)"
-                                  : "rotate(-45deg) translateY(10px) translateX(-2px)",
-                              transformOrigin:
-                                language === "ar"
-                                  ? "right bottom"
-                                  : "left bottom",
-                              direction: language === "ar" ? "rtl" : "ltr",
-                            }}
+                            className={`text-[10px] text-white block break-words capitalize transform origin-top-left w-24 ${
+                              language === "ar"
+                                ? "rotate-45 translate-y-20 translate-x-2"
+                                : "-rotate-45 translate-y-20 -translate-x-2"
+                            }`}
+                            style={
+                              language === "ar"
+                                ? {
+                                    wordBreak: "break-word",
+                                    lineHeight: "1.2",
+                                    marginTop: "-100px",
+                                    marginLeft: "40px",
+                                  }
+                                : {
+                                    wordBreak: "break-word",
+                                    lineHeight: "1.2",
+                                    marginTop: "-40px",
+                                    marginLeft: "20px",
+                                  }
+                            }
                           >
                             {occupation.occupation}
                           </span>
@@ -1204,7 +1351,7 @@ export default function SecondPage() {
         <Col xs={24} lg={11}>
           <div
             className={`bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border border-[#2CCAD3]/30 hover:border-white transition-colors h-full ${
-              language === "ar" ? "text-right" : ""
+              language === "ar" ? "text-right" : "text-left"
             }`}
           >
             <div
@@ -1238,7 +1385,13 @@ export default function SecondPage() {
                 )}
               </div>
             </div>
-            <div className="space-y-4 relative" style={{ top: "30px" }}>
+            <div
+              className={`space-y-4 relative ${
+                language === "ar" ? "pl-28" : "pr-28"
+              }`}
+              style={{ top: "10px" }}
+            >
+              {" "}
               {/* Vertical line */}
               <div
                 className={`absolute ${
@@ -1246,13 +1399,15 @@ export default function SecondPage() {
                 } top-0 bottom-0 w-[1.5px] bg-gray-100`}
               />
               {[
-                ...(majorData?.overall?.topNarrowMajorsInsights?.topByGender ||
+                ...(majorData?.overall?.totalMetrics?.educationLevelInsights ||
                   []),
               ]
-                .sort((a, b) => b.employmentRate - a.employmentRate)
+                .sort((a, b) => b.totalGraduates - a.totalGraduates)
                 .slice(0, 5) // Added slice to limit to top 5
                 .map((major, index) => {
-                  const width = major.employmentRate;
+                  const percentages = [98, 75, 45, 30, 18];
+                  const width = percentages[index] || 12;
+                  const isSmallBar = width < 30;
                   return (
                     <div
                       key={index}
@@ -1263,7 +1418,7 @@ export default function SecondPage() {
                       <div
                         className="w-[200px] relative cursor-pointer"
                         onClick={() =>
-                          handleNarrowMajorSelect(major.narrowMajor)
+                          handleNarrowMajorSelect(major.educationLevel)
                         }
                       >
                         <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
@@ -1272,7 +1427,7 @@ export default function SecondPage() {
                             language === "ar" ? "text-right" : "text-left"
                           }`}
                         >
-                          {major.narrowMajor}
+                          {major.educationLevel}
                         </span>
                       </div>
                       <div className="relative flex-1 h-18">
@@ -1291,7 +1446,7 @@ export default function SecondPage() {
                                 : "linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                           }}
                           onClick={() =>
-                            handleNarrowMajorSelect(major.narrowMajor)
+                            handleNarrowMajorSelect(major.educationLevel)
                           }
                         >
                           <div
@@ -1300,7 +1455,29 @@ export default function SecondPage() {
                             }`}
                           >
                             <span className="text-base font-bold text-white">
-                              {major.employmentRate}%
+                              {major.totalGraduates}
+                            </span>
+                          </div>
+                        </div>
+                        {/* Employment Rate */}
+                        <div
+                          className="absolute top-1/2 -translate-y-1/2"
+                          style={{
+                            [language === "ar"
+                              ? "right"
+                              : "left"]: `calc(${width}% + 16px)`,
+                          }}
+                        >
+                          <div
+                            className="bg-[#2CCAD3]/20 rounded-full px-3 py-1"
+                            style={{ wordBreak: "break-word" }}
+                          >
+                            <span
+                              className="text-white text-sm whitespace-nowrap"
+                              style={{ wordBreak: "break-word" }}
+                            >
+                              {major.employmentRate}%{" "}
+                              {getTranslation("employed", language)}
                             </span>
                           </div>
                         </div>
@@ -1329,105 +1506,121 @@ export default function SecondPage() {
       >
         {/* Top Majors by Gender */}
         <Col xs={24} lg={6}>
-          <div
-            className={`bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border border-[#2CCAD3]/30 hover:border-white transition-colors h-full ${
-              language === "ar" ? "text-right" : ""
-            }`}
-          >
             <div
-              className={`w-full flex ${
-                language === "ar" ? "justify-end" : "justify-start"
-              } mb-6`}
+              className={`bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border border-[#2CCAD3]/30 hover:border-white transition-colors h-full ${
+                language === "ar" ? "text-right" : "text-left"
+              }`}
             >
-              <div className="flex items-center gap-2">
-                {language === "en" && (
-                  <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
-                    <Image
-                      src="/icons/degree.svg"
-                      alt="Degree"
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                )}
-                <span className="text-white text-xl">
-                  {translations.charts.topNarrowMajorsByGender[language]}
+              <h2
+                className={`text-xl mb-6 flex items-center ${
+                  language === "ar" ? "flex-row-reverse" : ""
+                } gap-2`}
+              >
+                {/* <h2 className="text-xl mb-6 flex items-center gap-2"> */}
+                <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg flex justify-center items-center">
+                  <Image
+                    src="/icons/degree.svg"
+                    alt="Degree"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <span className="text-white">
+                  {getTranslation("Top Specialization by Gender", language)}
                 </span>
-                {language === "ar" && (
-                  <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
-                    <Image
-                      src="/icons/degree.svg"
-                      alt="Degree"
-                      width={24}
-                      height={24}
-                    />
+              </h2>
+              <div className="space-y-4">
+                {majorData?.overall.topNarrowMajorsInsights.topByGender
+                  ?.sort((a, b) => b.graduates - a.graduates) // Sort by number of graduates in descending order
+                  ?.slice(0, 5)
+                  .map((major, index) => (
+                    <div key={index} className="relative">
+                      <div
+                        className={`mb-1 flex justify-between rounded-2xl items-center ${
+                          language === "ar" ? "flex-row-reverse" : ""
+                        }`}
+                      >
+                        <span className="text-sm text-white">{major.narrowMajor}</span>
+                        <span
+                          className={`text-xs text-white ${
+                            language === "ar" ? "ml-2" : "mr-2"
+                          }`}
+                        >
+                          {getTranslation("graduates", language)}{" "}
+                          {major.graduates}
+                        </span>
+                      </div>
+                      <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
+                        {/* Male percentage */}
+                        <div
+                          className={`absolute h-full ${
+                            language === "ar"
+                              ? "right-0 bg-gradient-to-l"
+                              : "left-0 bg-gradient-to-r"
+                          } from-[#2cd7c4]/30 to-[#2cd7c4]/100 group-hover:opacity-90 transition-opacity`}
+                          style={{
+                            width: `${major.genderDistribution.male.percentage}%`,
+                          }}
+                          onClick={() =>
+                            handleNarrowMajorSelect(major.narrowMajor)
+                          }
+                        >
+                          <div
+                            className={`absolute ${
+                              language === "ar" ? "right-2" : "left-2"
+                            } top-1/2 -translate-y-1/2 flex items-center gap-1 ${
+                              language === "ar" ? "flex-row-reverse" : ""
+                            }`}
+                          >
+                            <BiMale style={{ color: "#2CCAD3" }} />
+                            <span className="text-xs text-white">
+                              {major.genderDistribution.male.percentage}%
+                            </span>
+                          </div>
+                        </div>
+                        {/* Female percentage */}
+                        <div
+                          className={`absolute h-full ${
+                            language === "ar"
+                              ? "left-0 bg-gradient-to-r"
+                              : "right-0 bg-gradient-to-l"
+                          }  from-[#fe1684]/30 to-[#fe1684]/100 group-hover:opacity-90 transition-opacity`}
+                          style={{
+                            width: `${major.genderDistribution.female.percentage}%`,
+                          }}
+                          onClick={() =>
+                            handleNarrowMajorSelect(major.narrowMajor)
+                          }
+                        >
+                          <div
+                            className={`absolute ${
+                              language === "ar" ? "left-2" : "right-2"
+                            } top-1/2 -translate-y-1/2 flex items-center gap-1 ${
+                              language === "ar" ? "flex-row-reverse" : ""
+                            }`}
+                          >
+                            <span className="text-xs text-white">
+                              {major.genderDistribution.female.percentage}%
+                            </span>
+                            <BiFemale style={{ color: "#fe1684" }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                {!majorData?.overall.topNarrowMajorsInsights.topByGender
+                  ?.length && (
+                  <div
+                    className="flex items-center justify-center h-[200px] text-white"
+                    style={{ wordBreak: "break-word" }}
+                  >
+                    {getTranslation("No data available", language)}
                   </div>
                 )}
               </div>
             </div>
-            <div className="space-y-4">
-              {majorData?.overall?.topNarrowMajorsInsights?.topByGender
-                ?.slice(0, 5)
-                .map((major, index) => (
-                  <div key={index} className="relative">
-                    <div className="mb-1 flex justify-between items-center">
-                      <span className="text-sm text-white">
-                        {major.narrowMajor}
-                      </span>
-                      <span className="text-xs text-white">
-                        {major.graduates}{" "}
-                        {getTranslation("graduates", language)}
-                      </span>
-                    </div>
-                    <div className="relative h-8 bg-[#1E1F5E] rounded-full overflow-hidden">
-                      {/* Male percentage */}
-                      <div
-                        className="absolute h-full bg-gradient-to-r from-[#2cd7c4]/30 to-[#2cd7c4]/100 group-hover:opacity-90 transition-opacity cursor-pointer"
-                        style={{
-                          width: `${major.genderDistribution.male.percentage}%`,
-                          left: 0,
-                        }}
-                        onClick={() =>
-                          handleNarrowMajorSelect(major.narrowMajor)
-                        }
-                      >
-                        <div className="absolute left-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                          <BiMale className="text-[#2CCAD3]" />
-                          <span className="text-xs text-white">
-                            {major.genderDistribution.male.percentage}%
-                          </span>
-                        </div>
-                      </div>
-                      {/* Female percentage */}
-                      <div
-                        className="absolute h-full bg-gradient-to-r from-[#fe1684]/100 to-[#fe1684]/30 group-hover:opacity-90 transition-opacity cursor-pointer"
-                        style={{
-                          width: `${major.genderDistribution.female.percentage}%`,
-                          right: 0,
-                        }}
-                        onClick={() =>
-                          handleNarrowMajorSelect(major.narrowMajor)
-                        }
-                      >
-                        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                          <span className="text-xs text-white">
-                            {major.genderDistribution.female.percentage}%
-                          </span>
-                          <BiFemale style={{ color: "#fe1672" }} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              {!majorData?.overall?.topNarrowMajorsInsights?.topByGender
-                ?.length && (
-                <div className="flex items-center justify-center h-[200px] text-white">
-                  {getTranslation("No data available", language)}
-                </div>
-              )}
-            </div>
-          </div>
-        </Col>
+          </Col>
+
 
         {/* Sankey Chart Row */}
         <Col xs={10} lg={12}>
@@ -1474,9 +1667,8 @@ export default function SecondPage() {
                 {sankeyData.nodes.length > 0 && (
                   <ResponsiveSankey
                     data={sankeyData}
-                    margin={{ top: 40, right: 200, bottom: 40, left: 200 }}
+                    margin={{ top: 40, right: 140, bottom: 40, left: 190 }}
                     align={language === "ar" ? "end" : "start"}
-                    
                     colors={(node) => node.nodeColor || "#000000"}
                     nodeOpacity={1}
                     nodeHoverOthersOpacity={0.35}
@@ -1491,73 +1683,69 @@ export default function SecondPage() {
                     linkContract={3}
                     enableLinkGradient={true}
                     labelPosition="outside"
-                    labelPadding={16}
+                    labelPadding={8}
                     labelOffset={20}
                     labelOrientation="horizontal"
-                    onClick={(node) => {
-                      handleSankeyNodeClick(node.id);
-                    }}
-                    nodeTooltip={({ node }) => {
-                      const isTimingNode = [
+                    onClick={(
+                      node: SankeyNodeDatum<
+                        {
+                          id: string;
+                          nodeColor: string;
+                          source?: { id: string };
+                        },
+                        { source: string; target: string; value: number }
+                      >
+                    ) => {
+                      const timingNodes = [
                         getTranslation("Before Graduation", language),
                         getTranslation("Within First Year", language),
                         getTranslation("After First Year", language),
-                      ].includes(node.id);
+                      ];
 
-                      return (
-                        <div style={{ padding: "8px 12px" }}>
-                          <strong>{node.id}</strong>
-                          <div style={{ fontSize: "12px", marginTop: "4px" }}>
-                            {isTimingNode 
-                              // ? getTranslation("Click to view majors in this timing", language)
-                              // : getTranslation("Click to view details", language)
-                            }
-                          </div>
-                        </div>
-                      );
+                      // For Arabic version, the timing nodes are source and majors are target
+                      // For English version, the majors are source and timing nodes are target
+                      if (language === "ar") {
+                        // For Arabic, if clicking a line, node.target.id will be the major name
+                        const majorName = (node as any).target?.id || node.id;
+                        if (!timingNodes.includes(majorName)) {
+                          handleNarrowMajorSelect(majorName);
+                        }
+                      } else {
+                        // For English, if clicking a line, node.source.id will be the major name
+                        const majorName = (node as any).source?.id || node.id;
+                        if (!timingNodes.includes(majorName)) {
+                          handleNarrowMajorSelect(majorName);
+                        }
+                      }
+                    }}
+                    label={(node) => {
+                      const text = node.id;
+                      const maxLineWidth = 20;
+                      const words = text.split(" ");
+                      let lines = [];
+                      let currentLine = words[0];
+
+                      for (let i = 1; i < words.length; i++) {
+                        const word = words[i];
+                        if ((currentLine + " " + word).length <= maxLineWidth) {
+                          currentLine += " " + word;
+                        } else {
+                          lines.push(currentLine);
+                          currentLine = word;
+                        }
+                      }
+                      lines.push(currentLine);
+
+                      return lines.map((line, index) => (
+                        <tspan key={index} dy={index > 0 ? 12 : -10} x="0">
+                          {line}
+                        </tspan>
+                      ));
                     }}
                     sort={(a, b) => {
-                      // Define order for timing nodes
-                      const timingOrder = {
-                        [getTranslation("Before Graduation", language)]: 1,
-                        [getTranslation("Within First Year", language)]: 2,
-                        [getTranslation("After First Year", language)]: 3,
-                      };
-
-                      // If both are timing nodes, sort by predefined order
-                      if (timingOrder[a.id] && timingOrder[b.id]) {
-                        return timingOrder[a.id] - timingOrder[b.id];
-                      }
-
-                      // If only one is a timing node, it should go to the right/left based on language
-                      if (timingOrder[a.id]) {
-                        return language === "ar" ? -1 : 1;
-                      }
-                      if (timingOrder[b.id]) {
-                        return language === "ar" ? 1 : -1;
-                      }
-
-                      // For major nodes, sort by their employment percentage (descending)
-                      const majorA = majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.find(
-                        (m) => m.narrowMajor === a.id
-                      );
-                      const majorB = majorData.overall.topNarrowMajorsInsights.topByEmploymentTiming.find(
-                        (m) => m.narrowMajor === b.id
-                      );
-
-                      if (majorA && majorB) {
-                        const totalA =
-                          (majorA.employmentTiming?.beforeGraduation?.percentage || 0) +
-                          (majorA.employmentTiming?.withinFirstYear?.percentage || 0) +
-                          (majorA.employmentTiming?.afterFirstYear?.percentage || 0);
-                        const totalB =
-                          (majorB.employmentTiming?.beforeGraduation?.percentage || 0) +
-                          (majorB.employmentTiming?.withinFirstYear?.percentage || 0) +
-                          (majorB.employmentTiming?.afterFirstYear?.percentage || 0);
-                        return totalB - totalA;
-                      }
-
-                      return 0;
+                      const labelLengthA = a.id.length;
+                      const labelLengthB = b.id.length;
+                      return labelLengthA - labelLengthB;
                     }}
                     theme={{
                       labels: {
@@ -1636,7 +1824,8 @@ export default function SecondPage() {
                 .sort((a, b) => b.employmentRate - a.employmentRate)
                 .slice(0, 5) // Added slice to limit to top 5
                 .map((major, index) => {
-                  const width = major.employmentRate;
+                  const percentages = [98, 75, 45, 30, 15];
+                  const width = percentages[index] || 12;
                   return (
                     <div
                       key={index}
