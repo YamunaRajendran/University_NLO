@@ -1415,12 +1415,12 @@ export default function SecondPage() {
                         language === "ar" ? "flex-row-reverse" : ""
                       }`}
                     >
-                      <div
-                        className="w-[200px] relative cursor-pointer"
-                        onClick={() =>
-                          handleNarrowMajorSelect(major.educationLevel)
-                        }
-                      >
+                       <div
+                        className="w-[200px] relative pointer-events-none"
+                        // onClick={() =>
+                        //   handleNarrowMajorSelect(major.educationLevel)
+                        // }
+                      > 
                         <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
                         <span
                           className={`relative z-10 text-sm text-white px-3 py-1 block break-words ${
@@ -1436,7 +1436,7 @@ export default function SecondPage() {
                             language === "ar"
                               ? "right-0 rounded-l-full"
                               : "left-0 rounded-r-full"
-                          } top-1/2 -translate-y-1/2 h-7 group-hover:opacity-90 transition-opacity cursor-pointer`}
+                          } top-1/2 -translate-y-1/2 h-7 group-hover:opacity-90 transition-opacity`}
                           style={{
                             width: `${width}%`,
                             maxWidth: "100%",
@@ -1445,9 +1445,9 @@ export default function SecondPage() {
                                 ? "linear-gradient(to left, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)"
                                 : "linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                           }}
-                          onClick={() =>
-                            handleNarrowMajorSelect(major.educationLevel)
-                          }
+                          // onClick={() =>
+                          //   handleNarrowMajorSelect(major.educationLevel)
+                          // }
                         >
                           <div
                             className={`absolute top-1/2 -translate-y-1/2 ${
@@ -1686,6 +1686,14 @@ export default function SecondPage() {
                     labelPadding={8}
                     labelOffset={20}
                     labelOrientation="horizontal"
+                    sort={(a, b) => {
+                      const order = {
+                        [getTranslation("Before Graduation", language)]: 0,
+                        [getTranslation("Within First Year", language)]: 1,
+                        [getTranslation("After First Year", language)]: 2,
+                      };
+                      return (order[a.id] ?? -1) - (order[b.id] ?? -1);
+                    }}
                     onClick={(
                       node: SankeyNodeDatum<
                         {
