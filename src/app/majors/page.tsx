@@ -1373,12 +1373,7 @@ export default function SecondPage() {
               <div className="flex items-center gap-2">
                 {language === "en" && (
                   <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
-                    <Image
-                      src="/icons/degree.svg"
-                      alt="Degree"
-                      width={24}
-                      height={24}
-                    />
+                    <Image src="/icons/degree.svg" alt="Degree" width={24} height={24} />
                   </div>
                 )}
                 <span className="text-white text-xl">
@@ -1386,12 +1381,7 @@ export default function SecondPage() {
                 </span>
                 {language === "ar" && (
                   <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg">
-                    <Image
-                      src="/icons/degree.svg"
-                      alt="Degree"
-                      width={24}
-                      height={24}
-                    />
+                    <Image src="/icons/degree.svg" alt="Degree" width={24} height={24} />
                   </div>
                 )}
               </div>
@@ -1402,23 +1392,19 @@ export default function SecondPage() {
               }`}
               style={{ top: "10px" }}
             >
-              {" "}
               {/* Vertical line */}
               <div
                 className={`absolute ${
                   language === "ar" ? "right-[200px]" : "left-[200px]"
                 } top-0 bottom-0 w-[1.5px] bg-gray-100`}
               />
-              {[
-                ...(majorData?.overall?.totalMetrics?.educationLevelInsights ||
-                  []),
-              ]
+              {(majorData?.overall?.totalMetrics?.educationLevelInsights || [])
                 .sort((a, b) => b.totalGraduates - a.totalGraduates)
-                .slice(0, 5) // Added slice to limit to top 5
+                .slice(0, 5) // Limit to top 5
                 .map((major, index) => {
                   const percentages = [98, 75, 45, 30, 18];
                   const width = percentages[index] || 12;
-                  const isSmallBar = width < 30;
+
                   return (
                     <div
                       key={index}
@@ -1426,12 +1412,8 @@ export default function SecondPage() {
                         language === "ar" ? "flex-row-reverse" : ""
                       }`}
                     >
-                       <div
-                        className="w-[200px] relative pointer-events-none"
-                        // onClick={() =>
-                        //   handleNarrowMajorSelect(major.educationLevel)
-                        // }
-                      > 
+                      {/* Education Level Label */}
+                      <div className="w-[200px] relative pointer-events-none">
                         <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
                         <span
                           className={`relative z-10 text-sm text-white px-3 py-1 block break-words ${
@@ -1441,7 +1423,14 @@ export default function SecondPage() {
                           {major.educationLevel}
                         </span>
                       </div>
-                      <div className="relative flex-1 h-18">
+
+                      {/* Employment Bar */}
+                      <div
+                        className="relative flex-1 h-18"
+                        style={{
+                          [language === "ar" ? "marginLeft" : "marginRight"]: 60,
+                        }}
+                      >
                         <div
                           className={`absolute border-[1px] border-white ${
                             language === "ar"
@@ -1456,13 +1445,10 @@ export default function SecondPage() {
                                 ? "linear-gradient(to left, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)"
                                 : "linear-gradient(to right, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)",
                           }}
-                          // onClick={() =>
-                          //   handleNarrowMajorSelect(major.educationLevel)
-                          // }
                         >
                           <div
                             className={`absolute top-1/2 -translate-y-1/2 ${
-                              language === "ar" ? "right-2" : "left-2"
+                              language === "ar" ? "right-0" : "left-0"
                             }`}
                           >
                             <span className="text-base font-bold text-white">
@@ -1470,25 +1456,24 @@ export default function SecondPage() {
                             </span>
                           </div>
                         </div>
-                        {/* Employment Rate */}
+
+                        {/* Employment Rate Label (Fixed Overlapping Issue) */}
                         <div
                           className="absolute top-1/2 -translate-y-1/2"
                           style={{
-                            [language === "ar"
-                              ? "right"
-                              : "left"]: `calc(${width}% + 16px)`,
+                            [language === "ar" ? "right" : "left"]: `calc(${width}% + 15px)`, // Increased spacing
                           }}
                         >
                           <div
-                            className="bg-[#2CCAD3]/20 rounded-full px-3 py-1"
-                            style={{ wordBreak: "break-word" }}
+                            className="bg-[#2CCAD3]/20 rounded-full px-2 py-1"
+                            style={{
+                              wordBreak: "break-word",
+                              minWidth: "125px", // Ensures label width is sufficient
+                              textAlign: language === "ar" ? "right" : "left",
+                            }}
                           >
-                            <span
-                              className="text-white text-sm whitespace-nowrap"
-                              style={{ wordBreak: "break-word" }}
-                            >
-                              {major.employmentRate}%{" "}
-                              {getTranslation("employed", language)}
+                            <span className="text-white text-sm whitespace-nowrap">
+                              {major.employmentRate}% {getTranslation("employed", language)}
                             </span>
                           </div>
                         </div>
@@ -1496,8 +1481,8 @@ export default function SecondPage() {
                     </div>
                   );
                 })}
-              {!majorData?.overall?.topNarrowMajorsInsights?.topByGender
-                ?.length && (
+
+              {!majorData?.overall?.topNarrowMajorsInsights?.topByGender?.length && (
                 <div className="flex items-center justify-center h-[200px] text-white">
                   {getTranslation("No data available", language)}
                 </div>

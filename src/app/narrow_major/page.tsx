@@ -1636,7 +1636,11 @@ export default function ThirdPage() {
                           >
                             <div
                               className="bg-[#2CCAD3]/20 rounded-full px-3 py-1"
-                              style={{ wordBreak: "break-word" }}
+                              style={{ wordBreak: "break-word",
+                                minWidth: "120px", // Ensures label width is sufficient
+                                textAlign: language === "ar" ? "right" : "left",
+                               }}
+                              
                             >
                               <span
                                 className="text-white text-sm whitespace-nowrap"
