@@ -671,24 +671,35 @@ export default function SecondPage() {
     return data;
   }, [majorData, language]);
 
-  const handleSankeyNodeClick = (nodeId: string) => {
+  const handleSankeyNodeClick = (
+    node: SankeyNodeDatum<
+      {
+        id: string;
+        nodeColor: string;
+        source?: { id: string };
+      },
+      { source: string; target: string; value: number }
+    >
+  ) => {
     const timingNodes = [
       getTranslation("Before Graduation", language),
       getTranslation("Within First Year", language),
       getTranslation("After First Year", language),
     ];
-    
+
     // For Arabic version, the timing nodes are source and majors are target
     // For English version, the majors are source and timing nodes are target
     if (language === "ar") {
-      // If it's not a timing node, it's a major node
-      if (!timingNodes.includes(nodeId)) {
-        handleNarrowMajorSelect(nodeId);
+      // For Arabic, if clicking a line, node.target.id will be the major name
+      const majorName = (node as any).target?.id || node.id;
+      if (!timingNodes.includes(majorName)) {
+        handleNarrowMajorSelect(majorName);
       }
     } else {
-      // For English version
-      if (!timingNodes.includes(nodeId)) {
-        handleNarrowMajorSelect(nodeId);
+      // For English, if clicking a line, node.source.id will be the major name
+      const majorName = (node as any).source?.id || node.id;
+      if (!timingNodes.includes(majorName)) {
+        handleNarrowMajorSelect(majorName);
       }
     }
   };
@@ -1622,8 +1633,8 @@ export default function SecondPage() {
           </Col>
 
 
-        {/* Sankey Chart Row */}
-        <Col xs={10} lg={12}>
+
+          <Col xs={10} lg={12}>
           <div
             className={`bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border border-[#2CCAD3]/30 hover:border-white transition-colors h-full ${
               language === "ar" ? "text-right" : ""
@@ -1663,6 +1674,143 @@ export default function SecondPage() {
 
             {/* Chart */}
             <div className="flex justify-center">
+              <div className="h-[400px] w-full max-w-[700px]">
+                {sankeyData.nodes.length > 0 && (
+                  <ResponsiveSankey
+                    data={sankeyData}
+                    margin={language === "ar" 
+                      ? { top: 20, right: 200, bottom: 20, left: 200 } 
+                      : { top: 20, right: 140, bottom: 20, left: 170 }
+                    }
+                    align="justify"
+                    sort={(a, b) => {
+                      const order = {
+                        [getTranslation("Before Graduation", language)]: 0,
+                        [getTranslation("Within First Year", language)]: 1,
+                        [getTranslation("After First Year", language)]: 2,
+                      };
+                      return (order[a.id] ?? -1) - (order[b.id] ?? -1);
+                    }}
+                    colors={(node) => node.nodeColor || "#6366f1"}
+                    nodeOpacity={1}
+                    nodeThickness={20}
+                    nodeInnerPadding={3}
+                    nodeSpacing={language === "ar" ? 32 : 24}
+                    nodeBorderWidth={0}
+                    nodeBorderRadius={3}
+                    linkOpacity={0.3}
+                    linkHoverOpacity={0.7}
+                    linkContract={3}
+                    enableLinkGradient={true}
+                    labelPosition="outside"
+                    labelOrientation="horizontal"
+                    labelPadding={language === "ar" ? 16 : 4}
+                    labelTextColor={{
+                      from: "color",
+                      modifiers: [["darker", 1]],
+                    }}
+                    animate={true}
+                    onClick={handleSankeyNodeClick}
+                    label={(node) => {
+                      const text = node.id;
+                      const maxLineWidth = language === "ar" ? 25 : 20;
+                      const words = text.split(" ");
+                      let lines = [];
+                      let currentLine = words[0];
+
+                      for (let i = 1; i < words.length; i++) {
+                        const word = words[i];
+                        if (
+                          (currentLine + " " + word).length <= maxLineWidth
+                        ) {
+                          currentLine += " " + word;
+                        } else {
+                          lines.push(currentLine);
+                          currentLine = word;
+                        }
+                      }
+                      lines.push(currentLine);
+
+                      return lines.map((line, index) => (
+                        <tspan 
+                          key={index} 
+                          dy={index > 0 ? 12 : language === "ar" ? -15 : -10} 
+                          x="0"
+                          style={{
+                            fontSize: language === "ar" ? "13px" : "15px"
+                          }}
+                        >
+                          {line}
+                        </tspan>
+                      ));
+                    }}
+                    theme={{
+                      labels: {
+                        text: {
+                          fontSize: language === "ar" ? 13 : 15,
+                          fill: "#fff",
+                          fontWeight: "bold",
+                        },
+                      },
+                      tooltip: {
+                        container: {
+                          background: "#1E1F5E",
+                          color: "#fff",
+                          fontSize: 15,
+                          borderRadius: 8,
+                          padding: "8px 12px",
+                        },
+                      },
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </Col>
+
+
+        {/* Sankey Chart Row */}
+        {/* <Col xs={10} lg={12}>
+          <div
+            className={`bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border border-[#2CCAD3]/30 hover:border-white transition-colors h-full ${
+              language === "ar" ? "text-right" : ""
+            }`}
+          > */}
+            {/* <div
+              className={`w-full flex ${
+                language === "ar" ? "justify-end" : "justify-start"
+              } mb-6`}
+            >
+              <div className="flex items-center gap-2">
+                {language === "en" && (
+                  <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg flex justify-center items-center">
+                    <Image
+                      src="/icons/major.svg"
+                      alt="Major"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                )}
+                <span className="text-white text-xl">
+                  {translations.charts.timeToEmployment[language]}
+                </span>
+                {language === "ar" && (
+                  <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg flex justify-center items-center">
+                    <Image
+                      src="/icons/major.svg"
+                      alt="Major"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                )}
+              </div>
+            </div> */}
+
+            {/* Chart */}
+            {/* <div className="flex justify-center">
               <div className="h-[400px] w-full max-w-[700px]">
                 {sankeyData.nodes.length > 0 && (
                   <ResponsiveSankey
@@ -1756,6 +1904,7 @@ export default function SecondPage() {
                           fontSize: 13,
                           fill: "#fff",
                           fontWeight: "bold",
+                          textWrap: "nowrap",
                         },
                       },
                       tooltip: {
@@ -1771,9 +1920,9 @@ export default function SecondPage() {
                   />
                 )}
               </div>
-            </div>
-          </div>
-        </Col>
+            </div> */}
+          {/* </div>
+        </Col> */}
 
         {/* Employment Rate by Narrow Major */}
         <Col xs={24} lg={6}>

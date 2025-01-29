@@ -1873,11 +1873,142 @@ export default function ThirdPage() {
             </div>
           </Col>
 
-          {/* Sankey Chart */}
           <Col xs={10} lg={12}>
             <div className="">
               <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border border-[#2CCAD3]/30 hover:border-white transition-colors h-full">
                 {/* <h2 className="text-xl mb-6 flex items-center gap-2"> */}
+                <h2
+                  className={`text-xl mb-6 flex items-center ${
+                    language === "ar" ? "flex-row-reverse" : ""
+                  } gap-2`}
+                >
+                  <div className="bg-[#2CCAD3]/10 p-1.5 rounded-lg flex justify-center items-center">
+                    <Image
+                      src="/icons/employment.svg"
+                      alt="Employment Flow"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                  <span className="text-white">
+                    {getTranslation(
+                      "Specialization By Time of Employment",
+                      language
+                    )}
+                  </span>
+                </h2>
+
+                <div className="flex justify-center">
+                  <div className="h-[400px] w-full max-w-[700px]">
+                    {narrowMajorData?.overall.topMajorsInsights
+                      .topByEmploymentTiming && (
+                      <ResponsiveSankey
+                        data={sankeyData}
+                        margin={language === "ar" 
+                          ? { top: 20, right: 200, bottom: 20, left: 200 } 
+                          : { top: 20, right: 140, bottom: 20, left: 170 }
+                        }
+                        align="justify"
+                        sort={(a, b) => {
+                          const order = {
+                            [getTranslation("Before Graduation", language)]: 0,
+                            [getTranslation("Within First Year", language)]: 1,
+                            [getTranslation("After First Year", language)]: 2,
+                          };
+                          return (order[a.id] ?? -1) - (order[b.id] ?? -1);
+                        }}
+                        colors={(node) => node.nodeColor || "#6366f1"}
+                        nodeOpacity={1}
+                        nodeThickness={20}
+                        nodeInnerPadding={3}
+                        nodeSpacing={language === "ar" ? 32 : 24}
+                        nodeBorderWidth={0}
+                        nodeBorderRadius={3}
+                        linkOpacity={0.3}
+                        linkHoverOpacity={0.7}
+                        linkContract={3}
+                        enableLinkGradient={true}
+                        labelPosition="outside"
+                        labelOrientation="horizontal"
+                        labelPadding={language === "ar" ? 16 : 4}
+                        labelTextColor={{
+                          from: "color",
+                          modifiers: [["darker", 1]],
+                        }}
+                        animate={true}
+                        label={(node) => {
+                          const text = node.id;
+                          const maxLineWidth = language === "ar" ? 25 : 20;
+                          const words = text.split(" ");
+                          let lines = [];
+                          let currentLine = words[0];
+
+                          for (let i = 1; i < words.length; i++) {
+                            const word = words[i];
+                            if (
+                              (currentLine + " " + word).length <= maxLineWidth
+                            ) {
+                              currentLine += " " + word;
+                            } else {
+                              lines.push(currentLine);
+                              currentLine = word;
+                            }
+                          }
+                          lines.push(currentLine);
+
+                          return lines.map((line, index) => (
+                            <tspan 
+                              key={index} 
+                              dy={index > 0 ? 12 : language === "ar" ? -15 : -10} 
+                              x="0"
+                              style={{
+                                fontSize: language === "ar" ? "13px" : "15px"
+                              }}
+                            >
+                              {line}
+                            </tspan>
+                          ));
+                        }}
+                        theme={{
+                          labels: {
+                            text: {
+                              fontSize: language === "ar" ? 13 : 15,
+                              fill: "#fff",
+                              fontWeight: "bold",
+                            },
+                          },
+                          tooltip: {
+                            container: {
+                              background: "#1E1F5E",
+                              color: "#fff",
+                              fontSize: 15,
+                              borderRadius: 8,
+                              padding: "8px 12px",
+                            },
+                          },
+                        }}
+                      />
+                    )}
+                    {!narrowMajorData?.overall.topMajorsInsights
+                      .topByEmploymentTiming && (
+                      <div
+                        className="flex items-center justify-center h-[20px] text-white"
+                        style={{ wordBreak: "break-word" }}
+                      >
+                        {getTranslation("No data available", language)}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+
+          {/* Sankey Chart */}
+          {/* <Col xs={10} lg={12}>
+            <div className="">
+              <div className="bg-[#1d1f4f]/60 rounded-2xl p-6 backdrop-blur-sm border border-[#2CCAD3]/30 hover:border-white transition-colors h-full">
+                <h2 className="text-xl mb-6 flex items-center gap-2">
                 <h2
                   className={`text-xl mb-6 flex items-center ${
                     language === "ar" ? "flex-row-reverse" : ""
@@ -1994,7 +2125,7 @@ export default function ThirdPage() {
                 </div>
               </div>
             </div>
-          </Col>
+          </Col> */}
 
           {/* Employment Rate by Narrow Major */}
           <Col xs={24} lg={6}>
