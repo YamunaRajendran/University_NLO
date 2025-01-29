@@ -270,7 +270,7 @@ export default function HomePage() {
         {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#24285E]/80 to-transparent backdrop-blur-sm"></div> */}
 
         {/* Left Side Education Stats */}
-        <div className="w-full h-[500px] sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-14">
+        <div className="w-full h-[600px] sm:w-[90%] md:w-[80%] lg:w-[270px] flex flex-col gap-1 p-2 sm:p-4 lg:p-0 mb-4 lg:mb-0 lg:mt-24">
           {/* <p className="text-white text-center mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base  ">
           {getTranslation("The dashboard provides insights from university graduates, helping educational institutes and decision-makers analyze the growth and impact of various majors", language)}
         </p> */}
@@ -530,9 +530,9 @@ export default function HomePage() {
         </div>
 
         {/* Main container with transition */}
-        <div className="w-[300px] sm:w-[400px] lg:w-[600px] h-[300px] sm:h-[400px] lg:h-[700px] flex items-center justify-center">
+        <div className="w-[300px] sm:w-[400px] lg:w-[600px] h-[300px] sm:h-[400px] lg:h-[700px] flex items-center justify-center mt-20">
           {/* Main circle container */}
-          <div className="relative w-[150px] sm:w-[180px] lg:w-[230px] h-[150px] sm:h-[180px] lg:h-[230px] rounded-full shadow-2xl shadow-[#2e6bb2]/500 bg-gradient-to-br from-[#24285E] from-20% via-[#24285E] via-20% to-[#244975]">
+          <div className="relative w-[150px] sm:w-[180px] lg:w-[290px] h-[150px] sm:h-[180px] lg:h-[290px] rounded-full shadow-2xl shadow-[#2e6bb2]/500 bg-gradient-to-br from-[#24285E] from-20% via-[#24285E] via-20% to-[#244975]">
             {/* Outer glowing border */}
             <div className="absolute -inset-1 rounded-full border-[3px] border-[#ffff] outer-circle-glow"></div>
 
@@ -541,7 +541,7 @@ export default function HomePage() {
 
             {/* Centered Logo */}
             <div
-              className="absolute inset-0 m-auto w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] lg:w-[180px] lg:h-[180px] rounded-full flex flex-col items-center justify-center z-20 logo-container"
+              className="absolute inset-0 m-auto w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] lg:w-[235px] lg:h-[235px] rounded-full flex flex-col items-center justify-center z-20 logo-container"
               style={{ marginTop: "29px" }}
             >
               <Image
@@ -929,7 +929,7 @@ export default function HomePage() {
                   {/* Bachelor's - 195571 */}
                   <div className="flex flex-col items-center">
                     <div className="h-24 w-6 sm:w-8 flex items-end relative">
-                      <div className="absolute -top-[115%] -left-1.5">
+                      <div className="absolute -top-[115%] -left-1">
                         <span className="text-white text-[12px] sm:text-[14px] font-bold px-0.5 py-0.5 whitespace-nowrap">
                           {formatNumber(195571)}
                         </span>

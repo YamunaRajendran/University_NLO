@@ -52,67 +52,67 @@ const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
       icon: FaGraduationCap,
       text: getTranslation("Education", language),
       majorKey: "Education",
-      position: { angle: -82, radius: 200, offsetX: 0, offsetY: 0, rotate: 10 },
+      position: { angle: -82, radius: 250, offsetX: 2, offsetY: 0, rotate: 10 },
     },
     {
       icon: FaLaptopCode,
       text: getTranslation("Information Technology", language),
       majorKey: "Communications and Information Technology",
-      position: { angle: -49, radius: 200, offsetX: 0, rotate: 30 },
+      position: { angle: -49, radius: 250, offsetX: 0, rotate: 30 },
     },
     {
       icon: FaBalanceScale,
       text: getTranslation("Business and Law", language),
       majorKey: "Business, administration and law",
-      position: { angle: -16, radius: 200, offsetX: 0, rotate: -5 },
+      position: { angle: -16, radius: 250, offsetX: 0, rotate: -5 },
     },
     {
       icon: FaPaintBrush,
       text: getTranslation("Arts and Humanities", language),
       majorKey: "Arts and Humanities",
-      position: { angle: 17, radius: 200, offsetX: 0, rotate: 15 },
+      position: { angle: 17, radius: 250, offsetX: 0, rotate: 15 },
     },
     {
       icon: FaHeartbeat,
       text: getTranslation("Health and Welfare", language),
       majorKey: "Health and Welfare",
-      position: { angle: 50, radius: 200, offsetX: 0, rotate: -40 },
+      position: { angle: 50, radius: 250, offsetX: 0, rotate: -40 },
     },
     {
       icon: FaFlask,
       text: getTranslation("Sciences and Mathematics", language),
       majorKey: "Natural Sciences, Mathematics and Statistics",
-      position: { angle: 83, radius: 200, offsetX: 0, rotate: 0 },
+      position: { angle: 83, radius: 250, offsetX: 0, rotate: 0 },
     },
     {
       icon: FaCogs,
       text: getTranslation("Engineering", language),
       majorKey: "Engineering, manufacturing and construction",
-      position: { angle: 116, radius: 200, offsetX: 0, rotate: 30 },
+      position: { angle: 116, radius: 250, offsetX: 0, rotate: 30 },
     },
     {
       icon: FaSeedling,
       text: getTranslation("Agriculture", language),
       majorKey: "Agriculture, Forestry, Fisheries and Veterinary",
-      position: { angle: 149, radius: 200, offsetX: 0, rotate: -35 },
+      position: { angle: 149, radius: 250, offsetX: 0, rotate: -35 },
     },
     {
       icon: FaBook,
       text: getTranslation("Social Sciences", language),
       majorKey: "Social Sciences, Journalism, Information",
-      position: { angle: 182, radius: 200, offsetX: 0, rotate: 0 },
+      position: { angle: 182, radius: 250, offsetX: 0, rotate: 0 },
     },
     {
       icon: FaUserGraduate,
       text: getTranslation("Generic Programs", language),
       majorKey: "Generic Programs and Qualifications",
-      position: { angle: 215, radius: 200, offsetX: 0, rotate: 30 },
+      position: { angle: 215, radius: 250, offsetX: 0, rotate: 30 },
     },
     {
       icon: FaCog,
       text: getTranslation("Services", language),
       majorKey: "Services",
-      position: { angle: 248, radius: 200, offsetX: 0, rotate: -30 },
+      position: { angle: 248, radius: 250, offsetX: -5, rotate: -30 },
     },
   ];
 
@@ -193,7 +193,7 @@ const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
             }}
           >
             <div
-              className={`w-[100px] h-[100px] chat-bubble ${bubbleDirection} small-circle border border-[#2ab1bb] rounded-full ${
+              className={`w-[135px] h-[135px] chat-bubble ${bubbleDirection} small-circle border border-[#2ab1bb] rounded-full ${
                 activeCircle === index ? "small-circle-glow" : ""
               } ${GradientDirection} cursor-pointer hover:scale-110 transition-transform duration-300`}
               style={{
@@ -210,8 +210,8 @@ const SmallCircles: FC<SmallCirclesProps> = ({ animate, onSelect }) => {
                 className="absolute inset-0 flex flex-col items-center justify-center border border-[#2ab1bb] rounded-full"
                 style={{ transform: `rotate(${-rotation}deg)` }}
               >
-                <Icon className="text-[#4EC9ED] text-2xl mb-1" />
-                <span className="text-[#FFFFFF] text-xs font-medium px-2 leading-tight">
+                <Icon className="text-[#4EC9ED] text-2xl mb-1" size={35} />
+                <span className="text-[#FFFFFF] text-lg font-medium px-2 leading-tight">
                   {content.text}
                 </span>
               </div>
