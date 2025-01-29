@@ -1873,7 +1873,7 @@ export default function SecondPage() {
                         >
                           <div
                             className={`absolute top-1/2 -translate-y-1/2 ${
-                              language === "ar" ? "right-1" : "left"
+                              language === "ar" ? "right-0" : "left"
                             }`}
                           >
                             <span className="text-base font-bold text-white">
