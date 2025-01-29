@@ -1827,8 +1827,9 @@ export default function SecondPage() {
                 .sort((a, b) => b.employmentRate - a.employmentRate)
                 .slice(0, 5) // Added slice to limit to top 5
                 .map((major, index) => {
-                  const percentages = [98, 75, 45, 30, 15];
-                  const width = percentages[index] || 12;
+                  // const percentages = [98, 75, 45, 30, 15];
+                  // const width = percentages[index] || 12;
+                  const width = major.employmentRate;
                   return (
                     <div
                       key={index}
@@ -1859,8 +1860,8 @@ export default function SecondPage() {
                               : "left-0 rounded-r-full"
                           } top-1/2 -translate-y-1/2 h-7 group-hover:opacity-90 transition-opacity cursor-pointer`}
                           style={{
-                            width: `${width}%`,
-                            maxWidth: "100%",
+                            width: `${width+20}%`,
+                            maxWidth: "110%",
                             background:
                               language === "ar"
                                 ? "linear-gradient(to left, #2CD7C4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)"
@@ -1872,7 +1873,7 @@ export default function SecondPage() {
                         >
                           <div
                             className={`absolute top-1/2 -translate-y-1/2 ${
-                              language === "ar" ? "right-2" : "left-2"
+                              language === "ar" ? "right-1" : "left"
                             }`}
                           >
                             <span className="text-base font-bold text-white">

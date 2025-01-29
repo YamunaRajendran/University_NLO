@@ -1601,12 +1601,12 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "إدارة الطيران",
-                      "graduates": 8,
-                      "employmentRate": 75.0,
+                      "name": "خدمات العملاء",
+                      "graduates": 32,
+                      "employmentRate": 68.8,
                       "genderDistribution": {
                         "male": {
-                          "count": 8,
+                          "count": 32,
                           "percentage": 100.0
                         },
                         "female": {
@@ -1631,12 +1631,12 @@
                       }
                     },
                     {
-                      "name": "خدمات العملاء",
-                      "graduates": 32,
-                      "employmentRate": 68.8,
+                      "name": "إدارة الطيران",
+                      "graduates": 8,
+                      "employmentRate": 75.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 32,
+                          "count": 8,
                           "percentage": 100.0
                         },
                         "female": {
@@ -3838,21 +3838,6 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "الإعاقة البصرية",
-                      "graduates": 12,
-                      "employmentRate": 58.3,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 12,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
                       "name": "الاجتماعيات (تربوي)",
                       "graduates": 34,
                       "employmentRate": 97.1,
@@ -3868,12 +3853,27 @@
                       }
                     },
                     {
-                      "name": "التعليم الابتدائي دراسات إسلامية",
-                      "graduates": 2,
-                      "employmentRate": 50.0,
+                      "name": "التعليم الابتدائي علوم",
+                      "graduates": 20,
+                      "employmentRate": 65.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 2,
+                          "count": 20,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "الإعاقة البصرية",
+                      "graduates": 12,
+                      "employmentRate": 58.3,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 12,
                           "percentage": 100.0
                         },
                         "female": {
@@ -3898,12 +3898,12 @@
                       }
                     },
                     {
-                      "name": "التعليم الابتدائي علوم",
-                      "graduates": 20,
-                      "employmentRate": 65.0,
+                      "name": "التعليم الابتدائي دراسات إسلامية",
+                      "graduates": 2,
+                      "employmentRate": 50.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 20,
+                          "count": 2,
                           "percentage": 100.0
                         },
                         "female": {
@@ -4248,12 +4248,12 @@
             ],
             "topByGender": [
               {
-                "narrowMajor": "خدمات الأمن",
-                "graduates": 44,
-                "employmentRate": 20.5,
+                "narrowMajor": "خدمات النقل",
+                "graduates": 129,
+                "employmentRate": 82.9,
                 "genderDistribution": {
                   "male": {
-                    "count": 44,
+                    "count": 129,
                     "percentage": 100.0
                   },
                   "female": {
@@ -4263,12 +4263,12 @@
                 }
               },
               {
-                "narrowMajor": "خدمات النقل",
-                "graduates": 129,
-                "employmentRate": 82.9,
+                "narrowMajor": "خدمات الأمن",
+                "graduates": 44,
+                "employmentRate": 20.5,
                 "genderDistribution": {
                   "male": {
-                    "count": 129,
+                    "count": 44,
                     "percentage": 100.0
                   },
                   "female": {
@@ -5221,12 +5221,12 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "الملاحة البحرية",
-                      "graduates": 64,
-                      "employmentRate": 82.8,
+                      "name": "الموانئ والنقل البحري",
+                      "graduates": 65,
+                      "employmentRate": 83.1,
                       "genderDistribution": {
                         "male": {
-                          "count": 64,
+                          "count": 65,
                           "percentage": 100.0
                         },
                         "female": {
@@ -5236,12 +5236,12 @@
                       }
                     },
                     {
-                      "name": "الموانئ والنقل البحري",
-                      "graduates": 65,
-                      "employmentRate": 83.1,
+                      "name": "الملاحة البحرية",
+                      "graduates": 64,
+                      "employmentRate": 82.8,
                       "genderDistribution": {
                         "male": {
-                          "count": 65,
+                          "count": 64,
                           "percentage": 100.0
                         },
                         "female": {
@@ -5536,6 +5536,21 @@
                   ],
                   "topByGender": [
                     {
+                      "name": "تخصص غير محدد في خدمات الأمن",
+                      "graduates": 24,
+                      "employmentRate": 12.5,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 24,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
                       "name": "الدفاع المدني",
                       "graduates": 18,
                       "employmentRate": 27.8,
@@ -5557,21 +5572,6 @@
                       "genderDistribution": {
                         "male": {
                           "count": 2,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "تخصص غير محدد في خدمات الأمن",
-                      "graduates": 24,
-                      "employmentRate": 12.5,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 24,
                           "percentage": 100.0
                         },
                         "female": {
@@ -6576,12 +6576,12 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "أمراض الجهاز الهضمي",
-                      "graduates": 2,
-                      "employmentRate": 100.0,
+                      "name": "الصحة العامة للأسنان",
+                      "graduates": 31,
+                      "employmentRate": 61.3,
                       "genderDistribution": {
                         "male": {
-                          "count": 2,
+                          "count": 31,
                           "percentage": 100.0
                         },
                         "female": {
@@ -6606,12 +6606,12 @@
                       }
                     },
                     {
-                      "name": "الصحة العامة للأسنان",
-                      "graduates": 31,
-                      "employmentRate": 61.3,
+                      "name": "تقنية الموجات الصوتية للقلب",
+                      "graduates": 10,
+                      "employmentRate": 60.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 31,
+                          "count": 10,
                           "percentage": 100.0
                         },
                         "female": {
@@ -6621,12 +6621,12 @@
                       }
                     },
                     {
-                      "name": "تقنية الموجات الصوتية للقلب",
-                      "graduates": 10,
-                      "employmentRate": 60.0,
+                      "name": "طب التخدير",
+                      "graduates": 8,
+                      "employmentRate": 100.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 10,
+                          "count": 8,
                           "percentage": 100.0
                         },
                         "female": {
@@ -8493,16 +8493,16 @@
                 }
               },
               {
-                "narrowMajor": "برامج أخرى في العلوم الطبيعية والرياضيات والإحصاء غير مصنفة في مكان آخر",
-                "graduates": 2,
-                "employmentRate": 50.0,
+                "narrowMajor": "برامج ومؤهلات متعددة التخصصات تتضمن العلوم الطبيعية والرياضيات والإحصاء",
+                "graduates": 3,
+                "employmentRate": 100.0,
                 "genderDistribution": {
                   "male": {
                     "count": 0,
                     "percentage": 0.0
                   },
                   "female": {
-                    "count": 2,
+                    "count": 3,
                     "percentage": 100.0
                   }
                 }
@@ -10029,12 +10029,27 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "الأرصاد",
-                      "graduates": 15,
-                      "employmentRate": 93.3,
+                      "name": "الجيولوجيا",
+                      "graduates": 136,
+                      "employmentRate": 86.8,
                       "genderDistribution": {
                         "male": {
-                          "count": 15,
+                          "count": 136,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "الكيمياء الصناعية",
+                      "graduates": 77,
+                      "employmentRate": 77.9,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 77,
                           "percentage": 100.0
                         },
                         "female": {
@@ -10059,12 +10074,12 @@
                       }
                     },
                     {
-                      "name": "الجيولوجيا",
-                      "graduates": 136,
-                      "employmentRate": 86.8,
+                      "name": "الأرصاد",
+                      "graduates": 15,
+                      "employmentRate": 93.3,
                       "genderDistribution": {
                         "male": {
-                          "count": 136,
+                          "count": 15,
                           "percentage": 100.0
                         },
                         "female": {
@@ -10080,21 +10095,6 @@
                       "genderDistribution": {
                         "male": {
                           "count": 13,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "الكيمياء الصناعية",
-                      "graduates": 77,
-                      "employmentRate": 77.9,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 77,
                           "percentage": 100.0
                         },
                         "female": {
@@ -11976,12 +11976,12 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "اللغة الألمانية",
-                      "graduates": 9,
-                      "employmentRate": 66.7,
+                      "name": "اللغة العبرية",
+                      "graduates": 20,
+                      "employmentRate": 75.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 9,
+                          "count": 20,
                           "percentage": 100.0
                         },
                         "female": {
@@ -12006,12 +12006,27 @@
                       }
                     },
                     {
-                      "name": "اللغة التركية",
-                      "graduates": 1,
-                      "employmentRate": 100.0,
+                      "name": "اللغة الفارسية",
+                      "graduates": 16,
+                      "employmentRate": 62.5,
                       "genderDistribution": {
                         "male": {
-                          "count": 1,
+                          "count": 16,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "اللغة الألمانية",
+                      "graduates": 9,
+                      "employmentRate": 66.7,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 9,
                           "percentage": 100.0
                         },
                         "female": {
@@ -12027,21 +12042,6 @@
                       "genderDistribution": {
                         "male": {
                           "count": 7,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "اللغة العبرية",
-                      "graduates": 20,
-                      "employmentRate": 75.0,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 20,
                           "percentage": 100.0
                         },
                         "female": {
@@ -12805,36 +12805,6 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "تقنية صناعة المطاط",
-                      "graduates": 7,
-                      "employmentRate": 57.1,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 7,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "هندسة التصنيع الغذائي",
-                      "graduates": 2,
-                      "employmentRate": 100.0,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 2,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
                       "name": "هندسة التعدين",
                       "graduates": 20,
                       "employmentRate": 75.0,
@@ -12856,6 +12826,36 @@
                       "genderDistribution": {
                         "male": {
                           "count": 14,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "تقنية صناعة المطاط",
+                      "graduates": 7,
+                      "employmentRate": 57.1,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 7,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "هندسة التصنيع الغذائي",
+                      "graduates": 2,
+                      "employmentRate": 100.0,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 2,
                           "percentage": 100.0
                         },
                         "female": {
@@ -13231,51 +13231,6 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "المساحة البحرية",
-                      "graduates": 7,
-                      "employmentRate": 100.0,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 7,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "الهندسة الجيوتكنيكية",
-                      "graduates": 1,
-                      "employmentRate": 100.0,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 1,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "تقنية الهندسة المعمارية",
-                      "graduates": 2,
-                      "employmentRate": 100.0,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 2,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
                       "name": "تقنية هندسة الإنشاءات",
                       "graduates": 49,
                       "employmentRate": 89.8,
@@ -13297,6 +13252,51 @@
                       "genderDistribution": {
                         "male": {
                           "count": 38,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "هندسة النقل",
+                      "graduates": 33,
+                      "employmentRate": 90.9,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 33,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "هندسة المساحة",
+                      "graduates": 21,
+                      "employmentRate": 100.0,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 21,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "المساحة البحرية",
+                      "graduates": 7,
+                      "employmentRate": 100.0,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 7,
                           "percentage": 100.0
                         },
                         "female": {
@@ -13671,27 +13671,12 @@
                   ],
                   "topByGender": [
                     {
-                      "name": "الهندسة البحرية",
-                      "graduates": 55,
-                      "employmentRate": 81.8,
+                      "name": "تقنية الهندسة الميكانيكية",
+                      "graduates": 649,
+                      "employmentRate": 90.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 55,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "الهندسة البيئية",
-                      "graduates": 37,
-                      "employmentRate": 97.3,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 37,
+                          "count": 649,
                           "percentage": 100.0
                         },
                         "female": {
@@ -13716,12 +13701,27 @@
                       }
                     },
                     {
-                      "name": "الهندسة النووية",
-                      "graduates": 6,
-                      "employmentRate": 100.0,
+                      "name": "تقنية الهندسة الكيميائية",
+                      "graduates": 466,
+                      "employmentRate": 88.0,
                       "genderDistribution": {
                         "male": {
-                          "count": 6,
+                          "count": 466,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
+                      "name": "تقنية هندسة التحكم والأتمتة",
+                      "graduates": 307,
+                      "employmentRate": 90.2,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 307,
                           "percentage": 100.0
                         },
                         "female": {
@@ -15352,12 +15352,12 @@
             ],
             "topByGender": [
               {
-                "narrowMajor": "البيطرة",
-                "graduates": 43,
-                "employmentRate": 86.0,
+                "narrowMajor": "الزراعة",
+                "graduates": 109,
+                "employmentRate": 81.7,
                 "genderDistribution": {
                   "male": {
-                    "count": 43,
+                    "count": 109,
                     "percentage": 100.0
                   },
                   "female": {
@@ -15367,12 +15367,12 @@
                 }
               },
               {
-                "narrowMajor": "الزراعة",
-                "graduates": 109,
-                "employmentRate": 81.7,
+                "narrowMajor": "البيطرة",
+                "graduates": 43,
+                "employmentRate": 86.0,
                 "genderDistribution": {
                   "male": {
-                    "count": 109,
+                    "count": 43,
                     "percentage": 100.0
                   },
                   "female": {
@@ -16147,6 +16147,21 @@
                   ],
                   "topByGender": [
                     {
+                      "name": "إنتاج النبات ووقايته",
+                      "graduates": 55,
+                      "employmentRate": 74.5,
+                      "genderDistribution": {
+                        "male": {
+                          "count": 55,
+                          "percentage": 100.0
+                        },
+                        "female": {
+                          "count": 0,
+                          "percentage": 0.0
+                        }
+                      }
+                    },
+                    {
                       "name": "إنتاج الحيوان وتربيته",
                       "graduates": 25,
                       "employmentRate": 80.0,
@@ -16162,12 +16177,12 @@
                       }
                     },
                     {
-                      "name": "إنتاج النبات ووقايته",
-                      "graduates": 55,
-                      "employmentRate": 74.5,
+                      "name": "الهندسة الزراعية",
+                      "graduates": 23,
+                      "employmentRate": 95.7,
                       "genderDistribution": {
                         "male": {
-                          "count": 55,
+                          "count": 23,
                           "percentage": 100.0
                         },
                         "female": {
@@ -16198,21 +16213,6 @@
                       "genderDistribution": {
                         "male": {
                           "count": 2,
-                          "percentage": 100.0
-                        },
-                        "female": {
-                          "count": 0,
-                          "percentage": 0.0
-                        }
-                      }
-                    },
-                    {
-                      "name": "الهندسة الزراعية",
-                      "graduates": 23,
-                      "employmentRate": 95.7,
-                      "genderDistribution": {
-                        "male": {
-                          "count": 23,
                           "percentage": 100.0
                         },
                         "female": {

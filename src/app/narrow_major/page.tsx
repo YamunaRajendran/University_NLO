@@ -2043,9 +2043,10 @@ export default function ThirdPage() {
                         <div className="w-[180px] relative">
                           <div className="absolute inset-0 bg-[#1E1F5E]/90 rounded-full group-hover:bg-[#2CCAD3]/20 transition-colors" />
                           <span
-                            className="relative z-10 text-sm text-white px-3 py-1 block truncate"
-                            style={{ wordBreak: "break-word" }}
-                          >
+                          className={`relative z-10 text-sm text-white px-3 py-1 block break-words ${
+                            language === "ar" ? "text-right" : "text-left"
+                          }`}
+                        >
                             {major.name}
                           </span>
                         </div>
@@ -2058,8 +2059,8 @@ export default function ThirdPage() {
                                 : "left-0 rounded-r-full"
                             } top-1/2 -translate-y-1/2 h-7 group-hover:opacity-90 transition-opacity`}
                             style={{
-                              width: `${width}%`,
-                              maxWidth: "100%",
+                              width: `${width+20}%`,
+                              maxWidth: "110%",
                               background:
                                 language === "ar"
                                   ? "linear-gradient(to left, #2cd7c4 0%, rgba(44, 215, 196, 0.6) 50%, transparent 100%)"
@@ -2069,7 +2070,7 @@ export default function ThirdPage() {
                             {/* Employment Rate */}
                             <div
                               className={`absolute ${
-                                language === "ar" ? "left-2" : "right-2"
+                                language === "ar" ? "right-0" : "left"
                               } top-1/2 -translate-y-1/2`}
                             >
                               <span
