@@ -1526,7 +1526,7 @@ export default function SecondPage() {
                   />
                 </div>
                 <span className="text-white">
-                  {getTranslation("Top Specialization by Gender", language)}
+                  {getTranslation("Top Narrow Majors by Gender", language)}
                 </span>
               </h2>
               <div className="space-y-4">

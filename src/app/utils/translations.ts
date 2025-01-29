@@ -201,6 +201,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Specialization By Time of Employment",
     ar: "توزيع التخصصات حسب وقت التوظيف"
   },
+  "Top Narrow Majors by Gender": {
+    en: "Top Narrow Majors by Gender",
+    ar: "توزيع أعلى التخصصات الدقيقة حسب الجنس"
+  },
   "SAR": {
     en: "SAR",
     ar: "ريال"
